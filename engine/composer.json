@@ -1,0 +1,33 @@
+{
+    "name": "serafim/bic-engine",
+    "description": "Simple game-development application framework",
+    "require": {
+        "php": ">=7.4",
+        "ext-ffi": "*",
+        "serafim/ffi-sdl": "^1.0",
+        "serafim/ffi-sdl-image": "^1.0",
+        "vlucas/phpdotenv": "^4.0",
+        "doctrine/annotations": "~1.8",
+        "illuminate/support": "~7.2",
+        "illuminate/container": "~7.2",
+        "illuminate/config": "~7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Serafim\\Bic\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require-dev": {
+        "symfony/var-dumper": "~5.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
