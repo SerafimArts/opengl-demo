@@ -7,6 +7,11 @@ If your psyche was injured please consult a doctor.
 
 Peace <3
 
+------
+
+Oh yes, according to my information, nobody has ever done such things 
+in **pure PHP**.
+
 ![](https://habrastorage.org/webt/xd/8u/dn/xd8udncjdbysbj4dglahj8kfizw.png)
 
 ## Installation
