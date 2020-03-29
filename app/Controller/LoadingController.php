@@ -94,7 +94,7 @@ class LoadingController
             return;
         }
 
-        if ($this->timer > 1) {
+        if ($this->timer > 5) {
             $this->game->show(GameController::class, [
                 Map::class => $this->progress->result()
             ]);
