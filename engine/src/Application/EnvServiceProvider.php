@@ -24,7 +24,10 @@ class EnvServiceProvider extends ServiceProvider
     public function register(): void
     {
         $env = Dotenv::createImmutable($this->app->path());
-        $env->load();
+
+        if (\is_file($this->app->path('.env'))) {
+            $env->load();
+        }
 
         $this->app->instance(Dotenv::class, $env);
     }
