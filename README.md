@@ -27,6 +27,7 @@ in **pure PHP**.
 ### Windows
 
 - `composer install`
+- `copy .env.example .env`
 - `php app.php`
 
 ### Linux
@@ -34,6 +35,7 @@ in **pure PHP**.
 - `sudo apt install libsdl2-2.0-0 -y`
 - `sudo apt install libsdl2-image-2.0-0 -y`
 - `composer install`
+- `cp .env.example .env`
 - `php app.php`
 
 ### MacOS
@@ -41,4 +43,5 @@ in **pure PHP**.
 - `brew install sdl2`
 - `brew install sdl2_image`
 - `composer install`
+- `cp .env.example .env`
 - `php app.php`
