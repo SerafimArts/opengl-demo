@@ -14,6 +14,14 @@ in **pure PHP**.
 
 ![](https://habrastorage.org/webt/xd/8u/dn/xd8udncjdbysbj4dglahj8kfizw.png)
 
+## Requiremens
+
+- PHP 7.4+
+- ext-ffi
+- [Composer](https://getcomposer.org/download/)
+- SDL2 (only MacOS and Linux)
+- SDL2 Image (only MacOS and Linux)
+
 ## Installation
 
 ### Windows
