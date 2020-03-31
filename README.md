@@ -18,7 +18,8 @@ Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
 
 ## Requiremens
 
-- PHP 7.4+
+- PHP 7.4+ NTS
+> Please note that when using the Thread Save version of the PHP there will be throw an errors like "Failed loading libpng16-16.dll"
 - ext-ffi
 - [Composer](https://getcomposer.org/download/)
 - SDL2 (only MacOS and Linux)
