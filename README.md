@@ -14,6 +14,8 @@ in **pure PHP**.
 
 ![](https://habrastorage.org/webt/xd/8u/dn/xd8udncjdbysbj4dglahj8kfizw.png)
 
+Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
+
 ## Requiremens
 
 - PHP 7.4+
