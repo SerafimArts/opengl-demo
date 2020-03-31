@@ -36,9 +36,14 @@ in **pure PHP**.
 - `composer install`
 - `php app.php`
 
+### Linux / Docker
+
+- `docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -e XAUTHORITY=$XAUTHORITY $(docker build -q .)`
+
 ### MacOS
 
 - `brew install sdl2`
 - `brew install sdl2_image`
 - `composer install`
 - `php app.php`
+
