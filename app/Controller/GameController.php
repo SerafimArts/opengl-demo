@@ -84,23 +84,33 @@ class GameController
      */
     public function onUpdate(float $delta): void
     {
-        $this->size += $delta / 10;
-        if ($this->size > 360) {
-            $this->size -= 360;
-        }
-
-        $this->position += $delta / 3.3;
-        if ($this->position > 360) {
-            $this->position -= 360;
-        }
-
-        $this->camera->size->x = \max(1, \abs(\sin($this->size)) + 1);
-        $this->camera->size->y = \max(1, \abs(\sin($this->size)) + 1);
-
-        $this->camera->position->x = \abs(\sin($this->position) * 400);
-        $this->camera->position->y = \abs(\cos($this->position) * 1000);
-
         $this->noise->update($delta);
+    }
+    
+    /**
+     * @OnMouseWheel()
+     * Camera size on scroll.
+     */
+    public function OnMouseWheel($event)
+    {
+        if ($event->y == 1) {
+            $this->camera->size->x = $this->camera->size->x + 0.04;
+            $this->camera->size->y = $this->camera->size->y + 0.04;
+        }
+
+        if ($event->y == -1) {
+            if (($this->camera->size->x - 0.04) <= 1) {
+                $this->camera->size->x = 1;
+            } else {
+                $this->camera->size->x = $this->camera->size->x - 0.04;
+            }
+
+            if (($this->camera->size->y - 0.04) <= 1) {
+                $this->camera->size->y = 1;
+            } else {
+                $this->camera->size->y = $this->camera->size->y - 0.04;
+            }
+        }
     }
 
     /**
