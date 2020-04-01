@@ -15,6 +15,8 @@ use App\Game;
 use App\View\Noise;
 use App\View\Overlay;
 use FFI\CData;
+use Serafim\Bic\Lifecycle\Annotation\OnEvent;
+use Serafim\Bic\Lifecycle\Annotation\OnMouseMove;
 use Serafim\Bic\Lifecycle\Annotation\OnMouseWheel;
 use Serafim\Bic\Lifecycle\Annotation\OnRender;
 use Serafim\Bic\Lifecycle\Annotation\OnUpdate;
@@ -22,6 +24,8 @@ use Serafim\Bic\Map\Map;
 use Serafim\Bic\Renderer\Camera\CameraInterface;
 use Serafim\Bic\Renderer\Camera\OrthographicCamera;
 use Serafim\SDL\EventPtr;
+use Serafim\SDL\Kernel\Event\Type;
+use Serafim\SDL\MouseMotionEvent;
 
 /**
  * Class MenuController
@@ -64,6 +68,11 @@ class GameController
     private CameraInterface $camera;
 
     /**
+     * @var array|null
+     */
+    private ?array $drag = null;
+
+    /**
      * GameController constructor.
      *
      * @param Game $game
@@ -88,6 +97,42 @@ class GameController
     public function onUpdate(float $delta): void
     {
         $this->noise->update($delta);
+    }
+
+    /**
+     * @OnMouseMove()
+     * @param CData|MouseMotionEvent $move
+     * @return void
+     */
+    public function onMouseMove(CData $move): void
+    {
+        if ($this->drag === null) {
+            return;
+        }
+
+        $this->camera->position->x -= $move->x - $this->drag[0];
+        $this->camera->position->y -= $move->y - $this->drag[1];
+
+        $this->drag = [$move->x, $move->y];
+    }
+
+    /**
+     * @OnEvent(Type::SDL_MOUSEBUTTONDOWN)
+     * @param CData|EventPtr $event
+     * @return void
+     */
+    public function onDrag(CData $event): void
+    {
+        $this->drag = [$event->button->x, $event->button->y];
+    }
+
+    /**
+     * @OnEvent(Type::SDL_MOUSEBUTTONUP)
+     * @return void
+     */
+    public function onDrop(): void
+    {
+        $this->drag = null;
     }
 
     /**
