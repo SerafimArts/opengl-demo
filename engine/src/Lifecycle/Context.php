@@ -14,7 +14,6 @@ namespace Serafim\Bic\Lifecycle;
 use Doctrine\Common\Annotations\Reader;
 use FFI\CData;
 use Serafim\Bic\Application;
-use Serafim\Bic\EventLoop\LoopInterface;
 use Serafim\Bic\Lifecycle\Annotation\Annotation;
 use Serafim\Bic\Lifecycle\Annotation\OnEvent;
 use Serafim\Bic\Lifecycle\Annotation\OnHide;
@@ -299,16 +298,5 @@ class Context
         foreach ($this->callbacks[self::TYPE_PAUSE] as $callback) {
             $this->app->call($callback);
         }
-    }
-
-    /**
-     * @param int $type
-     * @param \Closure $method
-     * @param Annotation $annotation
-     * @return void
-     */
-    private function register(int $type, \Closure $method, Annotation $annotation): void
-    {
-        $this->callbacks[$type][] = [$annotation, $method];
     }
 }
