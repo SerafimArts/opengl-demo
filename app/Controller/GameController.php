@@ -14,17 +14,25 @@ namespace App\Controller;
 use App\Game;
 use App\View\Noise;
 use App\View\Overlay;
+use FFI\CData;
+use Serafim\Bic\Lifecycle\Annotation\OnMouseWheel;
 use Serafim\Bic\Lifecycle\Annotation\OnRender;
 use Serafim\Bic\Lifecycle\Annotation\OnUpdate;
 use Serafim\Bic\Map\Map;
 use Serafim\Bic\Renderer\Camera\CameraInterface;
 use Serafim\Bic\Renderer\Camera\OrthographicCamera;
+use Serafim\SDL\EventPtr;
 
 /**
  * Class MenuController
  */
 class GameController
 {
+    /**
+     * @var float
+     */
+    private const CAMERA_ZOOM_SPEED = .04;
+
     /**
      * @var Game
      */
@@ -60,6 +68,7 @@ class GameController
      */
     private CameraInterface $camera;
 
+
     /**
      * GameController constructor.
      *
@@ -86,29 +95,31 @@ class GameController
     {
         $this->noise->update($delta);
     }
-    
+
     /**
-     * @OnMouseWheel()
      * Camera size on scroll.
+     *
+     * @OnMouseWheel()
+     * @param CData|EventPtr $event
      */
-    public function OnMouseWheel($event)
+    public function onMouseWheel(CData $event): void
     {
-        if ($event->y == 1) {
-            $this->camera->size->x = $this->camera->size->x + 0.04;
-            $this->camera->size->y = $this->camera->size->y + 0.04;
+        if ($event->y === 1) {
+            $this->camera->size->x += self::CAMERA_ZOOM_SPEED;
+            $this->camera->size->y += self::CAMERA_ZOOM_SPEED;
         }
 
-        if ($event->y == -1) {
-            if (($this->camera->size->x - 0.04) <= 1) {
+        if ($event->y === -1) {
+            if (($this->camera->size->x - self::CAMERA_ZOOM_SPEED) <= 1) {
                 $this->camera->size->x = 1;
             } else {
-                $this->camera->size->x = $this->camera->size->x - 0.04;
+                $this->camera->size->x -= self::CAMERA_ZOOM_SPEED;
             }
 
-            if (($this->camera->size->y - 0.04) <= 1) {
+            if (($this->camera->size->y - self::CAMERA_ZOOM_SPEED) <= 1) {
                 $this->camera->size->y = 1;
             } else {
-                $this->camera->size->y = $this->camera->size->y - 0.04;
+                $this->camera->size->y -= self::CAMERA_ZOOM_SPEED;
             }
         }
     }
