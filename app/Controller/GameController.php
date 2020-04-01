@@ -59,15 +59,9 @@ class GameController
     private float $size = 0;
 
     /**
-     * @var float
-     */
-    private float $position = 0;
-
-    /**
      * @var CameraInterface
      */
     private CameraInterface $camera;
-
 
     /**
      * GameController constructor.
