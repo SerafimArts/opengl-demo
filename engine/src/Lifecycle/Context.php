@@ -22,6 +22,7 @@ use Serafim\Bic\Lifecycle\Annotation\OnKeyDown;
 use Serafim\Bic\Lifecycle\Annotation\OnKeyUp;
 use Serafim\Bic\Lifecycle\Annotation\OnLoad;
 use Serafim\Bic\Lifecycle\Annotation\OnMouseMove;
+use Serafim\Bic\Lifecycle\Annotation\OnMouseWheel;
 use Serafim\Bic\Lifecycle\Annotation\OnPause;
 use Serafim\Bic\Lifecycle\Annotation\OnRender;
 use Serafim\Bic\Lifecycle\Annotation\OnResume;
@@ -251,6 +252,9 @@ class Context
             // Mouse
             case OnMouseMove::class:
                 return $event->motion;
+
+            case OnMouseWheel::class:
+                return $event->wheel;
 
             default:
                 return $event;
