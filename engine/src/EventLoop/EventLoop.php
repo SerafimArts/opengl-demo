@@ -160,6 +160,6 @@ abstract class EventLoop implements LoopInterface
     {
         $this->running = false;
 
-        $this->sdl->quit();
+        $this->sdl->SDL_Quit();
     }
 }
