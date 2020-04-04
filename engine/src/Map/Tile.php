@@ -13,7 +13,7 @@ namespace Serafim\Bic\Map;
 
 use FFI\CData;
 use Serafim\Bic\Renderer\Texture;
-use Serafim\SDL\RectPtr;
+use SDL\RectPtr;
 
 /**
  * Class Tile

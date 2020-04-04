@@ -19,9 +19,9 @@ use Serafim\Bic\EventLoop\WorkerInterface;
 use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Viewport\ViewportInterface;
 use Serafim\Bic\Window\WindowInterface;
-use Serafim\SDL\Event;
-use Serafim\SDL\Kernel\Event\Type;
-use Serafim\SDL\Kernel\Video\WindowEvent;
+use SDL\Event;
+use SDL\Kernel\Event\Type;
+use SDL\Kernel\Video\WindowEvent;
 
 /**
  * Class Lifecycle

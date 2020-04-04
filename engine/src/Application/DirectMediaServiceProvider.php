@@ -11,8 +11,9 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Application;
 
-use Serafim\SDL\SDL;
-use Serafim\SDLImage\Image;
+use SDL\SDL;
+use SDL\Image\Image;
+use SDL\SDLNativeApiAutocomplete;
 
 /**
  * Class DirectMediaServiceProvider
@@ -24,8 +25,9 @@ class DirectMediaServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        /** @var SDLNativeApiAutocomplete $sdl */
         $sdl = SDL::getInstance();
-        $sdl->init(SDL::SDL_INIT_VIDEO | SDL::SDL_INIT_AUDIO);
+        $sdl->SDL_Init(SDL::SDL_INIT_VIDEO | SDL::SDL_INIT_AUDIO);
 
         $this->app->instance(SDL::class, $sdl);
 

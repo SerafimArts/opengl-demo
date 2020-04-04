@@ -87,10 +87,10 @@ class Preloader extends View
     public function render(RendererInterface $renderer, TransformationInterface $transform): void
     {
         $destination = $transform->transform($this->icon->destination);
-        $this->sdl->renderCopy($renderer->getPointer(), $this->icon->getPointer(), null, $destination);
+        $this->sdl->SDL_RenderCopy($renderer->getPointer(), $this->icon->getPointer(), null, $destination);
 
         $destination = $transform->transform($this->loading->destination);
-        $this->sdl->renderCopyEx(
+        $this->sdl->SDL_RenderCopyEx(
             $renderer->getPointer(),
             $this->loading->getPointer(),
             null,

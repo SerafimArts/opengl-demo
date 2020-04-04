@@ -13,8 +13,8 @@ namespace Serafim\Bic\Renderer;
 
 use FFI\CData;
 use Serafim\Bic\Util;
-use Serafim\SDL\RectPtr;
-use Serafim\SDL\SDL;
+use SDL\RectPtr;
+use SDL\SDL;
 
 /**
  * Trait TransformationTrait

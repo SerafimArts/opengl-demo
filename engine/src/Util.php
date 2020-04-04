@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Serafim\Bic;
 
 use FFI\CData;
-use Serafim\SDL\Rect as RectStruct;
-use Serafim\SDL\RectPtr;
-use Serafim\SDL\SDL;
+use SDL\Rect as RectStruct;
+use SDL\RectPtr;
+use SDL\SDL;
 
 /**
  * Class Util

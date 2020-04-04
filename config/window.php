@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-use Serafim\SDL\Kernel\Video\WindowFlags;
+use SDL\Kernel\Video\WindowFlags;
 
 return [
 

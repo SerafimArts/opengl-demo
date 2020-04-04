@@ -41,6 +41,6 @@ class Loading extends View
      */
     public function render(RendererInterface $renderer, TransformationInterface $transform): void
     {
-        $this->sdl->renderCopy($renderer->getPointer(), $this->splash->getPointer(), null, null);
+        $this->sdl->SDL_RenderCopy($renderer->getPointer(), $this->splash->getPointer(), null, null);
     }
 }

@@ -12,17 +12,15 @@ declare(strict_types=1);
 namespace Serafim\Bic\Map;
 
 use FFI\CData;
+use SDL\Kernel\Video\BlendMode;
+use SDL\RectPtr;
+use SDL\SDL;
 use Serafim\Bic\Lifecycle\Lifecycle;
-use Serafim\Bic\Math\Vector2;
 use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Texture;
 use Serafim\Bic\Renderer\TransformationInterface;
 use Serafim\Bic\Renderer\View;
 use Serafim\Bic\Util;
-use Serafim\SDL\Kernel\Video\BlendMode;
-use Serafim\SDL\RectPtr;
-use Serafim\SDL\SDL;
-use Serafim\SDL\TexturePtr;
 
 /**
  * Class Layer
@@ -50,6 +48,11 @@ class Layer extends View
     public bool $visible = true;
 
     /**
+     * @var CData|RectPtr
+     */
+    public CData $dest;
+
+    /**
      * @var array|Tile[]
      */
     private array $tiles = [];
@@ -63,11 +66,6 @@ class Layer extends View
      * @var CData|RectPtr
      */
     private CData $clip;
-
-    /**
-     * @var CData|RectPtr
-     */
-    public CData $dest;
 
     /**
      * Layer constructor.
@@ -115,7 +113,7 @@ class Layer extends View
         $this->layer->destination->w = (int)$transform->w($this->dest->w);
         $this->layer->destination->h = (int)$transform->h($this->dest->h);
 
-        $this->sdl->renderCopy(
+        $this->sdl->SDL_RenderCopy(
             $renderer->getPointer(),
             $this->layer->ptr,
             $this->layer->source,
@@ -129,9 +127,9 @@ class Layer extends View
      */
     private function prerender(RendererInterface $renderer): void
     {
-        $format = $this->sdl->getWindowPixelFormat($this->game->window->getPointer());
+        $format = $this->sdl->SDL_GetWindowPixelFormat($this->game->window->getPointer());
 
-        $texture = $this->sdl->createTexture(
+        $texture = $this->sdl->SDL_CreateTexture(
             $renderer->getPointer(),
             $format,
             SDL::SDL_TEXTUREACCESS_TARGET,
@@ -145,7 +143,7 @@ class Layer extends View
         $this->layer->openTarget($renderer);
 
         foreach ($this->tiles as $tile) {
-            $this->sdl->renderCopy(
+            $this->sdl->SDL_RenderCopy(
                 $renderer->getPointer(),
                 $tile->texture->ptr,
                 $tile->clip,

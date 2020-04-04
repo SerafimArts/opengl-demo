@@ -14,7 +14,7 @@ namespace Serafim\Bic\Renderer\Viewport;
 use Serafim\Bic\Math\Vector2;
 use Serafim\Bic\Renderer\TransformMemoizationTrait;
 use Serafim\Bic\Window\Window;
-use Serafim\SDL\SDL;
+use SDL\SDL;
 
 /**
  * Class Viewport

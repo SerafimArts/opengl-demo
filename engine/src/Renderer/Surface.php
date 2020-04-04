@@ -14,11 +14,11 @@ namespace Serafim\Bic\Renderer;
 use FFI\CData;
 use Serafim\Bic\Native;
 use Serafim\Bic\Window\Window;
-use Serafim\SDL\PixelFormat;
-use Serafim\SDL\PixelFormatPtr;
-use Serafim\SDL\Rect;
-use Serafim\SDL\SurfacePtr;
-use Serafim\SDLImage\Image;
+use SDL\PixelFormat;
+use SDL\PixelFormatPtr;
+use SDL\Rect;
+use SDL\SurfacePtr;
+use SDL\Image\Image;
 
 /**
  * @method SurfacePtr getPointer()
@@ -46,11 +46,11 @@ class Surface extends Native
     {
         $before = $this->ptr;
 
-        $format = $this->sdl->getWindowPixelFormat($window->getPointer());
+        $format = $this->sdl->SDL_GetWindowPixelFormat($window->getPointer());
 
-        $this->ptr = $this->sdl->convertSurfaceFormat($before, $format, 0);
+        $this->ptr = $this->sdl->SDL_ConvertSurfaceFormat($before, $format, 0);
 
-        $this->sdl->freeSurface($before);
+        $this->sdl->SDL_FreeSurface($before);
     }
 
     /**
@@ -93,6 +93,6 @@ class Surface extends Native
      */
     public function __destruct()
     {
-        $this->sdl->freeSurface($this->ptr);
+        $this->sdl->SDL_FreeSurface($this->ptr);
     }
 }

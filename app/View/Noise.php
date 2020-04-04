@@ -15,7 +15,7 @@ use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Texture;
 use Serafim\Bic\Renderer\TransformationInterface;
 use Serafim\Bic\Renderer\View;
-use Serafim\SDL\Kernel\Video\BlendMode;
+use SDL\Kernel\Video\BlendMode;
 
 /**
  * Class Noise
@@ -80,7 +80,7 @@ class Noise extends View
         do {
             $current->destination->y = 0;
             do {
-                $this->sdl->renderCopy(
+                $this->sdl->SDL_RenderCopy(
                     $renderer->getPointer(),
                     $current->getPointer(),
                     null,

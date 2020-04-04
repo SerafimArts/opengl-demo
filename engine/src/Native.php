@@ -13,7 +13,8 @@ namespace Serafim\Bic;
 
 use FFI\CData;
 use FFI\CPtr;
-use Serafim\SDL\SDL;
+use SDL\SDL;
+use SDL\SDLNativeApiAutocomplete;
 
 /**
  * Class Native
@@ -21,7 +22,7 @@ use Serafim\SDL\SDL;
 abstract class Native implements NativeInterface
 {
     /**
-     * @var SDL
+     * @var SDL|SDLNativeApiAutocomplete
      */
     protected SDL $sdl;
 

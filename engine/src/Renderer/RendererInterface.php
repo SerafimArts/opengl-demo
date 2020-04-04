@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Serafim\Bic\Renderer;
 
 use Serafim\Bic\NativeInterface;
-use Serafim\SDL\RendererPtr;
+use SDL\RendererPtr;
 
 /**
  * @method RendererPtr getPointer()

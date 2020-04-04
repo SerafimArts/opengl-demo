@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Serafim\Bic\Renderer\Viewport;
 
 use FFI\CData;
-use Serafim\SDL\RectPtr;
+use SDL\RectPtr;
 
 /**
  * Class StretchViewport

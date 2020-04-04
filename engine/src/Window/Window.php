@@ -12,10 +12,11 @@ declare(strict_types=1);
 namespace Serafim\Bic\Window;
 
 use FFI\CData;
+use SDL\SDLNativeApiAutocomplete;
 use Serafim\Bic\Renderer\Surface;
-use Serafim\SDL\Kernel\Video\WindowFlags;
-use Serafim\SDL\SDL;
-use Serafim\SDL\WindowPtr;
+use SDL\Kernel\Video\WindowFlags;
+use SDL\SDL;
+use SDL\WindowPtr;
 
 /**
  * Class Window
@@ -33,7 +34,7 @@ class Window implements WindowInterface
     private CData $window;
 
     /**
-     * @var SDL
+     * @var SDL|SDLNativeApiAutocomplete
      */
     private SDL $sdl;
 
@@ -63,7 +64,7 @@ class Window implements WindowInterface
      */
     public function setIcon(Surface $surface): void
     {
-        $this->sdl->setWindowIcon($this->window, $surface->getPointer());
+        $this->sdl->SDL_SetWindowIcon($this->window, $surface->getPointer());
     }
 
     /**
@@ -71,7 +72,7 @@ class Window implements WindowInterface
      */
     public function show(): void
     {
-        $this->sdl->showWindow($this->window);
+        $this->sdl->SDL_ShowWindow($this->window);
     }
 
     /**
@@ -79,7 +80,7 @@ class Window implements WindowInterface
      */
     public function hide(): void
     {
-        $this->sdl->hideWindow($this->window);
+        $this->sdl->SDL_HideWindow($this->window);
     }
 
     /**
@@ -93,9 +94,10 @@ class Window implements WindowInterface
     {
         $x = $y = SDL::SDL_WINDOWPOS_CENTERED;
 
+        /** @var SDLNativeApiAutocomplete $sdl */
         $sdl = SDL::getInstance();
 
-        return new static($sdl->createWindow($title, $x, $y, $width, $height, $flags));
+        return new static($sdl->SDL_CreateWindow($title, $x, $y, $width, $height, $flags));
     }
 
     /**

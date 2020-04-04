@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
-use Serafim\SDL\SDL;
+use SDL\SDL;
+use SDL\SDLNativeApiAutocomplete;
 
 final class Driver
 {
@@ -42,9 +43,10 @@ final class Driver
      */
     public static function current(): Driver
     {
+        /** @var SDLNativeApiAutocomplete $sdl */
         $sdl = SDL::getInstance();
 
-        $driver = self::findByName($sdl->getCurrentVideoDriver());
+        $driver = self::findByName($sdl->SDL_GetCurrentVideoDriver());
 
         if ($driver === null) {
             throw new \LogicException('There is no default video driver');
@@ -88,10 +90,11 @@ final class Driver
      */
     public static function all(): iterable
     {
+        /** @var SDLNativeApiAutocomplete $sdl */
         $sdl = SDL::getInstance();
 
-        for ($i = 0, $len = $sdl->getNumVideoDrivers(); $i < $len; ++$i) {
-            yield new Driver($i, $sdl->getVideoDriver($i));
+        for ($i = 0, $len = $sdl->SDL_GetNumVideoDrivers(); $i < $len; ++$i) {
+            yield new Driver($i, $sdl->SDL_GetVideoDriver($i));
         }
     }
 }

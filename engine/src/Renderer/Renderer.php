@@ -13,8 +13,8 @@ namespace Serafim\Bic\Renderer;
 
 use Serafim\Bic\Native;
 use Serafim\Bic\Window\WindowInterface;
-use Serafim\SDL\RendererPtr;
-use Serafim\SDL\SDL;
+use SDL\RendererPtr;
+use SDL\SDL;
 
 /**
  * @method RendererPtr getPointer()
@@ -44,7 +44,7 @@ class Renderer extends Native implements RendererInterface
 
         $this->driver = $driver ?? Driver::current();
 
-        $this->ptr = $this->sdl->createRenderer($window->getPointer(), $this->driver->index, $flags);
+        $this->ptr = $this->sdl->SDL_CreateRenderer($window->getPointer(), $this->driver->index, $flags);
     }
 
     /**
@@ -52,7 +52,7 @@ class Renderer extends Native implements RendererInterface
      */
     public function clear(): void
     {
-        $this->sdl->renderClear($this->ptr);
+        $this->sdl->SDL_RenderClear($this->ptr);
     }
 
     /**
@@ -60,6 +60,6 @@ class Renderer extends Native implements RendererInterface
      */
     public function present(): void
     {
-        $this->sdl->renderPresent($this->ptr);
+        $this->sdl->SDL_RenderPresent($this->ptr);
     }
 }

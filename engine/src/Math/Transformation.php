@@ -13,9 +13,9 @@ namespace Serafim\Bic\Math;
 
 use FFI\CData;
 use Serafim\Bic\Util;
-use Serafim\SDL\Rect;
-use Serafim\SDL\RectPtr;
-use Serafim\SDL\SDL;
+use SDL\Rect;
+use SDL\RectPtr;
+use SDL\SDL;
 
 /**
  * Class Transformation

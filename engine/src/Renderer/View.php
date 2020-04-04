@@ -11,8 +11,9 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
+use SDL\SDLNativeApiAutocomplete;
 use Serafim\Bic\Lifecycle\Lifecycle;
-use Serafim\SDL\SDL;
+use SDL\SDL;
 
 /**
  * Class View
@@ -22,7 +23,7 @@ use Serafim\SDL\SDL;
 abstract class View implements ViewInterface
 {
     /**
-     * @var SDL
+     * @var SDL|SDLNativeApiAutocomplete
      */
     protected SDL $sdl;
 

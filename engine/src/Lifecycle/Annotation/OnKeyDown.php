@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle\Annotation;
 
-use Serafim\SDL\Kernel\Event\Type;
+use SDL\Kernel\Event\Type;
 
 /**
  * @Annotation

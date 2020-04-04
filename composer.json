@@ -10,6 +10,7 @@
         "php": ">=7.4",
         "ext-ffi": "*",
         "ext-json": "*",
+        "serafim/ffi-ide-helper": "^1.0",
         "serafim/bic-engine": "^1.0"
     },
     "autoload": {
