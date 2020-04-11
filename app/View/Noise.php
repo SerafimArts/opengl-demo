@@ -15,7 +15,7 @@ use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Texture;
 use Serafim\Bic\Renderer\TransformationInterface;
 use Serafim\Bic\Renderer\View;
-use SDL\Kernel\Video\BlendMode;
+use Serafim\SDL\Kernel\Video\BlendMode;
 
 /**
  * Class Noise

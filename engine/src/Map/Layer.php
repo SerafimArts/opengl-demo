@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Serafim\Bic\Map;
 
 use FFI\CData;
-use SDL\Kernel\Video\BlendMode;
-use SDL\RectPtr;
-use SDL\SDL;
+use Serafim\SDL\Kernel\Video\BlendMode;
+use Serafim\SDL\RectPtr;
+use Serafim\SDL\SDL;
 use Serafim\Bic\Lifecycle\Lifecycle;
 use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Texture;

@@ -23,9 +23,9 @@ use Serafim\Bic\Lifecycle\Annotation\OnUpdate;
 use Serafim\Bic\Map\Map;
 use Serafim\Bic\Renderer\Camera\CameraInterface;
 use Serafim\Bic\Renderer\Camera\OrthographicCamera;
-use SDL\EventPtr;
-use SDL\Kernel\Event\Type;
-use SDL\MouseMotionEvent;
+use Serafim\SDL\EventPtr;
+use Serafim\SDL\Kernel\Event\Type;
+use Serafim\SDL\MouseMotionEvent;
 
 /**
  * Class MenuController

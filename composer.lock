@@ -206,7 +206,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v7.4.0",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -250,16 +250,16 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v7.4.0",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "9108edffa95b34df94dc36721d92f380dd59bea3"
+                "reference": "10c5802e360595f5f2a8b6afa176b9542851e580"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/9108edffa95b34df94dc36721d92f380dd59bea3",
-                "reference": "9108edffa95b34df94dc36721d92f380dd59bea3",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/10c5802e360595f5f2a8b6afa176b9542851e580",
+                "reference": "10c5802e360595f5f2a8b6afa176b9542851e580",
                 "shasum": ""
             },
             "require": {
@@ -290,20 +290,20 @@
             ],
             "description": "The Illuminate Container package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-18T13:25:12+00:00"
+            "time": "2020-04-06T13:33:36+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.4.0",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "f13c89509345ceee05f3527a83f38c77c0f74579"
+                "reference": "2db7e8a936cc09e396d14902178ea177f4dc42ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/f13c89509345ceee05f3527a83f38c77c0f74579",
-                "reference": "f13c89509345ceee05f3527a83f38c77c0f74579",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/2db7e8a936cc09e396d14902178ea177f4dc42ac",
+                "reference": "2db7e8a936cc09e396d14902178ea177f4dc42ac",
                 "shasum": ""
             },
             "require": {
@@ -334,20 +334,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-31T14:24:32+00:00"
+            "time": "2020-04-04T15:13:36+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v7.4.0",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "6b5a135637bf901e5dd9c0e3d906a97d550d4cee"
+                "reference": "b8d805437c075a44bf53737763c3b979932445c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/6b5a135637bf901e5dd9c0e3d906a97d550d4cee",
-                "reference": "6b5a135637bf901e5dd9c0e3d906a97d550d4cee",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b8d805437c075a44bf53737763c3b979932445c7",
+                "reference": "b8d805437c075a44bf53737763c3b979932445c7",
                 "shasum": ""
             },
             "require": {
@@ -396,7 +396,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-30T13:52:20+00:00"
+            "time": "2020-04-08T13:18:06+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -467,17 +467,63 @@
                 "datetime",
                 "time"
             ],
-            "funding": [
+            "time": "2020-03-31T13:43:19+00:00"
+        },
+        {
+            "name": "phplrt/lexer-contracts",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/lexer-contracts.git",
+                "reference": "d4d80ef5043641da765953661520c7facf97efba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/lexer-contracts/zipball/d4d80ef5043641da765953661520c7facf97efba",
+                "reference": "d4d80ef5043641da765953661520c7facf97efba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Contracts\\Lexer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
                 {
-                    "url": "https://opencollective.com/Carbon",
-                    "type": "open_collective"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
-                    "type": "tidelift"
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
                 }
             ],
-            "time": "2020-03-31T13:43:19+00:00"
+            "description": "A set of phplrt lexer abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "lexer",
+                "parsing",
+                "regex",
+                "standards",
+                "stream",
+                "token",
+                "tokenizer"
+            ],
+            "time": "2020-03-05T18:40:32+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -700,22 +746,70 @@
             "time": "2020-03-21T23:18:42+00:00"
         },
         {
-            "name": "serafim/ffi-sdl",
-            "version": "dev-master",
+            "name": "serafim/ffi-loader",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/SerafimArts/ffi-sdl.git",
-                "reference": "803e0bd90c07fb5aa95751372b591cb63c96c246"
+                "url": "https://github.com/SerafimArts/ffi-loader.git",
+                "reference": "a7bfb01022d1815af488e6d0d0831b1d36bb6944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl/zipball/803e0bd90c07fb5aa95751372b591cb63c96c246",
-                "reference": "803e0bd90c07fb5aa95751372b591cb63c96c246",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-loader/zipball/a7bfb01022d1815af488e6d0d0831b1d36bb6944",
+                "reference": "a7bfb01022d1815af488e6d0d0831b1d36bb6944",
                 "shasum": ""
             },
             "require": {
                 "ext-ffi": "*",
-                "php": ">=7.4"
+                "php": ">=7.4",
+                "phplrt/lexer-contracts": "^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~9.1",
+                "symfony/var-dumper": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Serafim\\FFILoader\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "FFI libraries loader with simple preprocessor",
+            "keywords": [
+                "compiler",
+                "ffi",
+                "loader",
+                "parser"
+            ],
+            "time": "2020-04-10T17:58:53+00:00"
+        },
+        {
+            "name": "serafim/ffi-sdl",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SerafimArts/ffi-sdl.git",
+                "reference": "8623d8d49b060e9b73ff41751fcc6fcf8f43a002"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl/zipball/8623d8d49b060e9b73ff41751fcc6fcf8f43a002",
+                "reference": "8623d8d49b060e9b73ff41751fcc6fcf8f43a002",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ffi": "*",
+                "php": ">=7.4",
+                "serafim/ffi-loader": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~9.0",
@@ -730,7 +824,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "SDL\\": "src"
+                    "Serafim\\SDL\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -754,20 +848,20 @@
                 "opengl",
                 "sdl"
             ],
-            "time": "2020-04-04T04:22:40+00:00"
+            "time": "2020-04-11T00:15:57+00:00"
         },
         {
             "name": "serafim/ffi-sdl-image",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SerafimArts/ffi-sdl-image.git",
-                "reference": "b0b0bbd1cdd2deb3ea5256b08606f1c32c76b342"
+                "reference": "a3eb873d04f96a5b21904ac759ccf032c5c2a2b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl-image/zipball/b0b0bbd1cdd2deb3ea5256b08606f1c32c76b342",
-                "reference": "b0b0bbd1cdd2deb3ea5256b08606f1c32c76b342",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl-image/zipball/a3eb873d04f96a5b21904ac759ccf032c5c2a2b3",
+                "reference": "a3eb873d04f96a5b21904ac759ccf032c5c2a2b3",
                 "shasum": ""
             },
             "require": {
@@ -788,7 +882,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "SDL\\Image\\": "src"
+                    "Serafim\\SDL\\Image\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -812,7 +906,7 @@
                 "opengl",
                 "sdl"
             ],
-            "time": "2020-04-04T04:14:54+00:00"
+            "time": "2020-04-11T00:25:03+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -869,6 +963,20 @@
                 "ctype",
                 "polyfill",
                 "portable"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-02-27T09:26:54+00:00"
         },
@@ -928,6 +1036,20 @@
                 "polyfill",
                 "portable",
                 "shim"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-03-09T19:04:49+00:00"
         },
@@ -1195,6 +1317,24 @@
                 "ascii",
                 "clean",
                 "php"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/moelleken",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/voku",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/voku",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/voku/portable-ascii",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-03-13T01:23:26+00:00"
         }

@@ -12,14 +12,14 @@ declare(strict_types=1);
 namespace Serafim\Bic\Renderer;
 
 use FFI\CData;
-use SDL\SDLNativeApiAutocomplete;
+use Serafim\SDL\SDLNativeApiAutocomplete;
 use Serafim\Bic\Math\Vector2;
 use Serafim\Bic\Native;
 use Serafim\Bic\Util;
-use SDL\Kernel\Video\BlendMode;
-use SDL\RectPtr;
-use SDL\SDL;
-use SDL\TexturePtr;
+use Serafim\SDL\Kernel\Video\BlendMode;
+use Serafim\SDL\RectPtr;
+use Serafim\SDL\SDL;
+use Serafim\SDL\TexturePtr;
 
 /**
  * @method TexturePtr getPointer()

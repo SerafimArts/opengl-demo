@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
-use SDL\SDL;
-use SDL\SDLNativeApiAutocomplete;
+use Serafim\SDL\SDL;
+use Serafim\SDL\SDLNativeApiAutocomplete;
 
 final class Driver
 {

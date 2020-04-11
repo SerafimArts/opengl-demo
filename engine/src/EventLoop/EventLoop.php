@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace Serafim\Bic\EventLoop;
 
 use FFI\CData;
-use SDL\Event;
-use SDL\EventPtr;
-use SDL\SDL;
-use SDL\SDLNativeApiAutocomplete;
+use Serafim\SDL\Event;
+use Serafim\SDL\EventPtr;
+use Serafim\SDL\SDL;
+use Serafim\SDL\SDLNativeApiAutocomplete;
 
 /**
  * Class EventLoop

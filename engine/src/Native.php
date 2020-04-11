@@ -13,8 +13,8 @@ namespace Serafim\Bic;
 
 use FFI\CData;
 use FFI\CPtr;
-use SDL\SDL;
-use SDL\SDLNativeApiAutocomplete;
+use Serafim\SDL\SDL;
+use Serafim\SDL\SDLNativeApiAutocomplete;
 
 /**
  * Class Native

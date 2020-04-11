@@ -28,7 +28,7 @@ use Serafim\Bic\Lifecycle\Annotation\OnResume;
 use Serafim\Bic\Lifecycle\Annotation\OnShow;
 use Serafim\Bic\Lifecycle\Annotation\OnUnload;
 use Serafim\Bic\Lifecycle\Annotation\OnUpdate;
-use SDL\Event;
+use Serafim\SDL\Event;
 
 /**
  * Class Context
