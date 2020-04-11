@@ -106,10 +106,18 @@ class Texture extends Native
      */
     public static function fromPathname(RendererInterface $renderer, string $pathname): self
     {
+        return self::fromSurface($renderer, Surface::fromPathname($pathname));
+    }
+
+    /**
+     * @param RendererInterface $renderer
+     * @param Surface $surface
+     * @return $this
+     */
+    public static function fromSurface(RendererInterface $renderer, Surface $surface): self
+    {
         /** @var SDLNativeApiAutocomplete $sdl */
         $sdl = SDL::getInstance();
-
-        $surface = Surface::fromPathname($pathname);
 
         $texture = $sdl->SDL_CreateTextureFromSurface($renderer->getPointer(), $surface->getPointer());
 

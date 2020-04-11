@@ -19,7 +19,7 @@ interface LoopInterface
     /**
      * @var int
      */
-    public const DEFAULT_FRAME_RATE = 120;
+    public const DEFAULT_FRAME_RATE = 60;
 
     /**
      * @var int

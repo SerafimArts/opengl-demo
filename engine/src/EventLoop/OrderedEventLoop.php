@@ -21,12 +21,12 @@ class OrderedEventLoop extends EventLoop
     /**
      * @var Timer
      */
-    private Timer $render;
+    public Timer $render;
 
     /**
      * @var Timer
      */
-    private Timer $updates;
+    public Timer $updates;
 
     /**
      * BlockingEventLoop constructor.

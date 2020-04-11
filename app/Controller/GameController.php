@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Game;
+use App\View\FrameRate;
 use App\View\Noise;
 use App\View\Overlay;
 use FFI\CData;
@@ -73,6 +74,16 @@ class GameController
     private ?array $drag = null;
 
     /**
+     * @var FrameRate
+     */
+    private FrameRate $rate;
+
+    /**
+     * @var float
+     */
+    private float $cameraSize = 1;
+
+    /**
      * GameController constructor.
      *
      * @param Game $game
@@ -84,6 +95,7 @@ class GameController
         $this->map = $map;
         $this->noise = new Noise($game);
         $this->overlay = new Overlay($game);
+        $this->rate = new FrameRate($game);
 
         $this->camera = new OrthographicCamera($game->viewport);
     }
@@ -97,6 +109,7 @@ class GameController
     public function onUpdate(float $delta): void
     {
         $this->noise->update($delta);
+        $this->rate->update($delta);
     }
 
     /**
@@ -143,24 +156,21 @@ class GameController
      */
     public function onMouseWheel(CData $event): void
     {
-        if ($event->y === 1) {
-            $this->camera->size->x += self::CAMERA_ZOOM_SPEED;
-            $this->camera->size->y += self::CAMERA_ZOOM_SPEED;
+        switch (true) {
+            case $event->y === 1:
+                $this->cameraSize += self::CAMERA_ZOOM_SPEED;
+                break;
+
+            case $event->y === -1 && $this->cameraSize - self::CAMERA_ZOOM_SPEED <= 1:
+                $this->cameraSize = 1;
+                break;
+
+            case $event->y === -1:
+                $this->cameraSize -= self::CAMERA_ZOOM_SPEED;
+                break;
         }
 
-        if ($event->y === -1) {
-            if (($this->camera->size->x - self::CAMERA_ZOOM_SPEED) <= 1) {
-                $this->camera->size->x = 1;
-            } else {
-                $this->camera->size->x -= self::CAMERA_ZOOM_SPEED;
-            }
-
-            if (($this->camera->size->y - self::CAMERA_ZOOM_SPEED) <= 1) {
-                $this->camera->size->y = 1;
-            } else {
-                $this->camera->size->y -= self::CAMERA_ZOOM_SPEED;
-            }
-        }
+        $this->camera->size->x = $this->camera->size->y = $this->cameraSize;
     }
 
     /**
@@ -175,5 +185,6 @@ class GameController
 
         $this->noise->render($this->game->renderer, $this->game->viewport);
         $this->overlay->render($this->game->renderer, $this->game->viewport);
+        $this->rate->render($this->game->renderer, $this->game->viewport);
     }
 }

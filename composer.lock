@@ -683,7 +683,7 @@
             "dist": {
                 "type": "path",
                 "url": "engine",
-                "reference": "13da9d51f2f4577fb3a3ae49bbea14f52bdf43ef"
+                "reference": "2a9f0e5170238d8e10a30eccf4fdc453df08aab7"
             },
             "require": {
                 "doctrine/annotations": "~1.8",
@@ -694,6 +694,7 @@
                 "php": ">=7.4",
                 "serafim/ffi-sdl": "^1.0",
                 "serafim/ffi-sdl-image": "^1.0",
+                "serafim/ffi-sdl-ttf": "^1.0",
                 "vlucas/phpdotenv": "^4.0"
             },
             "require-dev": {
@@ -747,16 +748,16 @@
         },
         {
             "name": "serafim/ffi-loader",
-            "version": "1.0.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SerafimArts/ffi-loader.git",
-                "reference": "a7bfb01022d1815af488e6d0d0831b1d36bb6944"
+                "reference": "d156c741b0f4266ce2107d0ba1fcace1218449c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SerafimArts/ffi-loader/zipball/a7bfb01022d1815af488e6d0d0831b1d36bb6944",
-                "reference": "a7bfb01022d1815af488e6d0d0831b1d36bb6944",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-loader/zipball/d156c741b0f4266ce2107d0ba1fcace1218449c5",
+                "reference": "d156c741b0f4266ce2107d0ba1fcace1218449c5",
                 "shasum": ""
             },
             "require": {
@@ -790,26 +791,26 @@
                 "loader",
                 "parser"
             ],
-            "time": "2020-04-10T17:58:53+00:00"
+            "time": "2020-04-11T01:38:10+00:00"
         },
         {
             "name": "serafim/ffi-sdl",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SerafimArts/ffi-sdl.git",
-                "reference": "8623d8d49b060e9b73ff41751fcc6fcf8f43a002"
+                "reference": "bc537de1871999846ebad5bca0ed89f04f3f5d2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl/zipball/8623d8d49b060e9b73ff41751fcc6fcf8f43a002",
-                "reference": "8623d8d49b060e9b73ff41751fcc6fcf8f43a002",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl/zipball/bc537de1871999846ebad5bca0ed89f04f3f5d2a",
+                "reference": "bc537de1871999846ebad5bca0ed89f04f3f5d2a",
                 "shasum": ""
             },
             "require": {
                 "ext-ffi": "*",
                 "php": ">=7.4",
-                "serafim/ffi-loader": "^1.0"
+                "serafim/ffi-loader": "~1.0.3"
             },
             "require-dev": {
                 "phpunit/phpunit": "~9.0",
@@ -848,20 +849,20 @@
                 "opengl",
                 "sdl"
             ],
-            "time": "2020-04-11T00:15:57+00:00"
+            "time": "2020-04-11T02:16:52+00:00"
         },
         {
             "name": "serafim/ffi-sdl-image",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SerafimArts/ffi-sdl-image.git",
-                "reference": "a3eb873d04f96a5b21904ac759ccf032c5c2a2b3"
+                "reference": "d48c93724259e2bd74e548f2f787a472c025a756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl-image/zipball/a3eb873d04f96a5b21904ac759ccf032c5c2a2b3",
-                "reference": "a3eb873d04f96a5b21904ac759ccf032c5c2a2b3",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl-image/zipball/d48c93724259e2bd74e548f2f787a472c025a756",
+                "reference": "d48c93724259e2bd74e548f2f787a472c025a756",
                 "shasum": ""
             },
             "require": {
@@ -906,7 +907,65 @@
                 "opengl",
                 "sdl"
             ],
-            "time": "2020-04-11T00:25:03+00:00"
+            "time": "2020-04-11T01:45:34+00:00"
+        },
+        {
+            "name": "serafim/ffi-sdl-ttf",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SerafimArts/ffi-sdl-ttf.git",
+                "reference": "4bc58161aa6269a531b427247f099c005c175a4c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SerafimArts/ffi-sdl-ttf/zipball/4bc58161aa6269a531b427247f099c005c175a4c",
+                "reference": "4bc58161aa6269a531b427247f099c005c175a4c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ffi": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.4",
+                "serafim/ffi-sdl": "~1.0.3"
+            },
+            "require-dev": {
+                "serafim/ffi-ide-helper": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Serafim\\SDL\\TTF\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "PHP FFI to SDL TTF bindings",
+            "homepage": "https://github.com/SerafimArts/ffi-sdl-ttf",
+            "keywords": [
+                "bindings",
+                "ffi",
+                "font",
+                "graphics",
+                "library",
+                "opengl",
+                "sdl",
+                "ttf"
+            ],
+            "time": "2020-04-11T03:51:29+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

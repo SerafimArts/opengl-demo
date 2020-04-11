@@ -6,6 +6,7 @@
         "ext-ffi": "*",
         "serafim/ffi-sdl": "^1.0",
         "serafim/ffi-sdl-image": "^1.0",
+        "serafim/ffi-sdl-ttf": "^1.0",
         "vlucas/phpdotenv": "^4.0",
         "doctrine/annotations": "~1.8",
         "illuminate/support": "~7.2",

@@ -15,6 +15,7 @@ use FFI\CData;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Serafim\Bic\Application;
 use Serafim\Bic\EventLoop\LoopInterface;
+use Serafim\Bic\EventLoop\OrderedEventLoop;
 use Serafim\Bic\EventLoop\WorkerInterface;
 use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Viewport\ViewportInterface;

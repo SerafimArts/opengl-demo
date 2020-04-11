@@ -9,6 +9,7 @@ RUN apt install libffi-dev \
 
 RUN apt install libsdl2-2.0-0 -y
 RUN apt install libsdl2-image-2.0-0 -y
+RUN apt install libsdl2-ttf-2.0-0 -y
 RUN apt install libglu1 -y
 
 RUN apt install zip -y

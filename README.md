@@ -16,17 +16,17 @@ in **pure PHP**.
 
 Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
 
-## Requiremens
+## Requirements
 
-- PHP 7.4+ NTS
+- PHP 7.4+
 - ext-ffi
 - [Composer](https://getcomposer.org/download/)
-- SDL2 (only MacOS and Linux)
-- SDL2 Image (only MacOS and Linux)
 
-> Please note that when using the **Thread Safe** version of the PHP there will be throw 
-> an error like "**Failed loading libpng16-16.dll**"
-> See: https://bugs.php.net/bug.php?id=79439&thanks=4
+### Additional Requirements (MacOS and Linux only)
+
+- SDL 2.0+
+- SDL Image 2.0+
+- SDL TTF 2.0+
 
 ## Installation
 
@@ -39,6 +39,7 @@ Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
 
 - `sudo apt install libsdl2-2.0-0 -y`
 - `sudo apt install libsdl2-image-2.0-0 -y`
+- `sudo apt install libsdl2-ttf-2.0-0 -y`
 - `composer install`
 - `php app.php`
 
@@ -50,6 +51,7 @@ Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
 
 - `brew install sdl2`
 - `brew install sdl2_image`
+- `brew install sdl2_ttf`
 - `composer install`
 - `php app.php`
 
