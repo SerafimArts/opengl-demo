@@ -1,27 +1,21 @@
 FROM php:7.4
 
-RUN apt update
-
-RUN apt install libffi-dev \
-    && docker-php-ext-configure ffi --with-ffi \
-    && docker-php-ext-install ffi
-
-
-RUN apt install libsdl2-2.0-0 -y
-RUN apt install libsdl2-image-2.0-0 -y
-RUN apt install libsdl2-ttf-2.0-0 -y
-RUN apt install libglu1 -y
-
-RUN apt install zip -y
-
-RUN apt install git -y
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
+RUN apt update && \
+apt upgrade -y && \
+apt install -y libglu1 \
+libsdl2-ttf-2.0-0 \
+libsdl2-image-2.0-0 \
+libsdl2-2.0-0 \
+libffi-dev \
+git && \
+docker-php-ext-configure ffi --with-ffi && \
+docker-php-ext-install ffi && \
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY . /usr/src/myapp
 
 WORKDIR /usr/src/myapp
 
-RUN composer install
+RUN cd /usr/src/myapp && composer install
 
 CMD ["php", "./app.php"]
