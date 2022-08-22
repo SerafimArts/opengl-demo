@@ -31,7 +31,6 @@ class DirectMediaServiceProvider extends ServiceProvider
 
         $this->app->instance(SDL::class, $sdl);
 
-
         $image = Image::getInstance();
         $image->init(Image::IMG_INIT_PNG);
         $this->app->instance(Image::class, $image);

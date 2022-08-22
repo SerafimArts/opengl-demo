@@ -102,8 +102,8 @@ class FrameRate extends View
 
         [$width, $height] = $this->ttf->getSize($this->font, $text, "UTF-8");
 
-        $this->position->w = (int)$this->game->viewport->w($width->cdata);
-        $this->position->h = (int)$this->game->viewport->h($height->cdata);
+        $this->position->w = (int)$this->game->viewport->w($width);
+        $this->position->h = (int)$this->game->viewport->h($height);
     }
 
     /**

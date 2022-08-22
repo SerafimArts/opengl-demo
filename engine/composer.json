@@ -4,6 +4,8 @@
     "require": {
         "php": ">=7.4",
         "ext-ffi": "*",
+        "phplrt/lexer": "^3.2",
+        "phplrt/parser": "^3.2",
         "serafim/ffi-sdl": "^1.0",
         "serafim/ffi-sdl-image": "^1.0",
         "serafim/ffi-sdl-ttf": "^1.0",
@@ -22,11 +24,12 @@
         ]
     },
     "require-dev": {
-        "symfony/var-dumper": "~5.0"
+        "symfony/var-dumper": "^5.4|^6.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.0.x-dev",
+            "dev-main": "1.0.x-dev"
         }
     },
     "minimum-stability": "dev",

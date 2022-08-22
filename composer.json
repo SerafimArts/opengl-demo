@@ -19,7 +19,7 @@
         }
     },
     "require-dev": {
-        "symfony/var-dumper": "~5.0"
+        "symfony/var-dumper": "^5.4|^6.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
