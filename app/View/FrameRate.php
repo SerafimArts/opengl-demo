@@ -98,12 +98,12 @@ class FrameRate extends View
     {
         $text = \number_format($rate, 1) . ' FPS';
 
-        $this->surface = $this->ttf->renderBlended($this->font, $text, $this->color);
+        $this->surface = $this->ttf->renderBlended($this->font, $text, $this->color, "UTF-8");
 
-        [$width, $height] = $this->ttf->getSize($this->font, $text);
+        [$width, $height] = $this->ttf->getSize($this->font, $text, "UTF-8");
 
-        $this->position->w = (int)$this->game->viewport->w($width);
-        $this->position->h = (int)$this->game->viewport->h($height);
+        $this->position->w = (int)$this->game->viewport->w($width->cdata);
+        $this->position->h = (int)$this->game->viewport->h($height->cdata);
     }
 
     /**
