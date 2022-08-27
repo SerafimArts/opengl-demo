@@ -7,7 +7,6 @@
         {"type": "path", "url": "libs/foundation"},
         {"type": "path", "url": "libs/lib-bass"},
         {"type": "path", "url": "libs/lib-sdl2"},
-        {"type": "path", "url": "libs/loop"},
         {"type": "path", "url": "libs/ui"},
         {"type": "path", "url": "libs/ui-sdl2"},
         {"type": "path", "url": "libs/var-dumper"}
@@ -22,7 +21,6 @@
         "bic-engine/foundation": "^1.0",
         "bic-engine/lib-bass": "^1.0",
         "bic-engine/lib-sdl2": "^1.0",
-        "bic-engine/loop": "^1.0",
         "bic-engine/ui": "^1.0",
         "bic-engine/ui-sdl2": "^1.0",
         "bic-engine/var-dumper": "^1.0",
