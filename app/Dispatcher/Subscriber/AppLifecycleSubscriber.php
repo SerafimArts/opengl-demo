@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Dispatcher\Subscriber;
 
 use App\Controller\HomeController;
+use Bic\Controller\ManagerInterface;
 use Bic\Dispatcher\Attribute\OnEvent;
-use Bic\Foundation\Controller\ManagerInterface;
 use Bic\Foundation\Event\AppStarted;
 use Bic\UI\Window\Event\WindowCloseEvent;
 use Bic\UI\Window\FactoryInterface;

@@ -3,12 +3,12 @@ services:
     autowire: true
     autoconfigure: true
 
-  Bic\Foundation\Controller\Manager:
+  Bic\Controller\Manager:
     arguments:
       - '@service_container'
     tags:
       - { name: 'kernel.dispatcher' }
 
-  Bic\Foundation\Controller\ManagerInterface:
+  Bic\Controller\ManagerInterface:
     public: true
     alias: 'Bic\Foundation\Controller\Manager'

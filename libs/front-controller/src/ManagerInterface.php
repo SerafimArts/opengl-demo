@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Foundation\Controller;
+namespace Bic\Controller;
 
 use Bic\Dispatcher\DispatcherInterface;
 
