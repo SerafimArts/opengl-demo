@@ -1,0 +1,53 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: '%debug%'
+
+  # Platform Factory
+  App\Kernel\Platform\SDL2PlatformFactory: ~
+  Bic\Lib\SDL2\Platform:
+    factory: [ '@App\Kernel\Platform\SDL2PlatformFactory', 'getPlatform' ]
+    arguments: [ '%sys.platform%' ]
+
+  App\Kernel\Platform\BassALPlatformFactory: ~
+  Bic\Lib\BassAL\Platform:
+    factory: [ '@App\Kernel\Platform\BassALPlatformFactory', 'getPlatform' ]
+    arguments: [ '%sys.platform%' ]
+
+  # SDL2
+  Bic\Lib\SDL2:
+    arguments:
+      $binary: '%libs.sdl2.bin%'
+      $version: '%libs.sdl2.version%'
+      $init: true
+      $platform: '@Bic\Lib\SDL2\Platform'
+      $cache: '@cache.psr16.system'
+
+  Bic\Lib\SDL2\Image:
+    arguments:
+      $binary: '%libs.sdl2_image.bin%'
+      $version: '%libs.sdl2_image.version%'
+      $cache: '@cache.psr16.system'
+    calls:
+      - ['IMG_Init', [0x00000002]]
+
+  Bic\Lib\SDL2\TTF:
+    arguments:
+      $binary: '%libs.sdl2_ttf.bin%'
+      $version: '%libs.sdl2_ttf.version%'
+      $cache: '@cache.psr16.system'
+
+  Bic\Lib\BassAL:
+    arguments:
+      $binary: '%libs.bass.bin%'
+      $version: '%libs.bass.version%'
+      $platform: '@Bic\Lib\BassAL\Platform'
+      $cache: '@cache.psr16.system'
+
+  Bic\Lib\BassAL\Mixer:
+    arguments:
+      $binary: '%libs.bass_mix.bin%'
+      $version: '%libs.bass_mix.version%'
+      $platform: '@Bic\Lib\BassAL\Platform'
+      $cache: '@cache.psr16.system'

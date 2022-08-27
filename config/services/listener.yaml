@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Dispatcher\Subscriber\AppLifecycleSubscriber:
+    tags:
+      - { name: 'kernel.dispatcher' }

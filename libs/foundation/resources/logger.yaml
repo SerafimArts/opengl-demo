@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Psr\Log\NullLogger: ~
+
+  Psr\Log\LoggerInterface:
+    public: true
+    alias: 'Psr\Log\NullLogger'

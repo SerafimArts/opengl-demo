@@ -1,0 +1,39 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: '%debug%'
+
+  cache.psr6.app:
+    class: Symfony\Component\Cache\Adapter\PhpFilesAdapter
+    calls:
+      - setLogger: ['@Psr\Log\LoggerInterface']
+    arguments:
+      $namespace: '%app.cache.namespace%app'
+      $defaultLifetime: '%app.cache.lifetime%'
+      $directory: '%dir.cache%'
+
+  cache.psr16.app:
+    class: Symfony\Component\Cache\Psr16Cache
+    arguments: [ '@cache.psr6.app' ]
+
+  cache.psr6.system:
+    class: Symfony\Component\Cache\Adapter\PhpFilesAdapter
+    calls:
+      - setLogger: ['@Psr\Log\LoggerInterface']
+    arguments:
+      $namespace: '%app.cache.namespace%system'
+      $defaultLifetime: '%app.cache.lifetime%'
+      $directory: '%dir.cache%'
+
+  cache.psr16.system:
+    class: Symfony\Component\Cache\Psr16Cache
+    arguments: [ '@cache.psr6.system' ]
+
+  Psr\SimpleCache\CacheInterface:
+    alias: 'cache.psr16.app'
+    public: true
+
+  Psr\Cache\CacheItemPoolInterface:
+    alias: 'cache.psr6.app'
+    public: true

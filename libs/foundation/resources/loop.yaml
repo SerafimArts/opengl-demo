@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Bic\Loop\EventLoop: ~
+
+  Bic\Loop\EventLoopInterface:
+    public: true
+    alias: 'Bic\Loop\EventLoop'

@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: '%debug%'
+
+  logger.handler.stdout:
+    class: Monolog\Handler\StreamHandler
+    arguments:
+      $stream: 'php://stdout'
+      $level: '@=parameter("debug") ? 100 : 400'
+      $bubble: false
+
+  logger.handler.file:
+    class: App\Kernel\PrettyStreamHandler
+    arguments:
+      $stream: '%dir.storage%/logs/%date%-engine.log'
+      $level: '@=parameter("debug") ? 100 : 400'
+      $bubble: false
+
+  logger:
+    class: Monolog\Logger
+    arguments:
+      $name: '%app.name%'
+      $handlers:
+        - '@logger.handler.file'
+
+  Psr\Log\LoggerInterface:
+    public: true
+    alias: 'logger'

@@ -1,0 +1,62 @@
+#
+# Supported Environments:
+#   - "when@windows"
+#   - "when@bsd"
+#   - "when@darwin"
+#   - "when@solaris"
+#   - "when@linux"
+#   - "when@unknown"
+#
+
+parameters:
+  # System
+  sys.platform: !php/const PHP_OS_FAMILY
+
+  # Directories
+  dir.storage: '%dir.root%/storage'
+  dir.cache: '%dir.storage%/cache'
+  dir.logs: '%dir.storage%/logs'
+  dir.bin: '%dir.root%/bin'
+  dir.resources: '%dir.root%/resources'
+
+  # Application
+  app.name: Example
+  app.icon: '%dir.resources%/assets/x32.png'
+  app.width: 800
+  app.height: 600
+
+  app.cache.namespace: ''
+  app.cache.lifetime: 1024
+
+  app.audio.freq: 44100
+  app.audio.music.volume: 0.5
+
+  # Binaries
+  libs.sdl2.bin: null
+  libs.sdl2.version: null
+  libs.sdl2_image.bin: null
+  libs.sdl2_image.version: null
+  libs.sdl2_ttf.bin: null
+  libs.sdl2_ttf.version: null
+  libs.bass.bin: null
+  libs.bass.version: '2.4'
+  libs.bass_mix.bin: null
+  libs.bass_mix.version: '2.4'
+
+# Windows
+when@windows:
+  parameters:
+    libs.sdl2.bin: '%dir.bin%/SDL2.dll'
+    libs.sdl2_image.bin: '%dir.bin%/SDL2_image.dll'
+    libs.sdl2_ttf.bin: '%dir.bin%/SDL2_ttf.dll'
+    libs.bass.bin: '%dir.bin%/bass.dll'
+    libs.bass_mix.bin: '%dir.bin%/bassmix.dll'
+
+# Linux
+when@linux:
+  parameters:
+    libs.sdl2.bin: '%dir.bin%/libSDL2-2.0.so.0'
+    libs.sdl2_image.bin: '%dir.bin%/libSDL2_image-2.0.so.0'
+    libs.sdl2_ttf.bin: '%dir.bin%/libSDL2_ttf-2.0.so.0'
+    libs.bass.bin: '%dir.bin%/libbass.so'
+    libs.bass_mix.bin: '%dir.bin%/libbassmix.so'

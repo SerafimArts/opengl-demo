@@ -1,0 +1,31 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: '%debug%'
+
+  Bic\Audio\EngineInterface:
+    class: Bic\Audio\Engine
+
+  Bic\Audio\Device\OutputDeviceInterface:
+    factory: ['@Bic\Audio\EngineInterface', 'getDefaultOutputDevice']
+
+  Bic\Audio\Device\InputDeviceInterface:
+    factory: ['@Bic\Audio\EngineInterface', 'getDefaultInputDevice']
+
+  Bic\Audio\Context\OutputInterface:
+    factory: ['@Bic\Audio\EngineInterface', 'getOutput']
+    calls:
+      - ['setFrequency', ['%app.audio.freq%']]
+
+  Bic\Audio\Context\InputInterface:
+    factory: ['@Bic\Audio\EngineInterface', 'getInput']
+
+  Bic\Audio\RepositoryInterface:
+    factory: ['@Bic\Audio\EngineInterface', 'getSources']
+
+  Bic\Audio\Channel\MusicChannel:
+    public: true
+    factory: ['@Bic\Audio\Context\OutputInterface', 'getMusicChannel']
+    calls:
+      - ['setVolume', ['%app.audio.music.volume%']]

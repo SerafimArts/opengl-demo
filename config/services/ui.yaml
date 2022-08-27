@@ -1,0 +1,38 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: '%debug%'
+
+  # Window Factory
+  Bic\UI\SDL2\WindowFactory:
+    arguments:
+      $flags:
+        - !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_SHOWN
+        - !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_ALLOW_HIGHDPI
+        - !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_OPENGL
+        #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_INPUT_GRABBED
+        #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_INPUT_FOCUS
+        #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_MOUSE_FOCUS
+        #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_MOUSE_CAPTURE
+        #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_KEYBOARD_GRABBED
+        #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_FULLSCREEN_DESKTOP
+
+  Bic\UI\SDL2\Window:
+    factory: ['@Bic\UI\SDL2\WindowFactory', 'create']
+    arguments:
+      $name: '%app.name%'
+      $width: '%app.width%'
+      $height: '%app.height%'
+      $icon: '%app.icon%'
+
+  Bic\UI\Window\FactoryInterface:
+    public: true
+    alias: Bic\UI\SDL2\WindowFactory
+
+  Bic\UI\Window\WindowInterface:
+    public: true
+    alias: Bic\UI\SDL2\Window
+
+
+

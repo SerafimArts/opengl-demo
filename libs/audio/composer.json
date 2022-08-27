@@ -1,0 +1,39 @@
+{
+    "name": "bic-engine/audio",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "bic-engine/lib-bass": "^1.0",
+        "ramsey/uuid": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bic\\Audio\\": "src"
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7",
+        "symfony/var-dumper": "^5.4|^6.0",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.24",
+        "jetbrains/phpstorm-attributes": "^1.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bic\\Audio\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0.x-dev",
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform-check": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

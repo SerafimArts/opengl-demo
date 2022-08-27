@@ -1,0 +1,28 @@
+#!/usr/env php
+<?php
+
+/**
+ * This file is part of Engine package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+use App\Application;
+
+require __DIR__ . '/app/bootstrap.php';
+
+$app = new Application(__DIR__);
+
+try {
+    exit($app->run());
+} catch (\Throwable $e) {
+    try {
+        exit($app->throw($e));
+    } catch (\Throwable $e) {
+        \fwrite(\STDERR, (string)$e);
+        exit($e->getCode() ?: 255);
+    }
+}
