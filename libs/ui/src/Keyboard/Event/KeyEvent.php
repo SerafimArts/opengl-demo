@@ -17,6 +17,7 @@ use JetBrains\PhpStorm\ExpectedValues;
  * @template TTargetWindow of WindowInterface
  *
  * @template-extends Event<TTargetWindow>
+ * @package ui
  */
 abstract class KeyEvent extends Event
 {

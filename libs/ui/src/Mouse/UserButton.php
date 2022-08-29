@@ -6,16 +6,18 @@ namespace Bic\UI\Mouse;
 
 /**
  * @psalm-import-type ButtonID from ButtonInterface
+ * @package ui
  */
 final class UserButton implements ButtonInterface
 {
     /**
-     * @var array<ButtonID, self>
+     * @var array<int, self>
+     * @psalm-var array<ButtonID, self>
      */
     private static array $instances = [];
 
     /**
-     * @param ButtonID $id
+     * @psalm-param ButtonID $id
      */
     private function __construct(
         private readonly int $id,
@@ -23,7 +25,7 @@ final class UserButton implements ButtonInterface
     }
 
     /**
-     * @return ButtonID
+     * @psalm-return ButtonID
      */
     public function getId(): int
     {
@@ -31,7 +33,7 @@ final class UserButton implements ButtonInterface
     }
 
     /**
-     * @param ButtonID $id
+     * @psalm-param ButtonID $id
      * @return ButtonInterface
      */
     public static function create(int $id): ButtonInterface

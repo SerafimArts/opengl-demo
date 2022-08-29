@@ -8,6 +8,7 @@
         {"type": "path", "url": "libs/front-controller"},
         {"type": "path", "url": "libs/lib-bass"},
         {"type": "path", "url": "libs/lib-sdl2"},
+        {"type": "path", "url": "libs/renderer"},
         {"type": "path", "url": "libs/ui"},
         {"type": "path", "url": "libs/ui-sdl2"},
         {"type": "path", "url": "libs/var-dumper"}
@@ -23,6 +24,7 @@
         "bic-engine/front-controller": "^1.0",
         "bic-engine/lib-bass": "^1.0",
         "bic-engine/lib-sdl2": "^1.0",
+        "bic-engine/renderer": "^1.0",
         "bic-engine/ui": "^1.0",
         "bic-engine/ui-sdl2": "^1.0",
         "bic-engine/var-dumper": "^1.0",
@@ -35,6 +37,8 @@
         }
     },
     "require-dev": {
+        "phing/phing": "^3.0.0-RC3",
+        "guzzlehttp/guzzle": "^7.5",
         "nunomaduro/collision": "^6.0",
         "jetbrains/phpstorm-attributes": "^1.0",
         "symfony/var-dumper": "^5.4|^6.1",
@@ -46,6 +50,37 @@
         "psr-4": {
             "App\\Tests\\": "tests"
         }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "phing binaries-download:platform",
+            "phing run"
+        ]
+    },
+    "replace": {
+        "phing/task-analyzers": "*",
+        "phing/task-apigen": "*",
+        "phing/task-aws": "*",
+        "phing/task-coverage": "*",
+        "phing/task-dbdeploy": "*",
+        "phing/task-ftpdeploy": "*",
+        "phing/task-git": "*",
+        "phing/task-hg": "*",
+        "phing/task-inifile": "*",
+        "phing/task-ioncube": "*",
+        "phing/task-jshint": "*",
+        "phing/task-jsmin": "*",
+        "phing/task-liquibase": "*",
+        "phing/task-phkpackage": "*",
+        "phing/task-phpdoc": "*",
+        "phing/task-phpunit": "*",
+        "phing/task-sass": "*",
+        "phing/task-smarty": "*",
+        "phing/task-ssh": "*",
+        "phing/task-svn": "*",
+        "phing/task-visualizer": "*",
+        "phing/task-zendcodeanalyser": "*",
+        "phing/task-zendserverdevelopmenttools": "*"
     },
     "config": {
         "sort-packages": true,

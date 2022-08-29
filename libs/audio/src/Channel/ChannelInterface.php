@@ -7,15 +7,13 @@ namespace Bic\Audio\Channel;
 interface ChannelInterface
 {
     /**
-     * @psalm-return float
-     * @return float<0.0, 1.0>
+     * @return float
      */
     public function getVolume(): float;
 
     /**
-     * @psalm-param float $value
-     * @param float<0.0, 1.0> $value
-     * @return float<0.0, 1.0> Returns real volume
+     * @param float $value
+     * @return float Returns real volume
      */
     public function setVolume(float $value): float;
 }

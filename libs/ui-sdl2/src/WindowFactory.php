@@ -10,11 +10,14 @@ use Bic\UI\Window\Factory;
 
 /**
  * @template-extends Factory<Window>
+ *
+ * @package ui-sdl2
  */
 final class WindowFactory extends Factory
 {
     /**
-     * @var int-mask-of<WindowFlags::SDL_*>
+     * @psalm-var int-mask-of<WindowFlags::SDL_*>
+     * @var int
      */
     private int $flags = WindowFlags::SDL_WINDOW_OPENGL;
 
@@ -26,7 +29,8 @@ final class WindowFactory extends Factory
     /**
      * @param SDL2 $sdl2
      * @param SDL2\Image $image
-     * @param list<int-mask-of<WindowFlags::SDL_*>> $flags
+     * @psalm-param list<int-mask-of<WindowFlags::SDL_*>> $flags
+     * @param array<int> $flags
      */
     public function __construct(
         private readonly SDL2 $sdl2,

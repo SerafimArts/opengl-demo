@@ -1,0 +1,168 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+
+<project name="bic-engine" basedir="." default="main">
+    <!-- loading .env file -->
+    <if>
+        <available file="${phing.dir}/.env" type="file" />
+        <then><property file="${phing.dir}/.env" /></then>
+    </if>
+
+    <property name="version" value="0.0.1" />
+    <property name="main" value="${phing.dir}/run" />
+    <property name="output" value="${phing.dir}/bin" />
+    <property name="temp" value="${phing.dir}/storage" />
+    <property name="downloads" value="${temp}/downloads" />
+    <property name="libs" value="${phing.dir}/libs" />
+
+    <target name="main">
+        <runtarget target="binaries-download:platform" />
+    </target>
+
+    <target name="run" description="Run Application">
+        <exec executable="php" passthru="true">
+            <arg value="-dopcache.enable=1" />
+            <arg value="-dopcache.enable_cli=1" />
+            <arg value="-dopcache.jit_buffer_size=128M" />
+            <arg value="-dopcache.jit=1205" />
+            <arg value="-f${main}" />
+        </exec>
+    </target>
+
+    <target name="apigen">
+        <property name="phpdoc.version" value="3.3.1" />
+        <property name="phpdoc.dir" value="${output}" />
+        <property name="phpdoc.file" value="phpdoc.phar" />
+        <property name="phpdoc.pathname" value="${phpdoc.dir}/${phpdoc.file}" />
+
+        <if>
+            <available file="${phpdoc.pathname}" type="file" />
+            <else>
+                <httpget dir="${phpdoc.dir}"
+                         filename="${phpdoc.file}"
+                         url="https://github.com/phpDocumentor/phpDocumentor/releases/download/v${phpdoc.version}/phpDocumentor.phar" />
+            </else>
+        </if>
+
+        <exec executable="php" passthru="true">
+            <arg value="${phpdoc.pathname}" />
+            <arg value="--config" />
+            <arg value="${phing.dir}/phpdoc.xml" />
+        </exec>
+
+        <if>
+            <available file="${temp}/phpdoc/index.html" type="file" />
+            <then>
+                <if>
+                    <os family="unix" />
+                    <then>
+                        <exec executable="xdg-open" passthru="true">
+                            <arg value="${temp}/phpdoc/index.html" />
+                        </exec>
+                    </then>
+                </if>
+            </then>
+        </if>
+    </target>
+
+    <target name="clean" description="Clean local cache">
+        <if>
+            <available file="${temp}" type="dir" />
+            <then>
+                <delete dir="${temp}"
+                        includeemptydirs="true"
+                        verbose="true"
+                        failonerror="true" />
+            </then>
+        </if>
+
+        <runtarget target="prepare" />
+        <echo message="*&#10;!.gitignore&#10;" file="${temp}/.gitignore" />
+    </target>
+
+    <target name="prepare" hidden="true">
+        <echo message="Creating [bin] directory" />
+        <mkdir dir="${output}" />
+
+        <echo message="Creating [temp] directory" />
+        <mkdir dir="${temp}" />
+
+        <echo message="Creating [downloads] directory" />
+        <mkdir dir="${downloads}" />
+    </target>
+
+    <target name="binaries-download:all" description="Download all binaries">
+        <runtarget target="binaries-download:linux:amd64" />
+        <runtarget target="binaries-download:windows:amd64" />
+    </target>
+
+    <target name="binaries-download:platform" description="Download current platform-dependent binaries">
+        <echo message="Detect platform" />
+
+        <if>
+            <os family="windows" />
+            <then><runtarget target="binaries-download:windows:amd64" /></then>
+        </if>
+
+        <if>
+            <os family="unix" />
+            <then><runtarget target="binaries-download:linux:amd64" /></then>
+        </if>
+    </target>
+
+    <target name="binaries-download:linux:amd64" description="Download Linux/AMD64 binaries">
+        <phingcall target="binaries-download-and-extract">
+            <property name="os" value="linux" />
+            <property name="arch" value="amd64" />
+        </phingcall>
+    </target>
+
+    <target name="binaries-download:windows:amd64" description="Download Windows/AMD64 binaries">
+        <phingcall target="binaries-download-and-extract">
+            <property name="os" value="windows" />
+            <property name="arch" value="amd64" />
+        </phingcall>
+    </target>
+
+    <target name="binaries-download-and-extract" depends="prepare" hidden="true">
+        <property name="os" value="linux" override="false" />
+        <property name="arch" value="amd64" override="false" />
+        <property name="url" value="https://github.com/SerafimArts/opengl-demo/releases/download/${version}" />
+        <property name="archive" value="binaries-${os}-${arch}" />
+
+        <echo message="Downloading binaries (OS: ${os}, Arch: ${arch}) archive from ${url}/${archive}.zip" />
+        <if>
+            <available file="${downloads}/${archive}.zip" type="file" />
+            <then>
+                <echo message="[SKIP] Archive already has been downloaded" />
+            </then>
+            <else>
+                <httpget dir="${downloads}"
+                         filename="${archive}.zip"
+                         url="${url}/${archive}.zip"
+                />
+            </else>
+        </if>
+
+        <echo message="Extracting archive" />
+        <if>
+            <available file="${downloads}/${archive}" type="dir" />
+            <then>
+                <echo message="[SKIP] Archive already has been extracted" />
+            </then>
+            <else>
+                <unzip file="${downloads}/${archive}.zip" todir="${downloads}/${archive}">
+                    <fileset dir=".">
+                        <include name="*.zip"/>
+                    </fileset>
+                </unzip>
+            </else>
+        </if>
+
+        <echo message="Copy binary files" />
+        <copy todir="${output}" >
+            <fileset defaultexcludes="false" expandsymboliclinks="true" dir="${downloads}/${archive}">
+                <include name="**/*" />
+            </fileset>
+        </copy>
+    </target>
+</project>

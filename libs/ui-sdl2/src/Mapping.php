@@ -19,6 +19,8 @@ use Bic\UI\Mouse\UserButton;
 /**
  * @internal This is an internal library class, please do not use it in your code.
  * @psalm-internal Bic\UI\SDL2
+ *
+ * @package ui-sdl2
  */
 final class Mapping
 {

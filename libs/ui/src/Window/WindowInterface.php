@@ -7,6 +7,9 @@ namespace Bic\UI\Window;
 use Bic\UI\EventInterface;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @package ui
+ */
 interface WindowInterface
 {
     /**

@@ -24,6 +24,9 @@ use Bic\UI\Window\Window as BaseWindow;
 use Bic\UI\Window\WindowInterface;
 use FFI\CData;
 
+/**
+ * @package ui-sdl2
+ */
 final class Window extends BaseWindow
 {
     /**
@@ -45,7 +48,8 @@ final class Window extends BaseWindow
      * @param SDL2 $sdl2
      * @param Image $image
      * @param CData $ptr
-     * @param \Closure(WindowInterface):void $detach
+     * @psalm-param \Closure(WindowInterface):void $detach
+     * @param \Closure $detach
      */
     public function __construct(
         private readonly SDL2 $sdl2,
@@ -60,7 +64,10 @@ final class Window extends BaseWindow
     }
 
     /**
-     * {@inheritDoc}
+     * @psalm-taint-sink file $pathname
+     * @param non-empty-string $pathname
+     *
+     * @return void
      */
     public function setIcon(string $pathname): void
     {

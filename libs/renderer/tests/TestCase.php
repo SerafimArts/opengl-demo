@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Audio\Tests;
+namespace Bic\Renderer\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

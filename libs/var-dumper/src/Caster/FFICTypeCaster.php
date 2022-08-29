@@ -8,6 +8,9 @@ use FFI\CType;
 use Symfony\Component\VarDumper\Caster\Caster;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
+/**
+ * @package dumper
+ */
 final class FFICTypeCaster extends FFICaster
 {
     public static function castCType(CType $type, array $args, Stub $stub): array

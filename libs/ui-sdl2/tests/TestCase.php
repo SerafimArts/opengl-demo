@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\UI\Tests;
+namespace Bic\UI\SDL2\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

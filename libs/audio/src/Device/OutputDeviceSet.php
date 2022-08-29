@@ -17,7 +17,8 @@ use FFI\CData;
 final class OutputDeviceSet extends Set implements OutputDeviceSetInterface
 {
     /**
-     * @var array<DeviceID, OutputDevice>
+     * @psalm-var array<DeviceID, OutputDevice>
+     * @var array<int, OutputDevice>
      */
     private array $identityMap = [];
 

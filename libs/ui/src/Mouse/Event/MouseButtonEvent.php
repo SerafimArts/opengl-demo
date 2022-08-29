@@ -7,6 +7,9 @@ namespace Bic\UI\Mouse\Event;
 use Bic\UI\Mouse\ButtonInterface;
 use Bic\UI\Window\WindowInterface;
 
+/**
+ * @package ui
+ */
 abstract class MouseButtonEvent extends MouseEvent
 {
     public function __construct(

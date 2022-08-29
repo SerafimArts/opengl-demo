@@ -11,6 +11,7 @@ use Ramsey\Uuid\UuidInterface;
  * @template TWindow of WindowInterface
  *
  * @template-extends \Traversable<UuidInterface, TWindow>
+ * @package ui
  */
 interface FactoryInterface extends \Traversable, \Countable
 {

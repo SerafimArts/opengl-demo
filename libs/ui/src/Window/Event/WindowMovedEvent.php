@@ -6,6 +6,9 @@ namespace Bic\UI\Window\Event;
 
 use Bic\UI\Window\WindowInterface;
 
+/**
+ * @package ui
+ */
 final class WindowMovedEvent extends WindowEvent
 {
     /**

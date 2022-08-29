@@ -7,6 +7,9 @@ namespace Bic\VarDumper\Caster;
 use FFI\CData;
 use FFI\CType;
 
+/**
+ * @package dumper
+ */
 abstract class FFICaster
 {
     private const KIND_SCALARS = [

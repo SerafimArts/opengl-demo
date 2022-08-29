@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Bic\UI\Mouse;
 
+/**
+ * @package ui
+ */
 enum Button: int implements ButtonInterface
 {
     case LEFT = 0;

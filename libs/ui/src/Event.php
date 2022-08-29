@@ -10,6 +10,7 @@ use Bic\UI\Window\WindowInterface;
  * @template TTarget of WindowInterface
  *
  * @template-implements EventInterface<TTarget>
+ * @package ui
  */
 abstract class Event implements EventInterface
 {

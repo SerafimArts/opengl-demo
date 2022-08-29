@@ -7,6 +7,9 @@ namespace Bic\UI\Mouse\Event;
 use Bic\UI\Mouse\Wheel;
 use Bic\UI\Window\WindowInterface;
 
+/**
+ * @package ui
+ */
 class MouseWheelEvent extends MouseEvent
 {
     public function __construct(

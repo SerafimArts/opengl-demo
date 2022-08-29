@@ -7,6 +7,9 @@ namespace Bic\UI\Window;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @package ui
+ */
 abstract class Window implements WindowInterface
 {
     /**
@@ -20,7 +23,7 @@ abstract class Window implements WindowInterface
     protected bool $closed = false;
 
     /**
-     * @param \Closure(WindowInterface):void $detach
+     * @psalm-param \Closure(WindowInterface):void $detach
      */
     protected function __construct(
         private readonly \Closure $detach,
@@ -64,7 +67,8 @@ abstract class Window implements WindowInterface
     }
 
     /**
-     * @return array{ id: non-empty-string }
+     * @psalm-return array{ id: non-empty-string }
+     * @return array{ id: string }
      */
     final public function __debugInfo(): array
     {

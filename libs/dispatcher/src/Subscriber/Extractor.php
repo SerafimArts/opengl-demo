@@ -10,8 +10,8 @@ use Bic\Dispatcher\DispatcherInterface;
 final class Extractor implements DispatcherInterface
 {
     /**
-     * @template TEvent of object
-     * @var array<class-string<TEvent>, array<callable(TEvent):void>>
+     * @psalm-var array<class-string<object>, array<callable(object):void>>
+     * @var array<string, callable>
      */
     private array $events = [];
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Bic\UI\Window;
 
-use Bic\UI\Window\Event\WindowCloseEvent;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -12,6 +11,8 @@ use Ramsey\Uuid\UuidInterface;
  *
  * @template-implements FactoryInterface<TWindow>
  * @template-implements \IteratorAggregate<UuidInterface, TWindow>
+ *
+ * @package ui
  */
 abstract class Factory implements FactoryInterface, \IteratorAggregate
 {

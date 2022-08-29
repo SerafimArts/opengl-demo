@@ -7,6 +7,7 @@ namespace Bic\UI\Keyboard;
 /**
  * @psalm-type KeyModifierFlag = Modifier::*
  * @psalm-type KeyModifierFlags = int-mask-of<Modifier::*>
+ * @package ui
  */
 interface Modifier
 {

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Bic\UI\Keyboard;
 
+/**
+ * @package ui
+ */
 enum Key: int implements KeyInterface
 {
     case A = 4;

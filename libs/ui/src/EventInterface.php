@@ -8,6 +8,7 @@ use Bic\UI\Window\WindowInterface;
 
 /**
  * @template TTarget of WindowInterface
+ * @package ui
  */
 interface EventInterface
 {

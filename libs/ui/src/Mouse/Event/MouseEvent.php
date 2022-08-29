@@ -10,6 +10,7 @@ use Bic\UI\Event;
  * @template TTargetWindow of WindowInterface
  *
  * @template-extends Event<TTargetWindow>
+ * @package ui
  */
 abstract class MouseEvent extends Event
 {

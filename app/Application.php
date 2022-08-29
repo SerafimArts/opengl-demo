@@ -23,8 +23,8 @@ final class Application extends Kernel
     protected function start(): void
     {
         $renderer = $this->get(Renderer::class);
-
         $windows = $this->get(FactoryInterface::class);
+
         foreach ($windows->poll(blocking: false) as $event) {
             if ($event !== null) {
                 $this->dispatch($event);
