@@ -14,7 +14,7 @@ use App\Application;
 
 require __DIR__ . '/app/bootstrap.php';
 
-$app = new Application(__DIR__);
+$app = new Application(__DIR__, (bool)($_SERVER['APP_DEBUG'] ?? 0));
 
 try {
     exit($app->run());

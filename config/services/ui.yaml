@@ -17,6 +17,8 @@ services:
         #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_MOUSE_CAPTURE
         #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_KEYBOARD_GRABBED
         #- !php/const Bic\Lib\SDL2\WindowFlags::SDL_WINDOW_FULLSCREEN_DESKTOP
+    tags:
+      - { name: 'kernel.poller' }
 
   Bic\UI\SDL2\Window:
     factory: ['@Bic\UI\SDL2\WindowFactory', 'create']

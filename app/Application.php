@@ -12,32 +12,10 @@ declare(strict_types=1);
 namespace App;
 
 use Bic\Foundation\Kernel;
-use Bic\UI\Window\Event\WindowCloseEvent;
 use Bic\UI\Window\FactoryInterface;
 
 final class Application extends Kernel
 {
-    /**
-     * @var FactoryInterface
-     */
-    private readonly FactoryInterface $windows;
-
-    /**
-     * @psalm-taint-sink file $root
-     * @param non-empty-string $root
-     * @throws \Exception
-     */
-    public function __construct(string $root)
-    {
-        parent::__construct($root, (bool)($_SERVER['APP_DEBUG'] ?? 0));
-
-        try {
-            $this->windows = $this->get(FactoryInterface::class);
-        } catch (\Throwable $e) {
-            exit($this->throw($e));
-        }
-    }
-
     /**
      * @return void
      * @throws \Exception
@@ -46,7 +24,8 @@ final class Application extends Kernel
     {
         $renderer = $this->get(Renderer::class);
 
-        foreach ($this->windows->poll(blocking: false) as $event) {
+        $windows = $this->get(FactoryInterface::class);
+        foreach ($windows->poll(blocking: false) as $event) {
             if ($event !== null) {
                 $this->dispatch($event);
             }

@@ -35,7 +35,7 @@ final class EventDispatcherCompilerPass implements CompilerPassInterface
     {
         $this->registerServices($container);
 
-        $delegate = $container->getDefinition(DelegateDispatcherInterface::class);
+        $delegate = $container->getDefinition(CommandBus::class);
 
         foreach ($container->findTaggedServiceIds(self::SERVICE_TAG) as $id => $tags) {
             $dispatcherId = \sprintf(self::DISPATCHER_REFERENCE, $id);
@@ -53,11 +53,14 @@ final class EventDispatcherCompilerPass implements CompilerPassInterface
     private function registerServices(ContainerBuilder $builder): void
     {
         $builder->setDefinition(Subscriber::class, new Definition(Subscriber::class));
-        $builder->setDefinition(SubscriberInterface::class, (new ChildDefinition(Subscriber::class))->setPublic(true));
+        $builder->setAlias(SubscriberInterface::class, Subscriber::class)
+            ->setPublic(true);
 
         $builder->setDefinition(CommandBus::class, new Definition(CommandBus::class));
-        $builder->setDefinition(DispatcherInterface::class, (new ChildDefinition(CommandBus::class))->setPublic(true));
-        $builder->setDefinition(DelegateDispatcherInterface::class, (new ChildDefinition(CommandBus::class))->setPublic(true));
+        $builder->setAlias(DispatcherInterface::class, CommandBus::class)
+            ->setPublic(true);
+        $builder->setAlias(DelegateDispatcherInterface::class,CommandBus::class)
+            ->setPublic(true);
     }
 
     /**

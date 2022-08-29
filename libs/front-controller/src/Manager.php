@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Bic\Controller;
 
+use Bic\Controller\Event\ControllerHideEvent;
+use Bic\Controller\Event\ControllerShowEvent;
+use Bic\Controller\Event\ControllerSwitchEvent;
+use Bic\Controller\Manager\SelectedController;
+use Bic\Controller\Manager\SelectedControllerInterface;
 use Bic\Dispatcher\DispatcherInterface;
 use Bic\Dispatcher\SubscriberInterface;
 use Psr\Container\ContainerExceptionInterface;
@@ -13,22 +18,19 @@ use Psr\Container\NotFoundExceptionInterface;
 final class Manager implements ManagerInterface
 {
     /**
-     * @var object|null
+     * @var SelectedControllerInterface|null
      */
-    private ?object $controller = null;
-
-    /**
-     * @var DispatcherInterface|null
-     */
-    private ?DispatcherInterface $dispatcher = null;
+    private ?SelectedControllerInterface $current = null;
 
     /**
      * @param ContainerInterface $container
      * @param SubscriberInterface $subscriber
+     * @param DispatcherInterface $dispatcher
      */
     public function __construct(
         private readonly ContainerInterface $container,
         private readonly SubscriberInterface $subscriber,
+        private readonly DispatcherInterface $dispatcher,
     ) {
     }
 
@@ -50,15 +52,29 @@ final class Manager implements ManagerInterface
     }
 
     /**
-     * @param object|string $controller
-     * @return void
+     * {@inheritDoc}
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     * @throws \Throwable
      */
     public function use(object|string $controller): void
     {
-        $this->controller = $this->instance($controller);
-        $this->dispatcher = $this->subscriber->get($this->controller);
+        if ($this->current !== null) {
+            $this->dispatcher->dispatch(new ControllerHideEvent($this->current));
+        }
+
+        $instance = $this->instance($controller);
+        $dispatcher = $this->subscriber->get($instance);
+
+        $current = new SelectedController($instance, $dispatcher);
+
+        if ($this->current !== null) {
+            $this->dispatcher->dispatch(new ControllerSwitchEvent($this->current, $current));
+        }
+
+        $this->current = $current;
+        $this->dispatcher->dispatch(new ControllerShowEvent($current));
     }
 
     /**
@@ -67,6 +83,6 @@ final class Manager implements ManagerInterface
      */
     public function dispatch(object $event): void
     {
-        $this->dispatcher?->dispatch($event);
+        $this->current?->dispatch($event);
     }
 }

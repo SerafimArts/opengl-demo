@@ -11,4 +11,4 @@ services:
 
   Bic\Controller\ManagerInterface:
     public: true
-    alias: 'Bic\Foundation\Controller\Manager'
+    alias: 'Bic\Controller\Manager'

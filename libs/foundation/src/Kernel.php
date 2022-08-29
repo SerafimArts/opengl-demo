@@ -15,6 +15,7 @@ use Bic\Dispatcher\CommandBus;
 use Bic\Dispatcher\DelegateDispatcherInterface;
 use Bic\Dispatcher\DispatcherInterface;
 use Bic\Foundation\DependencyInjection\CompilerPass\EventDispatcherCompilerPass;
+use Bic\Foundation\DependencyInjection\CompilerPass\EventPollerCompilerPass;
 use Bic\Foundation\Event\AppComplete;
 use Bic\Foundation\Event\AppStarted;
 use Bic\Foundation\Exception\Factory;
@@ -30,6 +31,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 abstract class Kernel implements KernelInterface, DispatcherInterface
 {
@@ -223,7 +225,7 @@ abstract class Kernel implements KernelInterface, DispatcherInterface
     private function extendContainerBuilderDefinitions(ContainerBuilder $builder): void
     {
         $builder->setDefinition(self::class, (new Definition(self::class))->setSynthetic(true));
-        $builder->setDefinition(static::class, new ChildDefinition(self::class));
+        $builder->setAlias(static::class, self::class);
     }
 
     /**
