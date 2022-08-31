@@ -4,6 +4,11 @@ services:
     autoconfigure: true
     public: '%debug%'
 
+  Bic\Renderer\RendererInterface:
+    class: App\Renderer
+    public: true
+
   App\Renderer:
+    alias: 'Bic\Renderer\RendererInterface'
     public: true
 

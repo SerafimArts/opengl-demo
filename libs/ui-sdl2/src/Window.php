@@ -64,10 +64,7 @@ final class Window extends BaseWindow
     }
 
     /**
-     * @psalm-taint-sink file $pathname
-     * @param non-empty-string $pathname
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function setIcon(string $pathname): void
     {

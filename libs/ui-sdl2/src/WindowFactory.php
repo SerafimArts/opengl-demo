@@ -45,11 +45,9 @@ final class WindowFactory extends Factory
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @psalm-suppress MixedArgument
      */
-    public function instance(string $name, int $width, int $height, string $icon = null): Window
+    protected function instance(string $name, int $width, int $height): Window
     {
         $pointer = $this->sdl2->SDL_CreateWindow(
             $name,
@@ -57,23 +55,13 @@ final class WindowFactory extends Factory
             SDL2::SDL_WINDOWPOS_CENTERED_MASK | $this->displayId,
             $width,
             $height,
-            ($this->flags ^ WindowFlags::SDL_WINDOW_SHOWN) | WindowFlags::SDL_WINDOW_HIDDEN,
+            $this->flags,
         );
 
         if ($pointer === null) {
             throw new \LogicException($this->sdl2->getErrorMessage() ?: 'Unknown error');
         }
 
-        $instance = new Window($this->sdl2, $this->image, $pointer, $this->detach(...));
-
-        if ($icon !== null) {
-            $instance->setIcon($icon);
-        }
-
-        if ($this->flags & WindowFlags::SDL_WINDOW_SHOWN) {
-            $this->sdl2->SDL_ShowWindow($pointer);
-        }
-
-        return $instance;
+        return new Window($this->sdl2, $this->image, $pointer, $this->detach(...));
     }
 }

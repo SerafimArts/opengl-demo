@@ -3,6 +3,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "bic-engine/dispatcher": "^1.0",
         "bic-engine/ui": "^1.0",
         "bic-engine/lib-sdl2": "^1.0"
     },

@@ -12,26 +12,7 @@ declare(strict_types=1);
 namespace App;
 
 use Bic\Foundation\Kernel;
-use Bic\UI\Window\FactoryInterface;
 
 final class Application extends Kernel
 {
-    /**
-     * @return void
-     * @throws \Exception
-     */
-    protected function start(): void
-    {
-        $renderer = $this->get(Renderer::class);
-        $windows = $this->get(FactoryInterface::class);
-
-        foreach ($windows->poll(blocking: false) as $event) {
-            if ($event !== null) {
-                $this->dispatch($event);
-            }
-
-            $renderer->clean();
-            $renderer->draw();
-        }
-    }
 }

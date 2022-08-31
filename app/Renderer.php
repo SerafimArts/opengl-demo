@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App;
 
 use Bic\Lib\SDL2;
+use Bic\Renderer\RendererInterface;
 use Bic\UI\SDL2\Window;
 use FFI\CData;
 
-class Renderer
+class Renderer implements RendererInterface
 {
     /**
      * @var CData

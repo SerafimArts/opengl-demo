@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Bic\Foundation\Event;
 
-final class AppComplete extends AppEvent
+final class AppLaunchEvent extends AppEvent
 {
 }

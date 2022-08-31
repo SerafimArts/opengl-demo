@@ -18,6 +18,13 @@ interface WindowInterface
     public function getId(): UuidInterface;
 
     /**
+     * @psalm-taint-sink file $pathname
+     * @param non-empty-string $pathname
+     * @return void
+     */
+    public function setIcon(string $pathname): void;
+
+    /**
      * @return void
      */
     public function close(): void;

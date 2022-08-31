@@ -23,6 +23,7 @@ services:
     arguments:
       $name: '%app.name%'
       $handlers:
+        - '@logger.handler.stdout'
         - '@logger.handler.file'
 
   Psr\Log\LoggerInterface:

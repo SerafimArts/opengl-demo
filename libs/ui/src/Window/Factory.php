@@ -10,65 +10,41 @@ use Ramsey\Uuid\UuidInterface;
  * @template TWindow of WindowInterface
  *
  * @template-implements FactoryInterface<TWindow>
+ * @template-implements ManagerInterface<TWindow>
  * @template-implements \IteratorAggregate<UuidInterface, TWindow>
  *
  * @package ui
  */
-abstract class Factory implements FactoryInterface, \IteratorAggregate
+abstract class Factory implements FactoryInterface, ManagerInterface, \IteratorAggregate
 {
     /**
-     * @var \WeakMap<UuidInterface, TWindow>
+     * @var \WeakMap<UuidInterface, WindowInterface>
      */
-    private \WeakMap $windows;
+    private readonly \WeakMap $map;
 
-    protected function __construct()
+    public function __construct()
     {
-        $this->windows = new \WeakMap();
+        $this->map = new \WeakMap();
     }
 
     /**
      * @param string $name
      * @param positive-int $width
      * @param positive-int $height
-     * @return TWindow
+     * @return WindowInterface
      */
     abstract protected function instance(string $name, int $width, int $height): WindowInterface;
 
     /**
-     * @param WindowInterface $window
-     * @return void
-     */
-    public function detach(WindowInterface $window): void
-    {
-        unset($this->windows[$window->getId()]);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @psalm-suppress MixedArgument
-     */
-    public function create(string $name, int $width, int $height, string $icon = null): WindowInterface
-    {
-        $window = $this->instance($name, $width, $height, $icon);
-
-        return $this->windows[$window->getId()] = $window;
-    }
-
-    /**
      * {@inheritDoc}
      */
-    public function getIterator(): \Traversable
+    public function create(string $name, int $width, int $height): WindowInterface
     {
-        return $this->windows;
-    }
+        $instance = $this->instance($name, $width, $height);
 
-    /**
-     * {@inheritDoc}
-     */
-    public function count(): int
-    {
-        return $this->windows->count();
+        $this->map[$instance->getId()] = $instance;
+
+        return $instance;
     }
 
     /**
@@ -76,8 +52,14 @@ abstract class Factory implements FactoryInterface, \IteratorAggregate
      */
     public function find(UuidInterface $id): ?WindowInterface
     {
-        if (isset($this->windows[$id])) {
-            return $this->windows[$id];
+        if (isset($this->map[$id])) {
+            return $this->map[$id];
+        }
+
+        foreach ($this->map as $uuid => $window) {
+            if ($uuid->equals($id)) {
+                return $window;
+            }
         }
 
         return null;
@@ -86,16 +68,24 @@ abstract class Factory implements FactoryInterface, \IteratorAggregate
     /**
      * {@inheritDoc}
      */
-    public function poll(bool $blocking = false): \Iterator
+    public function detach(WindowInterface $window): void
     {
-        while ($this->windows->count()) {
-            foreach ($this->windows as $window) {
-                $event = $window->poll();
+        unset($this->map[$window->getId()]);
+    }
 
-                if ($blocking === false || $event !== null) {
-                    yield $event;
-                }
-            }
-        }
+    /**
+     * {@inheritDoc}
+     */
+    public function count(): int
+    {
+        return $this->map->count();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIterator(): \Traversable
+    {
+        return $this->map;
     }
 }

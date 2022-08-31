@@ -7,23 +7,34 @@
         <then><property file="${phing.dir}/.env" /></then>
     </if>
 
+    <property environment="APP_DEBUG" value="0" />
+
     <property name="version" value="0.0.1" />
     <property name="main" value="${phing.dir}/run" />
     <property name="output" value="${phing.dir}/bin" />
     <property name="temp" value="${phing.dir}/storage" />
-    <property name="downloads" value="${temp}/downloads" />
+    <property name="downloads" value="${temp}/cache/downloads" />
     <property name="libs" value="${phing.dir}/libs" />
 
     <target name="main">
         <runtarget target="binaries-download:platform" />
     </target>
 
-    <target name="run" description="Run Application">
+    <target name="run:jit" description="Run application with JIT">
         <exec executable="php" passthru="true">
             <arg value="-dopcache.enable=1" />
             <arg value="-dopcache.enable_cli=1" />
             <arg value="-dopcache.jit_buffer_size=128M" />
             <arg value="-dopcache.jit=1205" />
+            <arg value="-f${main}" />
+        </exec>
+    </target>
+
+    <target name="run" description="Run Application">
+        <exec executable="php" passthru="true">
+            <arg value="-dopcache.enable=1" />
+            <arg value="-dopcache.enable_cli=1" />
+            <arg value="-dopcache.jit_buffer_size=0M" />
             <arg value="-f${main}" />
         </exec>
     </target>

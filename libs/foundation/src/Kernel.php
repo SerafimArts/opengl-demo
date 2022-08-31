@@ -11,27 +11,25 @@ declare(strict_types=1);
 
 namespace Bic\Foundation;
 
-use Bic\Dispatcher\CommandBus;
 use Bic\Dispatcher\DelegateDispatcherInterface;
 use Bic\Dispatcher\DispatcherInterface;
 use Bic\Foundation\DependencyInjection\CompilerPass\EventDispatcherCompilerPass;
-use Bic\Foundation\DependencyInjection\CompilerPass\EventPollerCompilerPass;
-use Bic\Foundation\Event\AppComplete;
-use Bic\Foundation\Event\AppStarted;
+use Bic\Foundation\Event\AppEndEvent;
+use Bic\Foundation\Event\AppLaunchEvent;
+use Bic\Foundation\Event\AppUpdateEvent;
 use Bic\Foundation\Exception\Factory;
 use Bic\Foundation\Exception\HandlerInterface;
+use Bic\UI\Window\ManagerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
 use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 abstract class Kernel implements KernelInterface, DispatcherInterface
 {
@@ -297,11 +295,12 @@ abstract class Kernel implements KernelInterface, DispatcherInterface
     public function run(): int
     {
         try {
-            $this->dispatch(new AppStarted($this));
+            $this->dispatch(new AppLaunchEvent($this));
             $this->start();
-            $this->dispatch(new AppComplete($this));
         } catch (\Throwable $e) {
             return $this->throw($e);
+        } finally {
+            $this->dispatch(new AppEndEvent($this));
         }
 
         return 0;
@@ -309,6 +308,26 @@ abstract class Kernel implements KernelInterface, DispatcherInterface
 
     /**
      * @return void
+     * @throws \Throwable
      */
-    abstract protected function start(): void;
+    protected function start(): void
+    {
+        $time = \microtime(true);
+        $update = new AppUpdateEvent($this, 0.0);
+        $windows = $this->get(ManagerInterface::class);
+
+        do {
+            $now = \microtime(true);
+            $update->delta = $now - $time;
+            $this->dispatch($update);
+
+            foreach ($windows as $window) {
+                if ($event = $window->poll()) {
+                    $this->dispatch($event);
+                }
+            }
+
+            $time = $now;
+        } while ($windows->count() > 0);
+    }
 }

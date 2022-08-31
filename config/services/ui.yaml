@@ -26,9 +26,14 @@ services:
       $name: '%app.name%'
       $width: '%app.width%'
       $height: '%app.height%'
-      $icon: '%app.icon%'
+    calls:
+      - ['setIcon', ['%app.icon%']]
 
   Bic\UI\Window\FactoryInterface:
+    public: true
+    alias: Bic\UI\SDL2\WindowFactory
+
+  Bic\UI\Window\ManagerInterface:
     public: true
     alias: Bic\UI\SDL2\WindowFactory
 

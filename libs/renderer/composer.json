@@ -2,8 +2,7 @@
     "name": "bic-engine/renderer",
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "bic-engine/ui": "^1.0"
+        "php": "^8.1"
     },
     "autoload": {
         "psr-4": {

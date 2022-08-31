@@ -3,6 +3,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "react/promise": "^2.9",
         "bic-engine/ui": "^1.0",
         "bic-engine/dispatcher": "^1.0",
         "symfony/yaml": "^5.4|^6.0",
