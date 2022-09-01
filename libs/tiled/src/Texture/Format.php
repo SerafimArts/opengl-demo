@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bic\Tiled;
+namespace Bic\Tiled\Texture;
 
 enum Format
 {
-    case TILED_JSON;
+    case PNG;
 }

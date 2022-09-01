@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Bic\Tiled\Common;
 
-abstract class Size
+class Size
 {
     /**
-     * @psalm-param positive-int|0 $width
-     * @psalm-param positive-int|0 $height
+     * @param positive-int $width
+     * @param positive-int $height
      */
     public function __construct(
-        public int $width = 0,
-        public int $height = 0,
+        public int $width = 1,
+        public int $height = 1,
     ) {
     }
 }

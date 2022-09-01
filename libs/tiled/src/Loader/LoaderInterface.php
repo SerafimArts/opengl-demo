@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Bic\Tiled\Loader;
 
-use Bic\Tiled\Map\Map;
+use Bic\Tiled\Map;
 
 interface LoaderInterface
 {
     /**
-     * @param string $data
+     * @param non-empty-string $data
      * @param iterable<non-empty-string> $paths
      * @return Map
      */

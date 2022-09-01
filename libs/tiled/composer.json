@@ -3,6 +3,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "php-ds/php-ds": "^1.4",
         "ext-simplexml": "*"
     },
     "autoload": {

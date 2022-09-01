@@ -4,55 +4,25 @@ declare(strict_types=1);
 
 namespace Bic\Tiled;
 
-use Bic\Tiled\Loader\JsonLoader;
-use Bic\Tiled\Loader\LoaderInterface;
-use Bic\Tiled\Loader\TmxLoader;
-use Bic\Tiled\Map\Map;
+use Bic\Tiled\Texture\FilesystemRepository;
+use Bic\Tiled\Texture\RepositoryInterface;
 
 final class Factory implements FactoryInterface
 {
     /**
-     * @var non-empty-string
+     * @var RepositoryInterface
      */
-    private const ERROR_FORMAT = 'Unsupported map format';
+    private readonly RepositoryInterface $textures;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fromPathname(string $pathname, Format $format = null): Map
+    public function __construct()
     {
-        $data = \file_get_contents($pathname);
-
-        $loader = $this->getLoader($format ?? $this->detectFormat($data));
-
-        return $loader->load($data, [\dirname($pathname)]);
+        $this->textures = new FilesystemRepository();
     }
 
-    /**
-     * @param Format $format
-     * @return LoaderInterface
-     */
-    private function getLoader(Format $format): LoaderInterface
+    public function fromPathname(string $pathname, Format $format): Map
     {
-        return match ($format) {
-            Format::JSON => new JsonLoader(),
-            Format::TMX => new TmxLoader(),
-            default => throw new \InvalidArgumentException(self::ERROR_FORMAT)
-        };
-    }
-
-    /**
-     * @param string $data
-     * @return Format
-     */
-    private function detectFormat(string $data): Format
-    {
-        $data = \trim($data);
-
-        return match ($data[0] ?? '') {
-            '{' => Format::JSON,
-            '<' => Format::TMX,
-            default => throw new \InvalidArgumentException(self::ERROR_FORMAT)
+        $loader = match ($format) {
+            Format::TILED_JSON
         };
     }
 }
