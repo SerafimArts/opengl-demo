@@ -18,7 +18,7 @@ Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
 
 ## Requirements
 
-- PHP 7.4+
+- PHP 8.1+
 - ext-ffi
 - [Composer](https://getcomposer.org/download/)
 
