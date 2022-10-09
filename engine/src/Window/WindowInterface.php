@@ -12,5 +12,4 @@ use Serafim\SDL\WindowPtr;
  */
 interface WindowInterface extends NativeInterface
 {
-
 }
