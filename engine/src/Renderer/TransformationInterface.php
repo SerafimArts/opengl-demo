@@ -6,7 +6,7 @@ namespace Serafim\Bic\Renderer;
 
 use FFI\CData;
 use Serafim\SDL\RectPtr;
-"*"
+
 interface TransformationInterface
 {
     /**

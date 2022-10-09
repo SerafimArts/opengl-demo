@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace Serafim\Bic\EventLoop;
-"*"
+
 interface LoopInterface
 {
     /**

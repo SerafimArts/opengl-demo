@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Serafim\Bic\EventLoop;
 
 use FFI\CData;
-"*"
+
 interface WorkerInterface
 {
     /**

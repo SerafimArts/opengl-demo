@@ -6,7 +6,7 @@ namespace Serafim\Bic;
 
 use FFI\CData;
 use FFI\CPtr;
-"*"
+
 interface NativeInterface
 {
     /**

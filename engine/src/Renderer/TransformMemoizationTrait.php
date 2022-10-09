@@ -8,7 +8,7 @@ use FFI\CData;
 use Serafim\Bic\Util;
 use Serafim\SDL\RectPtr;
 use Serafim\SDL\SDL;
-"*"
+
 trait TransformMemoizationTrait
 {
     /**
