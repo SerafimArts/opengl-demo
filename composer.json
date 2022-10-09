@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": "^8.1",
         "ext-ffi": "*",
         "ext-json": "*",
         "serafim/ffi-ide-helper": "^1.0",

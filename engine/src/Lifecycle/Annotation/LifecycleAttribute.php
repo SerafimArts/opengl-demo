@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle\Annotation;
 
-#[\Attribute(\Attribute::TARGET_METHOD)]
-class OnHide extends LifecycleAttribute
+abstract class LifecycleAttribute
 {
 }

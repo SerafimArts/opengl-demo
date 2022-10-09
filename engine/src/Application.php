@@ -27,7 +27,6 @@ final class Application extends Container
         Application\ConfigServiceProvider::class,
 
         // Services
-        Application\AnnotationReaderServiceProvider::class,
         Application\EventLoopServiceProvider::class,
     ];
 

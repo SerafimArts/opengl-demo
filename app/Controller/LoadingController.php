@@ -48,9 +48,6 @@ class LoadingController
      */
     private LoadingInterface $progress;
 
-    /**
-     * @param Game $game
-     */
     public function __construct(Game $game)
     {
         $this->game = $game;
@@ -63,12 +60,11 @@ class LoadingController
     }
 
     /**
-     * @OnUpdate()
-     *
      * @param float $delta
      * @return void
      * @throws BindingResolutionException
      */
+    #[OnUpdate]
     public function onUpdate(float $delta): void
     {
         $this->timer += $delta;
@@ -90,10 +86,9 @@ class LoadingController
     }
 
     /**
-     * @OnRender()
-     *
      * @return void
      */
+    #[OnRender]
     public function onRender(): void
     {
         $this->loading->render($this->game->renderer, $this->game->viewport);

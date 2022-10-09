@@ -73,10 +73,6 @@ class GameController
      */
     private float $cameraSize = 1;
 
-    /**
-     * @param Game $game
-     * @param Map $map
-     */
     public function __construct(Game $game, Map $map)
     {
         $this->game = $game;
@@ -88,12 +84,7 @@ class GameController
         $this->camera = new OrthographicCamera($game->viewport);
     }
 
-    /**
-     * @OnUpdate()
-     *
-     * @param float $delta
-     * @return void
-     */
+    #[OnUpdate]
     public function onUpdate(float $delta): void
     {
         $this->noise->update($delta);
@@ -101,10 +92,9 @@ class GameController
     }
 
     /**
-     * @OnMouseMove()
      * @param CData|MouseMotionEvent $move
-     * @return void
      */
+    #[OnMouseMove]
     public function onMouseMove(CData $move): void
     {
         if ($this->drag === null) {
@@ -118,19 +108,18 @@ class GameController
     }
 
     /**
-     * @OnEvent(Type::SDL_MOUSEBUTTONDOWN)
      * @param CData|EventPtr $event
-     * @return void
      */
+    #[OnEvent(type: Type::SDL_MOUSEBUTTONDOWN)]
     public function onDrag(CData $event): void
     {
         $this->drag = [$event->button->x, $event->button->y];
     }
 
     /**
-     * @OnEvent(Type::SDL_MOUSEBUTTONUP)
      * @return void
      */
+    #[OnEvent(type: Type::SDL_MOUSEBUTTONUP)]
     public function onDrop(): void
     {
         $this->drag = null;
@@ -139,9 +128,9 @@ class GameController
     /**
      * Camera size on scroll.
      *
-     * @OnMouseWheel()
      * @param CData|EventPtr $event
      */
+    #[OnMouseWheel]
     public function onMouseWheel(CData $event): void
     {
         switch (true) {
@@ -162,11 +151,10 @@ class GameController
     }
 
     /**
-     * @OnRender()
-     *
      * @param float $delta
      * @return void
      */
+    #[OnRender]
     public function onRender(float $delta): void
     {
         $this->map->render($this->game->renderer, $this->camera);

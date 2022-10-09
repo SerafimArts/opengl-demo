@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle\Annotation;
 
-/**
- * @Annotation
- */
-class OnEvent extends Lifecycle
+#[\Attribute(\Attribute::TARGET_METHOD)]
+class OnEvent extends LifecycleAttribute
 {
-    /**
-     * @var string
-     */
-    protected const DEFAULT_VALUE = 'type';
-
-    /**
-     * @var int
-     */
-    public ?int $type = null;
+    public function __construct(
+        public readonly int $type,
+    ) {
+    }
 }

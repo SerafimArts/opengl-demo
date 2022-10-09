@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle;
 
-use Doctrine\Common\Annotations\Reader;
 use FFI\CData;
 use Serafim\Bic\Application;
-use Serafim\Bic\Lifecycle\Annotation\Annotation;
+use Serafim\Bic\Lifecycle\Annotation\LifecycleAttribute;
 use Serafim\Bic\Lifecycle\Annotation\OnEvent;
 use Serafim\Bic\Lifecycle\Annotation\OnHide;
 use Serafim\Bic\Lifecycle\Annotation\OnKeyDown;
@@ -105,10 +104,9 @@ class Context
 
     /**
      * @param Application $app
-     * @param Reader $reader
      * @param object $context
      */
-    public function __construct(Application $app, Reader $reader, object $context)
+    public function __construct(Application $app, object $context)
     {
         $this->app = $app;
 
@@ -116,7 +114,7 @@ class Context
          * @var \ReflectionMethod $ref
          * @var Annotation $annotation
          */
-        foreach ($this->annotations($reader, $context) as $ref => $annotation) {
+        foreach ($this->attributes($context) as $ref => $annotation) {
             $method = $ref->getClosure($context);
 
             if ($annotation instanceof OnEvent) {
@@ -132,19 +130,18 @@ class Context
     }
 
     /**
-     * @param Reader $reader
      * @param object $context
-     * @return iterable
+     * @return iterable<LifecycleAttribute>
      */
-    private function annotations(Reader $reader, object $context): iterable
+    private function attributes(object $context): iterable
     {
         $class = new \ReflectionObject($context);
 
         foreach ($class->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
-            foreach ($reader->getMethodAnnotations($method) as $annotation) {
-                if ($annotation instanceof Annotation) {
-                    yield $method => $annotation;
-                }
+            $attributes = $method->getAttributes(LifecycleAttribute::class, \ReflectionAttribute::IS_INSTANCEOF);
+
+            foreach ($attributes as $attribute) {
+                yield $method => $attribute->newInstance();
             }
         }
     }
@@ -202,11 +199,11 @@ class Context
     public function event(CData $event): void
     {
         /**
-         * @var OnEvent $annotation
+         * @var OnEvent $attribute
          * @var \Closure $callback
          */
-        foreach ($this->events as [$annotation, $callback]) {
-            $handle = $this->handle($annotation, $event);
+        foreach ($this->events as [$attribute, $callback]) {
+            $handle = $this->handle($attribute, $event);
 
             if ($handle !== null) {
                 $this->app->call($callback, ['event' => $handle, CData::class => $handle]);
@@ -215,22 +212,23 @@ class Context
     }
 
     /**
-     * @param Annotation $annotation
+     * @param LifecycleAttribute $attr
      * @param CData|Event $event
+     *
      * @return CData|null
      */
-    private function handle(Annotation $annotation, CData $event): ?CData
+    private function handle(LifecycleAttribute $attr, CData $event): ?CData
     {
-        if ($annotation->type !== null && $annotation->type !== $event->type) {
+        if ($attr->type !== $event->type) {
             return null;
         }
 
-        switch (\get_class($annotation)) {
+        switch (\get_class($attr)) {
             // Keyboard
             case OnKeyDown::class:
             case OnKeyUp::class:
-                /** @var $annotation OnKeyDown */
-                if ($annotation->code === null || $annotation->code === $event->key->keysym->scancode) {
+                /** @var $attr OnKeyDown */
+                if ($attr->code === null || $attr->code === $event->key->keysym->scancode) {
                     return $event->key;
                 }
 

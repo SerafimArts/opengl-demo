@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle\Annotation;
 
-/**
- * @Annotation
- */
-class OnLoad extends Lifecycle
+#[\Attribute(\Attribute::TARGET_METHOD)]
+class OnLoad extends LifecycleAttribute
 {
 }

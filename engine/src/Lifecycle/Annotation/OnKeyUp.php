@@ -6,23 +6,12 @@ namespace Serafim\Bic\Lifecycle\Annotation;
 
 use Serafim\SDL\Kernel\Event\Type;
 
-/**
- * @Annotation
- */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class OnKeyUp extends OnEvent
 {
-    /**
-     * @var string
-     */
-    protected const DEFAULT_VALUE = 'code';
-
-    /**
-     * @var int|null
-     */
-    public ?int $code = null;
-
-    /**
-     * @var int
-     */
-    public ?int $type = Type::SDL_KEYUP;
+    public function __construct(
+        public readonly int $code,
+    ) {
+        parent::__construct(Type::SDL_KEYUP);
+    }
 }
