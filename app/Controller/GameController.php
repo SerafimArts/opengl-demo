@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -28,9 +21,6 @@ use Serafim\SDL\EventPtr;
 use Serafim\SDL\Kernel\Event\Type;
 use Serafim\SDL\MouseMotionEvent;
 
-/**
- * Class MenuController
- */
 class GameController
 {
     /**
@@ -84,8 +74,6 @@ class GameController
     private float $cameraSize = 1;
 
     /**
-     * GameController constructor.
-     *
      * @param Game $game
      * @param Map $map
      */

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -23,9 +16,6 @@ use Serafim\Bic\Math\Vector2;
 use Serafim\Bic\Progress\LoadingInterface;
 use Serafim\Bic\Renderer\ViewInterface;
 
-/**
- * Class LoadingController
- */
 class LoadingController
 {
     /**
@@ -59,8 +49,6 @@ class LoadingController
     private LoadingInterface $progress;
 
     /**
-     * LoadingController constructor.
-     *
      * @param Game $game
      */
     public function __construct(Game $game)

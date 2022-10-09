@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Map;
@@ -15,9 +8,6 @@ use Illuminate\Config\Repository;
 use Serafim\Bic\Lifecycle\Lifecycle;
 use Serafim\Bic\Renderer\Texture;
 
-/**
- * Class Data
- */
 class Data extends Repository
 {
     /**
@@ -26,8 +16,6 @@ class Data extends Repository
     private array $textures;
 
     /**
-     * Data constructor.
-     *
      * @param array $items
      * @param array|Texture[] $textures
      */

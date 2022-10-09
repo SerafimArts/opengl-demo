@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Bic Engine package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle;
@@ -30,9 +23,6 @@ use Serafim\Bic\Lifecycle\Annotation\OnUnload;
 use Serafim\Bic\Lifecycle\Annotation\OnUpdate;
 use Serafim\SDL\Event;
 
-/**
- * Class Context
- */
 class Context
 {
     /**
@@ -114,8 +104,6 @@ class Context
     private Application $app;
 
     /**
-     * Context constructor.
-     *
      * @param Application $app
      * @param Reader $reader
      * @param object $context

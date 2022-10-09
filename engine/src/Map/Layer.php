@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Map;
@@ -22,9 +15,6 @@ use Serafim\Bic\Renderer\TransformationInterface;
 use Serafim\Bic\Renderer\View;
 use Serafim\Bic\Util;
 
-/**
- * Class Layer
- */
 class Layer extends View
 {
     /**
@@ -68,8 +58,6 @@ class Layer extends View
     private CData $clip;
 
     /**
-     * Layer constructor.
-     *
      * @param Lifecycle $game
      * @param int $width
      * @param int $height

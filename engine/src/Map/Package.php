@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Map;
@@ -16,9 +9,6 @@ use Illuminate\Support\Str;
 use Serafim\Bic\Lifecycle\Lifecycle;
 use Serafim\Bic\Renderer\Texture;
 
-/**
- * Class Package
- */
 class Package
 {
     /**
@@ -32,8 +22,6 @@ class Package
     private string $pathname;
 
     /**
-     * Package constructor.
-     *
      * @param string $pathname
      */
     public function __construct(string $pathname)

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic;
@@ -16,9 +9,6 @@ use FFI\CPtr;
 use Serafim\SDL\SDL;
 use Serafim\SDL\SDLNativeApiAutocomplete;
 
-/**
- * Class Native
- */
 abstract class Native implements NativeInterface
 {
     /**
@@ -31,9 +21,6 @@ abstract class Native implements NativeInterface
      */
     public CData $ptr;
 
-    /**
-     * Native constructor.
-     */
     public function __construct()
     {
         $this->sdl = SDL::getInstance();

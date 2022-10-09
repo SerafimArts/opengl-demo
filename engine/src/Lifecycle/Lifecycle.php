@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle;
@@ -24,9 +17,6 @@ use Serafim\SDL\Event;
 use Serafim\SDL\Kernel\Event\Type;
 use Serafim\SDL\Kernel\Video\WindowEvent;
 
-/**
- * Class Lifecycle
- */
 abstract class Lifecycle implements WorkerInterface
 {
     /**
@@ -65,8 +55,6 @@ abstract class Lifecycle implements WorkerInterface
     protected ?Context $context = null;
 
     /**
-     * Lifecycle constructor.
-     *
      * @param Application $app
      * @throws BindingResolutionException
      */

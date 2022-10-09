@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Bic Engine package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer\Viewport;
@@ -16,9 +9,6 @@ use Serafim\Bic\Renderer\TransformMemoizationTrait;
 use Serafim\Bic\Window\Window;
 use Serafim\SDL\SDL;
 
-/**
- * Class Viewport
- */
 abstract class Viewport implements ViewportInterface
 {
     use TransformMemoizationTrait;
@@ -44,8 +34,6 @@ abstract class Viewport implements ViewportInterface
     protected Window $window;
 
     /**
-     * Viewport constructor.
-     *
      * @param Window $window
      * @param Vector2|null $size
      */

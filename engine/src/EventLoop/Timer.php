@@ -1,19 +1,9 @@
 <?php
 
-/**
- * This file is part of Bic Engine package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\EventLoop;
 
-/**
- * Class Timer
- */
 class Timer
 {
     /**
@@ -37,8 +27,6 @@ class Timer
     private float $rate = 1;
 
     /**
-     * Timer constructor.
-     *
      * @param int $rate
      */
     public function __construct(int $rate = self::DEFAULT_UPDATE_RATE)

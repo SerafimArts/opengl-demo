@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Math;
@@ -17,9 +10,6 @@ use Serafim\SDL\Rect;
 use Serafim\SDL\RectPtr;
 use Serafim\SDL\SDL;
 
-/**
- * Class Transformation
- */
 class Transformation
 {
     /**
@@ -38,8 +28,6 @@ class Transformation
     private CData $memory;
 
     /**
-     * Transformation constructor.
-     *
      * @param CData $source
      * @param CData $target
      */

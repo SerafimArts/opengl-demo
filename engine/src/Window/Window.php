@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Window;
@@ -18,9 +11,6 @@ use Serafim\SDL\Kernel\Video\WindowFlags;
 use Serafim\SDL\SDL;
 use Serafim\SDL\WindowPtr;
 
-/**
- * Class Window
- */
 class Window implements WindowInterface
 {
     /**
@@ -39,8 +29,6 @@ class Window implements WindowInterface
     private SDL $sdl;
 
     /**
-     * Window constructor.
-     *
      * @param CData|WindowPtr $window
      */
     public function __construct(CData $window)

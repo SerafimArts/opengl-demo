@@ -1,19 +1,9 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Progress;
 
-/**
- * Class Loading
- */
 class Loading implements LoadingInterface
 {
     /**
@@ -22,8 +12,6 @@ class Loading implements LoadingInterface
     private \Generator $stream;
 
     /**
-     * Loading constructor.
-     *
      * @param \Generator $stream
      */
     public function __construct(\Generator $stream)

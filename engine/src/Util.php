@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic;
@@ -16,9 +9,6 @@ use Serafim\SDL\Rect as RectStruct;
 use Serafim\SDL\RectPtr;
 use Serafim\SDL\SDL;
 
-/**
- * Class Util
- */
 final class Util
 {
     /**

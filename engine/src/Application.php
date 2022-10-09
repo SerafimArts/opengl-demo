@@ -1,12 +1,5 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic;
@@ -19,9 +12,6 @@ use Serafim\Bic\Application\InteractWithPaths;
 use Serafim\Bic\Application\InteractWithProviders;
 use Serafim\Bic\EventLoop\LoopInterface;
 
-/**
- * Class Application
- */
 final class Application extends Container
 {
     use InteractWithPaths;
@@ -42,8 +32,6 @@ final class Application extends Container
     ];
 
     /**
-     * Application constructor.
-     *
      * @param string $root
      * @throws BindingResolutionException
      */

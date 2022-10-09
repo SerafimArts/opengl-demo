@@ -1,19 +1,9 @@
 <?php
 
-/**
- * This file is part of Battleground package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Serafim\Bic\Math;
 
-/**
- * Class Transition
- */
 class Transition
 {
     /**
@@ -27,8 +17,6 @@ class Transition
     private float $source;
 
     /**
-     * Transition constructor.
-     *
      * @param float $value
      */
     public function __construct(float $value)
