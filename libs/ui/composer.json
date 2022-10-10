@@ -1,5 +1,6 @@
 {
     "name": "bic-engine/ui",
+    "type": "library",
     "require": {
         "php": "^8.1"
     },

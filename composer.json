@@ -1,7 +1,8 @@
 {
-    "name": "serafim/battleground",
+    "name": "serafim/opengl-demo",
     "repositories": [
         {"type": "path", "url": "engine"},
+        {"type": "path", "url": "libs/binaries"},
         {"type": "path", "url": "libs/ui"},
         {"type": "path", "url": "libs/ui-sdl"}
     ],
@@ -9,7 +10,8 @@
         "php": "^8.1",
         "ext-ffi": "*",
         "ext-json": "*",
-        "bic-engine/ui-sdl": "*",
+        "local/binaries": "^1.0",
+        "bic-engine/ui-sdl": "^1.0",
         "serafim/ffi-ide-helper": "^1.0",
         "serafim/bic-engine": "^1.0"
     },
@@ -19,8 +21,17 @@
         }
     },
     "require-dev": {
+        "composer/composer": "^2.0",
         "vimeo/psalm": "^4.28",
         "symfony/var-dumper": "^5.4|^6.0"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform-check": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "local/binaries": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

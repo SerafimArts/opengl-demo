@@ -1,25 +1,22 @@
 {
-    "name": "bic-engine/ui-sdl",
-    "type": "library",
+    "name": "local/binaries",
+    "type": "composer-plugin",
     "require": {
         "php": "^8.1",
-        "ext-ffi": "*",
-        "ffi/env": "^1.0",
-        "ffi/proxy": "^1.0",
-        "ffi/location": "^1.0",
-        "bic-engine/ui": "^1.0"
+        "composer-plugin-api": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "Bic\\UI\\SDL\\": "src"
+            "Local\\Binaries\\": "src"
         }
     },
     "require-dev": {
-        "ffi-headers/sdl2-headers": "^1.0",
+        "composer/composer": "^2.0",
         "jetbrains/phpstorm-attributes": "^1.0",
         "symfony/var-dumper": "^5.4|^6.0"
     },
     "extra": {
+        "class": "Local\\Binaries\\Plugin",
         "branch-alias": {
             "dev-master": "1.0.x-dev",
             "dev-main": "1.0.x-dev"
