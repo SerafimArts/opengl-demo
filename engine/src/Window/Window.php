@@ -16,7 +16,7 @@ class Window implements WindowInterface
     /**
      * @var int
      */
-    private const DEFAULT_FLAGS = WindowFlags::SDL_WINDOW_HIDDEN | WindowFlags::SDL_WINDOW_OPENGL;
+    private const DEFAULT_FLAGS = WindowFlags::SDL_WINDOW_OPENGL;
 
     /**
      * @var CData|WindowPtr
@@ -27,6 +27,8 @@ class Window implements WindowInterface
      * @var SDL|SDLNativeApiAutocomplete
      */
     private SDL $sdl;
+
+    private ?Surface $icon = null;
 
     /**
      * @param CData|WindowPtr $window
@@ -52,6 +54,7 @@ class Window implements WindowInterface
      */
     public function setIcon(Surface $surface): void
     {
+        $this->icon = $surface;
         $this->sdl->SDL_SetWindowIcon($this->window, $surface->getPointer());
     }
 
