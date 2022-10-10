@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
+use Bic\UI\SDL\Window;
 use Serafim\Bic\Native;
-use Serafim\Bic\Window\WindowInterface;
 use Serafim\SDL\RendererPtr;
 use Serafim\SDL\SDL;
 
@@ -25,17 +25,18 @@ class Renderer extends Native implements RendererInterface
     public Driver $driver;
 
     /**
-     * @param WindowInterface $window
+     * @param Window $window
      * @param Driver|null $driver
      * @param int $flags
      */
-    public function __construct(WindowInterface $window, Driver $driver = null, int $flags = self::DEFAULT_FLAGS)
+    public function __construct(Window $window, Driver $driver = null, int $flags = self::DEFAULT_FLAGS)
     {
         parent::__construct();
 
         $this->driver = $driver ?? Driver::current();
+        $cdata = $this->sdl->cast('SDL_Window*', $window->getCData());
 
-        $this->ptr = $this->sdl->SDL_CreateRenderer($window->getPointer(), $this->driver->index, $flags);
+        $this->ptr = $this->sdl->SDL_CreateRenderer($cdata, $this->driver->index, $flags);
     }
 
     /**

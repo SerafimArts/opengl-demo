@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
+use Bic\UI\Factory as UIFactory;
+use Bic\UI\FactoryInterface;
+use Bic\UI\ManagerInterface;
+use Bic\UI\SDL\Factory;
+use Bic\UI\SDL\Window;
+use Bic\UI\Size;
+use Bic\UI\Window\CreateInfo;
+use Bic\UI\Window\WindowInterface;
+use Illuminate\Container\Container;
 use Serafim\Bic\Application\ServiceProvider;
-use Serafim\Bic\Window\Window;
-use Serafim\Bic\Window\WindowInterface;
+use Serafim\SDL\SDL;
 
 class WindowServiceProvider extends ServiceProvider
 {
@@ -16,30 +23,30 @@ class WindowServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(WindowInterface::class, function () {
-            $window = $this->createWindow();
+        $this->app->singleton(Factory::class, function () {
+            $instance = SDL::getInstance();
 
-            if ($icon = $this->config('window.icon')) {
-                $window->setIconFromPathname(\realpath($icon) ?: $icon);
-            }
-
-            return $window;
+            return Factory::fromLibrary($instance->info->bin);
         });
 
-        $this->app->alias(WindowInterface::class, Window::class);
-    }
+        $this->app->alias(Factory::class, UIFactory::class);
+        $this->app->alias(Factory::class, FactoryInterface::class);
+        $this->app->alias(Factory::class, ManagerInterface::class);
 
-    /***
-     * @return WindowInterface|Window
-     * @throws BindingResolutionException
-     */
-    private function createWindow(): WindowInterface
-    {
-        return Window::create(
-            $this->config('window.title', 'Bic Engine'),
-            $this->config('window.width', 800),
-            $this->config('window.height', 600),
-            $this->config('window.flags', 0),
-        );
+
+        $this->app->singleton(Window::class, function (Container $app) {
+            /** @var FactoryInterface $windows */
+            $windows = $app->make(FactoryInterface::class);
+
+            return $windows->create(new CreateInfo(
+                title: $this->config('window.title', 'Bic Engine'),
+                size: new Size(
+                    width: $this->config('window.width', 800),
+                    height: $this->config('window.height', 600),
+                )
+            ));
+        });
+
+        $this->app->alias(Window::class, WindowInterface::class);
     }
 }

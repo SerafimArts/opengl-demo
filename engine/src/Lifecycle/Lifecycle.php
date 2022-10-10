@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Lifecycle;
 
+use Bic\UI\Window\WindowInterface;
 use FFI\CData;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Serafim\Bic\Application;
 use Serafim\Bic\EventLoop\LoopInterface;
-use Serafim\Bic\EventLoop\OrderedEventLoop;
 use Serafim\Bic\EventLoop\WorkerInterface;
 use Serafim\Bic\Renderer\RendererInterface;
 use Serafim\Bic\Renderer\Viewport\ViewportInterface;
-use Serafim\Bic\Window\WindowInterface;
 use Serafim\SDL\Event;
 use Serafim\SDL\Kernel\Event\Type;
 use Serafim\SDL\Kernel\Video\WindowEvent;

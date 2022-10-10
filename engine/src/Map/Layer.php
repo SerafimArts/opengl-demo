@@ -115,7 +115,8 @@ class Layer extends View
      */
     private function prerender(RendererInterface $renderer): void
     {
-        $format = $this->sdl->SDL_GetWindowPixelFormat($this->game->window->getPointer());
+        $cdata = $this->sdl->cast('SDL_Window*', $this->game->window->getCData());
+        $format = $this->sdl->SDL_GetWindowPixelFormat($cdata);
 
         $texture = $this->sdl->SDL_CreateTexture(
             $renderer->getPointer(),

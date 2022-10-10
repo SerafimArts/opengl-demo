@@ -1,0 +1,29 @@
+{
+    "name": "bic-engine/ui-sdl",
+    "require": {
+        "php": "^8.1",
+        "ext-ffi": "*",
+        "ffi/env": "^1.0",
+        "ffi/proxy": "^1.0",
+        "ffi/location": "^1.0",
+        "bic-engine/ui": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bic\\UI\\SDL\\": "src"
+        }
+    },
+    "require-dev": {
+        "ffi-headers/sdl2-headers": "^1.0",
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "symfony/var-dumper": "^5.4|^6.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-main": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

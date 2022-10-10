@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer\Viewport;
 
+use Bic\UI\SDL\Window;
 use Serafim\Bic\Math\Vector2;
 use Serafim\Bic\Renderer\TransformMemoizationTrait;
-use Serafim\Bic\Window\Window;
 use Serafim\SDL\SDL;
 
 abstract class Viewport implements ViewportInterface
@@ -109,16 +109,9 @@ abstract class Viewport implements ViewportInterface
      */
     public function sync(): void
     {
-        $width = $this->sdl->new('int');
-        $height = $this->sdl->new('int');
+        $size = $this->window->getSize();
 
-        $this->sdl->SDL_GetWindowSize(
-            $this->window->getPointer(),
-            SDL::addr($width),
-            SDL::addr($height)
-        );
-
-        $this->source($width->cdata, $height->cdata);
+        $this->source($size->width, $size->height);
     }
 
     /**

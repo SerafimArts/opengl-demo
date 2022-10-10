@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
+use Bic\UI\SDL\Window;
 use FFI\CData;
 use Serafim\Bic\Native;
-use Serafim\Bic\Window\Window;
 use Serafim\SDL\PixelFormat;
 use Serafim\SDL\PixelFormatPtr;
 use Serafim\SDL\Rect;
@@ -37,7 +37,8 @@ class Surface extends Native
     {
         $before = $this->ptr;
 
-        $format = $this->sdl->SDL_GetWindowPixelFormat($window->getPointer());
+        $cdata = $this->sdl->cast('SDL_Window*', $window->getCData());
+        $format = $this->sdl->SDL_GetWindowPixelFormat($cdata);
 
         $this->ptr = $this->sdl->SDL_ConvertSurfaceFormat($before, $format, 0);
 

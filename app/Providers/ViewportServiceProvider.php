@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Bic\UI\Window\WindowInterface;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Serafim\Bic\Application\ServiceProvider;
 use Serafim\Bic\Math\Vector2;
 use Serafim\Bic\Renderer\Viewport\StretchViewport;
 use Serafim\Bic\Renderer\Viewport\ViewportInterface;
-use Serafim\Bic\Window\WindowInterface;
 
 class ViewportServiceProvider extends ServiceProvider
 {

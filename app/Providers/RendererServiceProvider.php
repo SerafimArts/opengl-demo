@@ -9,7 +9,7 @@ use Serafim\Bic\Application\ServiceProvider;
 use Serafim\Bic\Renderer\Driver;
 use Serafim\Bic\Renderer\Renderer;
 use Serafim\Bic\Renderer\RendererInterface;
-use Serafim\Bic\Window\WindowInterface;
+use Bic\UI\SDL\Window;
 
 class RendererServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,7 @@ class RendererServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(RendererInterface::class, function () {
-            $window = $this->app->make(WindowInterface::class);
+            $window = $this->app->make(Window::class);
 
             return $this->createRenderer($window);
         });
@@ -28,11 +28,11 @@ class RendererServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param WindowInterface $window
+     * @param Window $window
      * @return RendererInterface
      * @throws BindingResolutionException
      */
-    private function createRenderer(WindowInterface $window): RendererInterface
+    private function createRenderer(Window $window): RendererInterface
     {
         $flags = $this->config('renderer.flags', 0);
 
@@ -60,7 +60,5 @@ class RendererServiceProvider extends ServiceProvider
             default:
                 return Driver::current();
         }
-
-
     }
 }

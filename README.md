@@ -22,6 +22,12 @@ Demo in action: https://www.youtube.com/watch?v=vsBbJbhKeeU
 - ext-ffi
 - [Composer](https://getcomposer.org/download/)
 
+### Supported OS
+
+- Windows
+- Linux/Unix (over X11 and Wayland)
+- MacOS
+
 ### Additional Requirements (MacOS and Linux only)
 
 - SDL 2.0+
