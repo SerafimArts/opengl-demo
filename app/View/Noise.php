@@ -15,7 +15,7 @@ class Noise extends View
     /**
      * @var float
      */
-    public float $opacity = 100;
+    public float $opacity = 70;
 
     /**
      * @var array
