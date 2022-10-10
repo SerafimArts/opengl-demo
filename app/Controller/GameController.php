@@ -23,10 +23,9 @@ use Serafim\SDL\MouseMotionEvent;
 
 class GameController
 {
-    /**
-     * @var float
-     */
-    private const CAMERA_ZOOM_SPEED = .04;
+    private const CAMERA_ZOOM_SPEED = .06;
+    private const CAMERA_ZOOM_MAX   = 2.;
+    private const CAMERA_ZOOM_MIN   = .8;
 
     /**
      * @var Game
@@ -135,15 +134,19 @@ class GameController
     {
         switch (true) {
             case $event->y === 1:
-                $this->cameraSize += self::CAMERA_ZOOM_SPEED;
-                break;
-
-            case $event->y === -1 && $this->cameraSize - self::CAMERA_ZOOM_SPEED <= 1:
-                $this->cameraSize = 1;
+                if ($this->cameraSize + self::CAMERA_ZOOM_SPEED >= self::CAMERA_ZOOM_MAX) {
+                    $this->cameraSize = self::CAMERA_ZOOM_MAX;
+                } else {
+                    $this->cameraSize += self::CAMERA_ZOOM_SPEED;
+                }
                 break;
 
             case $event->y === -1:
-                $this->cameraSize -= self::CAMERA_ZOOM_SPEED;
+                if ($this->cameraSize - self::CAMERA_ZOOM_SPEED <= self::CAMERA_ZOOM_MIN) {
+                    $this->cameraSize = self::CAMERA_ZOOM_MIN;
+                } else {
+                    $this->cameraSize -= self::CAMERA_ZOOM_SPEED;
+                }
                 break;
         }
 
