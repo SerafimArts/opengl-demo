@@ -60,5 +60,5 @@ return [
     |
     */
 
-    'icon' => __DIR__ . '/../resources/img/icon.png'
+    'icon' => __DIR__ . '/../resources/img/icon/x48.png'
 ];
