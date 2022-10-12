@@ -3,6 +3,10 @@
     "repositories": [
         {"type": "path", "url": "engine"},
         {"type": "path", "url": "libs/binaries"},
+        {"type": "path", "url": "libs/image"},
+        {"type": "path", "url": "libs/image-sdl"},
+        {"type": "path", "url": "libs/math"},
+        {"type": "path", "url": "libs/stream"},
         {"type": "path", "url": "libs/ui"},
         {"type": "path", "url": "libs/ui-sdl"}
     ],
@@ -11,6 +15,10 @@
         "ext-ffi": "*",
         "ext-json": "*",
         "local/binaries": "^1.0",
+        "bic-engine/stream": "^1.0",
+        "bic-engine/math": "^1.0",
+        "bic-engine/image": "^1.0",
+        "bic-engine/image-sdl": "^1.0",
         "bic-engine/ui-sdl": "^1.0",
         "serafim/ffi-ide-helper": "^1.0",
         "serafim/bic-engine": "^1.0"

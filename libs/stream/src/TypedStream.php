@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Stream;
+namespace Bic\Stream;
 
 use JetBrains\PhpStorm\ExpectedValues;
 
@@ -72,6 +72,14 @@ final class TypedStream implements StreamInterface
     public function move(int $offset): int
     {
         return $this->stream->move($offset);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function completed(): bool
+    {
+        return $this->stream->completed();
     }
 
     /**

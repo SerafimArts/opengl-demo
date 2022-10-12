@@ -1,0 +1,24 @@
+{
+    "name": "bic-engine/stream",
+    "type": "library",
+    "require": {
+        "php": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bic\\Stream\\": "src"
+        }
+    },
+    "require-dev": {
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "symfony/var-dumper": "^5.4|^6.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-main": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

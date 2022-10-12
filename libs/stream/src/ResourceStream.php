@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Stream;
+namespace Bic\Stream;
 
-/**
- * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal Bic\Image
- */
-class ResourceStream implements StreamInterface
+use Bic\Stream\Exception\NonReadableException;
+
+class ResourceStream implements RewindableStreamInterface
 {
     /**
      * @param resource $stream
@@ -18,20 +16,26 @@ class ResourceStream implements StreamInterface
         private readonly mixed $stream,
         private readonly bool $close = false,
     ) {
+        if (!$this->isValidStream($this->stream)) {
+            throw new NonReadableException('Could not open non-stream resource for reading');
+        }
+
+        if (!$this->isReadable($this->stream)) {
+            throw new NonReadableException('Could not open non-readable stream for reading');
+        }
     }
 
-    /**
-     * @param string $string
-     *
-     * @return static
-     */
-    public static function fromString(string $string): self
+    private function isValidStream(mixed $stream): bool
     {
-        $stream = \fopen('php://memory','r+');
-        \fwrite($stream, $string);
-        \rewind($stream);
+        return \is_resource($stream) && \get_resource_type($stream) === 'stream';
+    }
 
-        return new self($stream, true);
+    private function isReadable(mixed $stream): bool
+    {
+        $meta = \stream_get_meta_data($stream);
+        $mode = $meta['mode'];
+
+        return \str_contains($mode, 'r') || \str_contains($mode, '+');
     }
 
     /**
@@ -64,6 +68,14 @@ class ResourceStream implements StreamInterface
 
     /**
      * {@inheritDoc}
+     */
+    public function rewind(): void
+    {
+        \rewind($this->stream);
+    }
+
+    /**
+     * {@inheritDoc}
      *
      * @psalm-suppress MoreSpecificReturnType
      * @psalm-suppress LessSpecificReturnStatement
@@ -71,6 +83,14 @@ class ResourceStream implements StreamInterface
     public function offset(): int
     {
         return (int)\ftell($this->stream);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function completed(): bool
+    {
+        return \feof($this->stream);
     }
 
     /**

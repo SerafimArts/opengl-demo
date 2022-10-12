@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Stream;
+namespace Bic\Stream;
 
-/**
- * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal Bic\Image
- */
 interface StreamInterface
 {
     /**
@@ -41,4 +37,11 @@ interface StreamInterface
      * @return positive-int|0
      */
     public function offset(): int;
+
+    /**
+     * Returns {@see true} in case of stream is ends or {@see false} instead.
+     *
+     * @return bool
+     */
+    public function completed(): bool;
 }

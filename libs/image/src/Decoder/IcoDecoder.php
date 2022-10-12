@@ -9,27 +9,26 @@ use Bic\Image\Decoder\IcoDecoder\Compression;
 use Bic\Image\Decoder\IcoDecoder\IcoDirectory;
 use Bic\Image\Format;
 use Bic\Image\Image;
-use Bic\Image\Stream\Endianness;
-use Bic\Image\Stream\StreamInterface;
-use Bic\Image\Stream\TypedStream;
+use Bic\Stream\Endianness;
+use Bic\Stream\StreamInterface;
+use Bic\Stream\TypedStream;
 
 final class IcoDecoder implements DecoderInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function match(StreamInterface $stream): bool
+    public function decode(StreamInterface $stream): ?iterable
     {
-        return $stream->read(4) === "\x00\x00\x01\x00";
+        if ($stream->read(4) === "\x00\x00\x01\x00") {
+            return $this->read(new TypedStream($stream, Endianness::LITTLE));
+        }
+
+        return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function decode(StreamInterface $stream): iterable
+    private function read(TypedStream $stream): iterable
     {
-        $stream = new TypedStream($stream, Endianness::LITTLE);
-
         /** @var array<IcoDirectory> $directories */
         $directories = [];
 
@@ -91,8 +90,8 @@ final class IcoDecoder implements DecoderInterface
 
             // Read image data
             $data = $info->width >= 0
-                ? $this->readBottomUp($stream, $ico, $format)
-                : $this->readTopDown($stream, $ico, $format);
+                ? $this->bottomUp($stream, $ico, $format)
+                : $this->topDown($stream, $ico, $format);
 
             yield new Image($format, $ico->width ?: 256, $ico->height ?: 256, $data);
         }
@@ -100,38 +99,42 @@ final class IcoDecoder implements DecoderInterface
 
     /**
      * @return iterable<non-empty-string>
+     * @throws \Throwable
      */
     private function lines(TypedStream $stream, IcoDirectory $ico, Format $format): iterable
     {
         $width = $ico->width ?: 256;
         $length = $format->getBitsPerPixel() / 8 * $width;
 
-        for ($y = 0, $lines = $ico->height ?: 256; $y < $lines; ++$y) {
-            yield $stream->read($length);
+        if (\Fiber::getCurrent()) {
+            for ($y = 0, $lines = $ico->height ?: 256; $y < $lines; ++$y) {
+                yield $chunk = $stream->read($length);
+                \Fiber::suspend($chunk);
+            }
+        } else {
+            for ($y = 0, $lines = $ico->height ?: 256; $y < $lines; ++$y) {
+                yield $stream->read($length);
+            }
         }
     }
 
-    private function readBottomUp(TypedStream $stream, IcoDirectory $ico, Format $format): string
+    private function bottomUp(TypedStream $stream, IcoDirectory $ico, Format $format): string
     {
         $result = '';
 
         foreach ($this->lines($stream, $ico, $format) as $line) {
             $result = $line . $result;
-
-            \Fiber::getCurrent() && \Fiber::suspend($line);
         }
 
         return $result;
     }
 
-    private function readTopDown(TypedStream $stream, IcoDirectory $ico, Format $format): string
+    private function topDown(TypedStream $stream, IcoDirectory $ico, Format $format): string
     {
         $result = '';
 
         foreach ($this->lines($stream, $ico, $format) as $line) {
             $result .= $line;
-
-            \Fiber::getCurrent() && \Fiber::suspend($line);
         }
 
         return $result;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Stream;
+namespace Bic\Stream;
 
 use JetBrains\PhpStorm\ExpectedValues;
 
