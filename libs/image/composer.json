@@ -1,0 +1,29 @@
+{
+    "name": "bic-engine/image",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bic\\Image\\": "src"
+        }
+    },
+    "require-dev": {
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "symfony/var-dumper": "^5.4|^6.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-main": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform-check": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
