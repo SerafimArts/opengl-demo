@@ -14,6 +14,9 @@ namespace Bic\Image\Decoder\IcoDecoder;
  * information given here.
  *
  * @link https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader
+ *
+ * @internal This is an internal library class, please do not use it in your code.
+ * @psalm-internal Bic\Image\Decoder
  */
 final class BitMapInfoHeader
 {

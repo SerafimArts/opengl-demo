@@ -9,7 +9,6 @@ use Bic\Image\Decoder\IcoDecoder\Compression;
 use Bic\Image\Decoder\IcoDecoder\IcoDirectory;
 use Bic\Image\Format;
 use Bic\Image\Image;
-use Bic\Image\ImageInterface;
 use Bic\Image\Stream\Endianness;
 use Bic\Image\Stream\StreamInterface;
 use Bic\Image\Stream\TypedStream;
