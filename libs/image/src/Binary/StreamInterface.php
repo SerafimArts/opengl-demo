@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Bic\Stream;
+namespace Bic\Image\Binary;
 
+/**
+ * @internal This is an internal library class, please do not use it in your code.
+ * @psalm-internal Bic\Image
+ */
 interface StreamInterface
 {
     /**
@@ -21,6 +25,13 @@ interface StreamInterface
      * @return positive-int|0
      */
     public function seek(int $offset): int;
+
+    /**
+     * Rewind the position of a stream pointer.
+     *
+     * @return void
+     */
+    public function rewind(): void;
 
     /**
      * Relative stream offset movement.
@@ -43,5 +54,5 @@ interface StreamInterface
      *
      * @return bool
      */
-    public function completed(): bool;
+    public function isCompleted(): bool;
 }

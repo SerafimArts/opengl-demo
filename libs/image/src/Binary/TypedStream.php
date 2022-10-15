@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bic\Stream;
+namespace Bic\Image\Binary;
 
-use JetBrains\PhpStorm\ExpectedValues;
+use Bic\Image\Exception\NonReadableException;
 
 /**
  * @internal This is an internal library class, please do not use it in your code.
@@ -69,6 +69,14 @@ final class TypedStream implements StreamInterface
     /**
      * {@inheritDoc}
      */
+    public function rewind(): void
+    {
+        $this->stream->rewind();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function move(int $offset): int
     {
         return $this->stream->move($offset);
@@ -77,9 +85,9 @@ final class TypedStream implements StreamInterface
     /**
      * {@inheritDoc}
      */
-    public function completed(): bool
+    public function isCompleted(): bool
     {
-        return $this->stream->completed();
+        return $this->stream->isCompleted();
     }
 
     /**
@@ -91,17 +99,19 @@ final class TypedStream implements StreamInterface
     }
 
     /**
-     * @param string|Type $type
+     * @param Type $type
+     * @param Endianness|null $endianness
      *
-     * @return mixed
+     * @return int|float
      */
-    private function readAs(string|Type $type): mixed
+    private function readAs(Type $type, Endianness $endianness = null): int|float
     {
-        $type = Type::of($type);
+        [1 => $data] = \unpack(
+            $type->toPackFormat($endianness ?? $this->endianness),
+            $this->read($type->getSize()),
+        );
 
-        $result = \unpack($type->value, $this->read($type->getSize()));
-
-        return \reset($result);
+        return $data;
     }
 
     /**
@@ -109,7 +119,9 @@ final class TypedStream implements StreamInterface
      */
     public function int8(): int
     {
-        return (int)$this->readAs(Type::INT8);
+        $value = \ord($this->read(1));
+
+        return $value & 0x80 ? $value - 0x100 : $value;
     }
 
     /**
@@ -127,7 +139,7 @@ final class TypedStream implements StreamInterface
      */
     public function uint8(): int
     {
-        return (int)$this->readAs(Type::UINT8);
+        return \ord($this->read(1));
     }
 
     /**
@@ -145,7 +157,11 @@ final class TypedStream implements StreamInterface
      */
     public function int16(): int
     {
-        return (int)$this->readAs(Type::INT16);
+        $buffer = $this->read(2);
+
+        $value = \ord($buffer[0]) | \ord($buffer[1]) << 8;
+
+        return \ord($buffer[1]) & 0x80 ? $value - 0x1_0000 : $value;
     }
 
     /**
@@ -163,9 +179,13 @@ final class TypedStream implements StreamInterface
      */
     public function uint16(Endianness $endianness = null): int
     {
-        $endianness ??= $this->endianness;
+        $buffer = $this->read(2);
 
-        return (int)$this->readAs($endianness === Endianness::LITTLE ? Type::UINT16_LE : Type::UINT16_BE);
+        if (($endianness ?? $this->endianness) === Endianness::LITTLE) {
+            return \ord($buffer[0]) | (\ord($buffer[1]) << 8);
+        }
+
+        return \ord($buffer[1]) | (\ord($buffer[0]) << 8);
     }
 
     /**
@@ -193,7 +213,9 @@ final class TypedStream implements StreamInterface
      */
     public function int32(): int
     {
-        return (int)$this->readAs(Type::INT32);
+        [1 => $int32] = \unpack('l', $this->read(4));
+
+        return $int32;
     }
 
     /**
@@ -221,9 +243,13 @@ final class TypedStream implements StreamInterface
      */
     public function uint32(Endianness $endianness = null): int
     {
-        $endianness ??= $this->endianness;
+        [1 => $uint32] = \unpack(match ($endianness ?? $this->endianness) {
+            Endianness::LITTLE => 'V',
+            Endianness::BIG => 'N',
+            default => 'L',
+        }, $this->read(4));
 
-        return (int)$this->readAs($endianness === Endianness::LITTLE ? Type::UINT32_LE : Type::UINT32_BE);
+        return $uint32;
     }
 
     /**
@@ -261,7 +287,9 @@ final class TypedStream implements StreamInterface
      */
     public function int64(): int
     {
-        return (int)$this->readAs(Type::INT64);
+        [1 => $int64] = \unpack('q', $this->read(8));
+
+        return $int64;
     }
 
     /**
@@ -279,9 +307,13 @@ final class TypedStream implements StreamInterface
      */
     public function uint64(Endianness $endianness = null): int
     {
-        $endianness ??= $this->endianness;
+        [1 => $uint64] = \unpack(match ($endianness ?? $this->endianness) {
+            Endianness::LITTLE => 'P',
+            Endianness::BIG => 'J',
+            default => 'Q',
+        }, $this->read(8));
 
-        return (int)$this->readAs($endianness === Endianness::LITTLE ? Type::UINT64_LE : Type::UINT64_BE);
+        return $uint64;
     }
 
     /**
@@ -305,26 +337,40 @@ final class TypedStream implements StreamInterface
     }
 
     /**
+     * @param Endianness|null $endianness
+     *
      * @return float
      */
     public function float32(Endianness $endianness = null): float
     {
-        $endianness ??= $this->endianness;
+        [1 => $float] = \unpack(match ($endianness ?? $this->endianness) {
+            Endianness::LITTLE => 'g',
+            Endianness::BIG => 'G',
+            default => 'f',
+        }, $this->read(4));
 
-        return (float)$this->readAs($endianness === Endianness::LITTLE ? Type::FLOAT32_LE : Type::FLOAT32_BE);
+        return $float;
     }
 
     /**
+     * @param Endianness|null $endianness
+     *
      * @return float
      */
     public function float64(Endianness $endianness = null): float
     {
-        $endianness ??= $this->endianness;
+        [1 => $double] = \unpack(match ($endianness ?? $this->endianness) {
+            Endianness::LITTLE => 'e',
+            Endianness::BIG => 'E',
+            default => 'd',
+        }, $this->read(8));
 
-        return (float)$this->readAs($endianness === Endianness::LITTLE ? Type::FLOAT64_LE : Type::FLOAT64_BE);
+        return $double;
     }
 
     /**
+     * @param Endianness|null $endianness
+     *
      * @return \DateTimeInterface
      */
     public function timestamp(Endianness $endianness = null): \DateTimeInterface
@@ -336,19 +382,21 @@ final class TypedStream implements StreamInterface
 
     /**
      * @param positive-int $size
-     * @param string|Type $type
+     * @param Type $type
+     * @param Endianness|null $endianness
      *
-     * @return array
+     * @return array<float|int>
      */
     public function array(
         int $size,
-        #[ExpectedValues(valuesFromClass: Type::class)]
-        string|Type $type
+        Type $type,
+        Endianness $endianness = null,
     ): array {
         $result = [];
 
+        $endianness ??= $this->endianness;
         for ($i = 0; $i < $size; ++$i) {
-            $result[] = $this->readAs($type);
+            $result[] = $this->readAs($type, $endianness);
         }
 
         return $result;
@@ -402,6 +450,7 @@ final class TypedStream implements StreamInterface
      * @param positive-int $bytes
      *
      * @return TypedStream
+     * @throws NonReadableException
      */
     public function slice(int $bytes): TypedStream
     {

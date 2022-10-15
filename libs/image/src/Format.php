@@ -8,19 +8,19 @@ use Bic\Image\Format\Info;
 
 enum Format
 {
-    #[Info(size: 24)]
+    #[Info(size: 3)]
     case R8G8B8;
 
-    #[Info(size: 24)]
+    #[Info(size: 3)]
     case B8G8R8;
 
-    #[Info(size: 32)]
+    #[Info(size: 4)]
     case R8G8B8A8;
 
-    #[Info(size: 32)]
+    #[Info(size: 4)]
     case B8G8R8A8;
 
-    #[Info(size: 32)]
+    #[Info(size: 4)]
     case A8B8G8R8;
 
     /**
@@ -42,12 +42,11 @@ enum Format
     }
 
     /**
-     * The number of significant bits in a pixel
-     * value, eg: 8, 15, 16, 24, 32.
+     * The number of significant bytes in a pixel value.
      *
      * @return positive-int
      */
-    public function getBitsPerPixel(): int
+    public function getBytesPerPixel(): int
     {
         $info = $this->getInfo();
 

@@ -25,4 +25,9 @@ interface ImageInterface
      * @return non-empty-string
      */
     public function getContents(): string;
+
+    /**
+     * @return positive-int
+     */
+    public function getBytes(): int;
 }

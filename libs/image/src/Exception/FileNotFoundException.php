@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Stream\Exception;
+namespace Bic\Image\Exception;
 
 class FileNotFoundException extends StreamException
 {

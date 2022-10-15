@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\Binaries;
+namespace Local\BinariesDownloader;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;

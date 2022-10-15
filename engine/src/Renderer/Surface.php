@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
-use Bic\UI\SDL\Window;
+use Bic\Image\ImageInterface;
+use Bic\Image\SDL\SDLDecoder;
 use FFI\CData;
+use FFI\CPtr;
 use Serafim\Bic\Native;
 use Serafim\SDL\PixelFormat;
 use Serafim\SDL\PixelFormatPtr;
 use Serafim\SDL\Rect;
+use Serafim\SDL\SDL;
 use Serafim\SDL\SurfacePtr;
 use Serafim\SDL\Image\Image;
 
@@ -20,6 +23,13 @@ use Serafim\SDL\Image\Image;
 class Surface extends Native
 {
     /**
+     * [pixels => surface] references list
+     *
+     * @var \WeakMap|null
+     */
+    private static ?\WeakMap $pixels = null;
+
+    /**
      * @param CData $surface
      */
     public function __construct(CData $surface)
@@ -27,22 +37,6 @@ class Surface extends Native
         $this->ptr = $surface;
 
         parent::__construct();
-    }
-
-    /**
-     * @param Window $window
-     * @return void
-     */
-    public function convert(Window $window): void
-    {
-        $before = $this->ptr;
-
-        $cdata = $this->sdl->cast('SDL_Window*', $window->getCData());
-        $format = $this->sdl->SDL_GetWindowPixelFormat($cdata);
-
-        $this->ptr = $this->sdl->SDL_ConvertSurfaceFormat($before, $format, 0);
-
-        $this->sdl->SDL_FreeSurface($before);
     }
 
     /**
@@ -67,6 +61,39 @@ class Surface extends Native
     public function getFormatPointer(): CData
     {
         return $this->ptr[0]->format;
+    }
+
+    /**
+     * @param ImageInterface $image
+     *
+     * @return static
+     */
+    public static function fromImage(ImageInterface $image): self
+    {
+        $sdl = SDL::getInstance();
+
+        $format = $image->getFormat();
+        $data   = $image->getContents();
+        $size   = $image->getBytes();
+        $bytes  = $format->getBytesPerPixel();
+
+        /** @var CPtr $pixels */
+        \FFI::memcpy($pixels = \FFI::new("int8_t[$size]"), $data, $size);
+
+        $instance = new self($sdl->SDL_CreateRGBSurfaceWithFormatFrom(
+            $pixels,
+            $image->getWidth(),
+            $image->getHeight(),
+            $bytes,
+            (int)($bytes * $image->getWidth()),
+            SDLDecoder::toSDLPixelFormat($image->getFormat()),
+        ));
+
+        // Pixels will be available as long as the SDL_Surface lives.
+        self::$pixels ??= new \WeakMap();
+        self::$pixels[$instance] = $pixels;
+
+        return $instance;
     }
 
     /**

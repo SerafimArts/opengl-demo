@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
+use Bic\Image\FactoryInterface;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Serafim\SDL\SDLNativeApiAutocomplete;
 use Serafim\Bic\Lifecycle\Lifecycle;
 use Serafim\SDL\SDL;
@@ -18,20 +20,28 @@ abstract class View implements ViewInterface
     /**
      * @var SDL|SDLNativeApiAutocomplete
      */
-    protected SDL $sdl;
+    protected readonly SDL $sdl;
 
     /**
      * @var Lifecycle
      */
-    protected Lifecycle $game;
+    protected readonly Lifecycle $game;
+
+    /**
+     * @var FactoryInterface
+     */
+    protected readonly FactoryInterface $images;
 
     /**
      * @param Lifecycle $game
-     */
+     *
+     * @throws BindingResolutionException
+*/
     public function __construct(Lifecycle $game)
     {
         $this->sdl = SDL::getInstance();
         $this->game = $game;
+        $this->images = $game->app->make(FactoryInterface::class);
 
         if (\method_exists($this, 'load')) {
             $game->app->call(\Closure::fromCallable([$this, 'load']));

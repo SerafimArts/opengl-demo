@@ -9,9 +9,9 @@ use Bic\Image\Decoder\IcoDecoder\Compression;
 use Bic\Image\Decoder\IcoDecoder\IcoDirectory;
 use Bic\Image\Format;
 use Bic\Image\Image;
-use Bic\Stream\Endianness;
-use Bic\Stream\StreamInterface;
-use Bic\Stream\TypedStream;
+use Bic\Image\Binary\Endianness;
+use Bic\Image\Binary\StreamInterface;
+use Bic\Image\Binary\TypedStream;
 
 final class IcoDecoder implements DecoderInterface
 {
@@ -104,7 +104,7 @@ final class IcoDecoder implements DecoderInterface
     private function lines(TypedStream $stream, IcoDirectory $ico, Format $format): iterable
     {
         $width = $ico->width ?: 256;
-        $length = $format->getBitsPerPixel() / 8 * $width;
+        $length = $format->getBytesPerPixel() * $width;
 
         if (\Fiber::getCurrent()) {
             for ($y = 0, $lines = $ico->height ?: 256; $y < $lines; ++$y) {

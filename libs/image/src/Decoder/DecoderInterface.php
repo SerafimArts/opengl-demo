@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Bic\Image\Decoder;
 
+use Bic\Image\Binary\StreamInterface;
 use Bic\Image\ImageInterface;
-use Bic\Stream\StreamInterface;
 
 interface DecoderInterface
 {

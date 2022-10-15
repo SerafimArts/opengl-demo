@@ -50,4 +50,12 @@ final class Image implements ImageInterface
     {
         return $this->contents;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBytes(): int
+    {
+        return $this->width * $this->height * $this->format->getBytesPerPixel();
+    }
 }

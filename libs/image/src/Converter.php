@@ -17,12 +17,7 @@ final class Converter implements ConverterInterface
 
         $input = $image->getFormat();
 
-        if ($input->getBitsPerPixel() % 8) {
-            throw new \LogicException('Unsupported bits per pixel');
-        }
-
-        // bytes per pixel: BITS / 8
-        $shift  = (int)($input->getBitsPerPixel() / 8);
+        $shift = $input->getBytesPerPixel();
         // size of image data (in bytes): WIDTH * HEIGHT * BYTES
         $length = $image->getWidth() * $image->getHeight() * $shift;
 

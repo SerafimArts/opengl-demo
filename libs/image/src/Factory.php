@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Bic\Image;
 
+use Bic\Image\Binary\FileStream;
 use Bic\Image\Exception\ImageException;
-use Bic\Stream\ResourceStream;
 use Bic\Image\Exception\InvalidArgumentException;
 use Bic\Image\Decoder\DecoderInterface;
 use Bic\Image\Decoder\IcoDecoder;
@@ -51,12 +51,10 @@ class Factory implements FactoryInterface
      */
     public function fromPathname(string $pathname): iterable
     {
-
-
-        $stream = new ResourceStream(\fopen($pathname, 'rb'));
+        $stream = new FileStream($pathname);
 
         foreach ($this->decoders as $decoder) {
-            $stream->seek(0);
+            $stream->rewind();
 
             if (\is_iterable($images = $decoder->decode($stream))) {
                 foreach ($images as $image) {

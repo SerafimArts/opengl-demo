@@ -2,15 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Bic\Stream;
+namespace Bic\Image\Binary;
 
-use Bic\Stream\Exception\NonReadableException;
+use Bic\Image\Exception\NonReadableException;
 
-class ResourceStream implements RewindableStreamInterface
+/**
+ * @internal This is an internal library class, please do not use it in your code.
+ * @psalm-internal Bic\Image
+ */
+class ResourceStream implements StreamInterface
 {
     /**
      * @param resource $stream
      * @param bool $close
+     *
+     * @throws NonReadableException
      */
     public function __construct(
         private readonly mixed $stream,
@@ -45,9 +51,7 @@ class ResourceStream implements RewindableStreamInterface
     {
         assert($bytes > 0);
 
-        $result = \fread($this->stream, $bytes);
-
-        return $result . \str_repeat("\x00", $bytes - \strlen($result));
+        return \fread($this->stream, $bytes);
     }
 
     /**
@@ -88,7 +92,7 @@ class ResourceStream implements RewindableStreamInterface
     /**
      * {@inheritDoc}
      */
-    public function completed(): bool
+    public function isCompleted(): bool
     {
         return \feof($this->stream);
     }

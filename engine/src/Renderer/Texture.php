@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Serafim\Bic\Renderer;
 
+use Bic\Image\ImageInterface;
 use FFI\CData;
 use Serafim\SDL\SDLNativeApiAutocomplete;
 use Serafim\Bic\Math\Vector2;
@@ -20,6 +21,11 @@ use Serafim\SDL\TexturePtr;
  */
 class Texture extends Native
 {
+    /**
+     * @var \WeakMap|null
+     */
+    private static ?\WeakMap $surfaces = null;
+
     /**
      * @var CData|RectPtr
      */
@@ -92,6 +98,17 @@ class Texture extends Native
 
     /**
      * @param RendererInterface $renderer
+     * @param ImageInterface $image
+     *
+     * @return static
+     */
+    public static function fromImage(RendererInterface $renderer, ImageInterface $image): self
+    {
+        return self::fromSurface($renderer, Surface::fromImage($image));
+    }
+
+    /**
+     * @param RendererInterface $renderer
      * @param string $pathname
      * @return $this
      */
@@ -112,7 +129,12 @@ class Texture extends Native
 
         $texture = $sdl->SDL_CreateTextureFromSurface($renderer->getPointer(), $surface->getPointer());
 
-        return new static($texture, $surface->getClipRect());
+        $instance = new static($texture, $surface->getClipRect());
+
+        self::$surfaces ??= new \WeakMap();
+        self::$surfaces[$instance] = $surface;
+
+        return $instance;
     }
 
     /**

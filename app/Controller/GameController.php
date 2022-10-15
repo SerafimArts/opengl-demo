@@ -48,11 +48,6 @@ class GameController
     private Overlay $overlay;
 
     /**
-     * @var float
-     */
-    private float $size = 0;
-
-    /**
      * @var CameraInterface
      */
     private CameraInterface $camera;

@@ -1,5 +1,5 @@
 {
-    "name": "local/binaries",
+    "name": "local/binaries-downloader",
     "type": "composer-plugin",
     "require": {
         "php": "^8.1",
@@ -7,7 +7,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Local\\Binaries\\": "src"
+            "Local\\BinariesDownloader\\": "src"
         }
     },
     "require-dev": {
@@ -16,7 +16,7 @@
         "symfony/var-dumper": "^5.4|^6.0"
     },
     "extra": {
-        "class": "Local\\Binaries\\Plugin",
+        "class": "Local\\BinariesDownloader\\Plugin",
         "branch-alias": {
             "dev-master": "1.0.x-dev",
             "dev-main": "1.0.x-dev"

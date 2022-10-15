@@ -19,5 +19,6 @@ return [
         \App\Providers\WindowServiceProvider::class,
         \App\Providers\RendererServiceProvider::class,
         \App\Providers\ViewportServiceProvider::class,
+        \App\Providers\ImageServiceProvider::class,
     ],
 ];

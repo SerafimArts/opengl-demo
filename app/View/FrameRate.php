@@ -63,7 +63,7 @@ class FrameRate extends View
         $this->ttf = TTF::getInstance();
         $this->font = $this->ttf->open(
             $game->app->resourcesPath('bender.ttf'),
-            (int)$game->viewport->y(12)
+            32
         );
 
         $this->ttf->setHinting($this->font, Hinting::TTF_HINTING_MONO);

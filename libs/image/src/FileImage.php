@@ -51,6 +51,14 @@ final class FileImage implements FileImageInterface
     /**
      * {@inheritDoc}
      */
+    public function getBytes(): int
+    {
+        return $this->icon->getBytes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getPathname(): string
     {
         return $this->pathname;
