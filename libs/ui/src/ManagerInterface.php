@@ -11,7 +11,7 @@ use Bic\UI\Window\WindowInterface;
  *
  * @template-extends \Traversable<array-key, TWindow>
  */
-interface ManagerInterface extends RunnableInterface, \Traversable, \Countable
+interface ManagerInterface extends \Traversable, \Countable
 {
     /**
      * @param TWindow $window
@@ -19,4 +19,9 @@ interface ManagerInterface extends RunnableInterface, \Traversable, \Countable
      * @return void
      */
     public function detach(WindowInterface $window): void;
+
+    /**
+     * @return void
+     */
+    public function run(): void;
 }

@@ -626,4 +626,5 @@ extern SDL_Window* SDL_CreateWindow(const char* title, int x, int y, int w, int 
 extern void SDL_ShowWindow(SDL_Window * window);
 extern void SDL_HideWindow(SDL_Window * window);
 extern void SDL_DestroyWindow(SDL_Window* window);
+extern Uint32 SDL_GetWindowID(SDL_Window* window);
 extern int SDL_GetWindowWMInfo(SDL_Window * window, SDL_SysWMinfo * info);

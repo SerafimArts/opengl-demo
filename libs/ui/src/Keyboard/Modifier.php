@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Bic\UI\Keyboard;
 
-/**
- * @psalm-type KeyModifierFlag = Modifier::*
- * @psalm-type KeyModifierFlags = int-mask-of<Modifier::*>
- */
 interface Modifier
 {
     public const NONE     = 0x0000;
@@ -27,5 +23,4 @@ interface Modifier
     public const SHIFT    = self::LSHIFT | self::RSHIFT;
     public const ALT      = self::LALT | self::RALT;
     public const GUI      = self::LGUI | self::RGUI;
-    public const RESERVED = self::SCROLL;
 }

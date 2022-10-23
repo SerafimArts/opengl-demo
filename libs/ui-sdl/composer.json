@@ -15,9 +15,13 @@
         }
     },
     "require-dev": {
-        "ffi-headers/sdl2-headers": "^1.0",
-        "jetbrains/phpstorm-attributes": "^1.0",
-        "symfony/var-dumper": "^5.4|^6.0"
+        "symfony/var-dumper": "^5.4|^6.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bic\\UI\\SDL\\Tests\\": "tests"
+        }
     },
     "extra": {
         "branch-alias": {

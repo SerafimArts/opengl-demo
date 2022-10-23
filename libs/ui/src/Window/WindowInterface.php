@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Bic\UI\Window;
 
 use Bic\UI\Position;
-use Bic\UI\RunnableInterface;
 use Bic\UI\Size;
 
-interface WindowInterface extends RunnableInterface
+interface WindowInterface
 {
     /**
      * Returns the title of the window in UTF-8 format or "" if there is no title.

@@ -10,7 +10,7 @@ namespace Bic\UI;
  * @property-read int $x
  * @property-read int $y
  */
-final class Position
+class Position
 {
     public function __construct(
         public int $x = 0,

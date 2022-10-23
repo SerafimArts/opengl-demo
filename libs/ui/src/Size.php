@@ -10,7 +10,7 @@ namespace Bic\UI;
  * @property-read int $width
  * @property-read int $height
  */
-final class Size
+class Size
 {
     /**
      * @psalm-param positive-int|0 $width
