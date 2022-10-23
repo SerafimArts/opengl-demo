@@ -1,12 +1,12 @@
 {
-    "name": "bic-engine/timer",
+    "name": "bic-engine/renderer",
     "type": "library",
     "require": {
         "php": "^8.1"
     },
     "autoload": {
         "psr-4": {
-            "Bic\\Timer\\": "src"
+            "Bic\\Renderer\\": "src"
         }
     },
     "require-dev": {
@@ -15,7 +15,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Bic\\Timer\\Tests\\": "tests"
+            "Bic\\Renderer\\Tests\\": "tests"
         }
     },
     "extra": {

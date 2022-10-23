@@ -18,7 +18,7 @@
         </include>
     </coverage>
     <testsuites>
-        <testsuite name="Unit Tests">
+        <testsuite name="Libraries Tests">
             <directory suffix="TestCase.php">libs/**/tests</directory>
         </testsuite>
     </testsuites>

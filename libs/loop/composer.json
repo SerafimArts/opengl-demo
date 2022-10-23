@@ -1,13 +1,16 @@
 {
-    "name": "bic-engine/timer",
-    "type": "library",
+    "name": "bic-engine/loop",
+    "license": "MIT",
     "require": {
         "php": "^8.1"
     },
     "autoload": {
         "psr-4": {
-            "Bic\\Timer\\": "src"
-        }
+            "Bic\\Loop\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "require-dev": {
         "symfony/var-dumper": "^5.4|^6.0",
@@ -15,7 +18,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Bic\\Timer\\Tests\\": "tests"
+            "Bic\\Loop\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -23,6 +26,11 @@
             "dev-master": "1.0.x-dev",
             "dev-main": "1.0.x-dev"
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform-check": true,
+        "optimize-autoloader": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -12,7 +12,6 @@
     },
     "require-dev": {
         "composer/composer": "^2.0",
-        "jetbrains/phpstorm-attributes": "^1.0",
         "symfony/var-dumper": "^5.4|^6.0"
     },
     "extra": {

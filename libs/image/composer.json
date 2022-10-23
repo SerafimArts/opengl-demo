@@ -10,8 +10,8 @@
         }
     },
     "require-dev": {
-        "jetbrains/phpstorm-attributes": "^1.0",
-        "symfony/var-dumper": "^5.4|^6.0"
+        "symfony/var-dumper": "^5.4|^6.0",
+        "phpunit/phpunit": "^9.5"
     },
     "extra": {
         "branch-alias": {
