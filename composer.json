@@ -1,5 +1,7 @@
 {
     "name": "serafim/opengl-demo",
+    "description": "Simple PHP Game Demo (using OpenGL/DX/Vulkan over SDL)",
+    "license": "MIT",
     "repositories": [
         {"type": "path", "url": "engine"},
         {"type": "path", "url": "libs/binaries-downloader"},
