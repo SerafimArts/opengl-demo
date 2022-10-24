@@ -177,8 +177,6 @@ jobs:
           tools: pecl
           ini-values: "memory_limit=-1"
           extensions: phar, ffi
-      - name: Update Composer
-        run: composer self-update
       - name: Validate Composer
         run: composer validate
       - name: Get Composer Cache Directory
