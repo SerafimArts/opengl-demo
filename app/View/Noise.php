@@ -15,7 +15,7 @@ class Noise extends View
     /**
      * @var float
      */
-    public float $opacity = 70;
+    public float $opacity = 80;
 
     /**
      * @var array
@@ -64,7 +64,6 @@ class Noise extends View
         $current->alpha($this->opacity);
 
         $source = $transform->getSource();
-
 
         $current->destination->x = 0;
         do {

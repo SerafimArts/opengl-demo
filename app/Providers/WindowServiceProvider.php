@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Bic\UI\Factory as UIFactory;
 use Bic\UI\FactoryInterface;
 use Bic\UI\ManagerInterface;
 use Bic\UI\SDL\Factory;
 use Bic\UI\SDL\Window;
 use Bic\UI\Size;
 use Bic\UI\Window\CreateInfo;
+use Bic\UI\Window\Mode;
 use Bic\UI\Window\WindowInterface;
 use Illuminate\Container\Container;
 use Serafim\Bic\Application\ServiceProvider;
@@ -29,7 +29,6 @@ class WindowServiceProvider extends ServiceProvider
             return Factory::fromLibrary($instance->info->bin);
         });
 
-        $this->app->alias(Factory::class, UIFactory::class);
         $this->app->alias(Factory::class, FactoryInterface::class);
         $this->app->alias(Factory::class, ManagerInterface::class);
 
@@ -43,7 +42,8 @@ class WindowServiceProvider extends ServiceProvider
                 size: new Size(
                     width: $this->config('window.width', 800),
                     height: $this->config('window.height', 600),
-                )
+                ),
+                mode: $this->config('window.mode', Mode::DESKTOP_FULLSCREEN)
             ));
         });
 

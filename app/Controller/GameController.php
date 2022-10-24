@@ -8,8 +8,10 @@ use App\Game;
 use App\View\FrameRate;
 use App\View\Noise;
 use App\View\Overlay;
+use Bic\UI\Keyboard\Key;
 use FFI\CData;
 use Serafim\Bic\Lifecycle\Annotation\OnEvent;
+use Serafim\Bic\Lifecycle\Annotation\OnKeyDown;
 use Serafim\Bic\Lifecycle\Annotation\OnMouseMove;
 use Serafim\Bic\Lifecycle\Annotation\OnMouseWheel;
 use Serafim\Bic\Lifecycle\Annotation\OnRender;
@@ -117,6 +119,12 @@ class GameController
     public function onDrop(): void
     {
         $this->drag = null;
+    }
+
+    #[OnKeyDown(key: Key::ESCAPE)]
+    public function onCloseApplication(): void
+    {
+        exit;
     }
 
     /**

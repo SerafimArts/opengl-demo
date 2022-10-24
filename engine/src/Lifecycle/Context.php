@@ -228,7 +228,7 @@ class Context
             case OnKeyDown::class:
             case OnKeyUp::class:
                 /** @var $attr OnKeyDown */
-                if ($attr->code === null || $attr->code === $event->key->keysym->scancode) {
+                if ($attr->key === null || $attr->key->getId() === $event->key->keysym->scancode) {
                     return $event->key;
                 }
 

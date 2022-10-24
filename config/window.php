@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Serafim\SDL\Kernel\Video\WindowFlags;
-
 return [
 
     /*
@@ -39,4 +37,14 @@ return [
     */
 
     'height' => (int)env('WINDOW_HEIGHT', 1080),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Window Mode
+    |--------------------------------------------------------------------------
+    |
+    | TODO
+    |
+    */
+    'mode' => \Bic\UI\Window\Mode::FULLSCREEN
 ];
