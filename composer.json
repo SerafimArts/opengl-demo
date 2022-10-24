@@ -37,7 +37,7 @@
         }
     },
     "require-dev": {
-        "phpbench/phpbench": "^1.2",
+        "squizlabs/php_codesniffer": "^3.7",
         "phpunit/phpunit": "^9.5",
         "composer/composer": "^2.0",
         "vimeo/psalm": "^4.28",
