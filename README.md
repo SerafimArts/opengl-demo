@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/serafim/opengl-demo/actions"><img src="https://github.com/serafim/opengl-demo/workflows/build/badge.svg"></a>
+    <a href="https://github.com/SerafimArts/opengl-demo/actions"><img src="https://github.com/SerafimArts/opengl-demo/workflows/build/badge.svg"></a>
 </p>
 
 Please note that this is only a demo and may contain non-optimal, crazy and
