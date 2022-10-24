@@ -208,8 +208,12 @@ final class Mat4 implements \Stringable, \ArrayAccess, \IteratorAggregate
      * @param float $far
      * @return static
      */
-    public static function perspective(float $fov = 45., float $aspect = 16/9, float $near = .1, float $far = 100.): self
-    {
+    public static function perspective(
+        float $fov = 45.,
+        float $aspect = 16 / 9,
+        float $near = .1,
+        float $far = 100.
+    ): self {
         $f = 1.0 / \tan($fov / 2.0);
 
         return new self([

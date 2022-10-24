@@ -17,7 +17,7 @@ final class FFICTypeCaster extends FFICaster
     {
         $stub->class = $type->getName();
 
-        return match(true) {
+        return match (true) {
             self::isScalar($type),
             self::isEnum($type) => [],
             self::isPointer($type) => [Caster::PREFIX_VIRTUAL . '0' => $type->getPointerType()],

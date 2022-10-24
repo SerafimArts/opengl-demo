@@ -40,7 +40,7 @@ final class FFICDataCaster extends FFICaster
     {
         $result = [];
 
-        for($i = 0, $size = $type->getArrayLength(); $i < $size; ++$i) {
+        for ($i = 0, $size = $type->getArrayLength(); $i < $size; ++$i) {
             $result[] = $data[$i];
         }
 

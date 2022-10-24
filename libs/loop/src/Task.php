@@ -125,7 +125,10 @@ final class Task
      * @template TStart
      * @template TReturn
      *
-     * @param \Fiber<TStart,mixed,TReturn,mixed>|\Generator<array-key,mixed,TReturn,mixed>|callable(TStart):TReturn $task
+     * @psalm-param ( \Fiber<TStart, mixed, TReturn, mixed>
+     *              | \Generator<array-key, mixed, TReturn, mixed>
+     *              | callable(TStart):TReturn
+     *              ) $task
      * @param TStart ...$args
      * @return TReturn
      * @throws \Throwable
@@ -139,7 +142,8 @@ final class Task
                 $coroutine->send(\Fiber::suspend($coroutine->current()));
             }
         } else {
-            foreach ($coroutine as $_);
+            foreach ($coroutine as $_) {
+            }
         }
 
         return $coroutine->getReturn();

@@ -21,22 +21,25 @@ final class Converter implements ConverterInterface
         // size of image data (in bytes): WIDTH * HEIGHT * BYTES
         $length = $image->getWidth() * $image->getHeight() * $shift;
 
-        $inputData  = $image->getContents();
-        $outputData = '';
+        // Input raw (bytes) data payload
+        $idata  = $image->getContents();
+
+        // Output raw (bytes) data payload
+        $odata = '';
 
         for ($offset = 0; $offset < $length; $offset += $shift) {
             // Pixel in RGBA input
             $pixel = match ($input) {
-                Format::R8G8B8 => $inputData[$offset] . $inputData[$offset + 1] . $inputData[$offset + 2] . "\x00",
-                Format::B8G8R8 => $inputData[$offset + 2] . $inputData[$offset + 1] . $inputData[$offset] . "\x00",
-                Format::R8G8B8A8 => $inputData[$offset] . $inputData[$offset + 1] . $inputData[$offset + 2] . $inputData[$offset + 3],
-                Format::B8G8R8A8 => $inputData[$offset + 2] . $inputData[$offset + 1] . $inputData[$offset] . $inputData[$offset + 3],
-                Format::A8B8G8R8 => $inputData[$offset + 3] . $inputData[$offset + 2] . $inputData[$offset + 1] . $inputData[$offset],
+                Format::R8G8B8 => $idata[$offset] . $idata[$offset + 1] . $idata[$offset + 2] . "\x00",
+                Format::B8G8R8 => $idata[$offset + 2] . $idata[$offset + 1] . $idata[$offset] . "\x00",
+                Format::R8G8B8A8 => $idata[$offset] . $idata[$offset + 1] . $idata[$offset + 2] . $idata[$offset + 3],
+                Format::B8G8R8A8 => $idata[$offset + 2] . $idata[$offset + 1] . $idata[$offset] . $idata[$offset + 3],
+                Format::A8B8G8R8 => $idata[$offset + 3] . $idata[$offset + 2] . $idata[$offset + 1] . $idata[$offset],
                 default => throw new \LogicException('Unsupported input ' . $input->name),
             };
 
             // RGBA to output input
-            $outputData .= match ($output) {
+            $odata .= match ($output) {
                 Format::R8G8B8 => $pixel[0] . $pixel[1] . $pixel[2],
                 Format::B8G8R8 => $pixel[2] . $pixel[1] . $pixel[0],
                 Format::R8G8B8A8 => $pixel,
@@ -45,6 +48,6 @@ final class Converter implements ConverterInterface
             };
         }
 
-        return new Image($output, $image->getWidth(), $image->getHeight(), $outputData);
+        return new Image($output, $image->getWidth(), $image->getHeight(), $odata);
     }
 }

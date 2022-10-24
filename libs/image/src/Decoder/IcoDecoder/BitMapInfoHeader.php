@@ -70,9 +70,11 @@ final class BitMapInfoHeader
      * @param positive-int $clrImportant Specifies the number of color indices that are considered important for
      *                                   displaying the bitmap. If this value is zero, all colors are important.
      *
-     * - FOURCC: @link https://learn.microsoft.com/en-us/windows/win32/directshow/fourcc-codes
-     * - Compression Types: @link https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-wmf/4e588f70-bd92-4a6f-b77f-35d0feaf7a57
+     * @codingStandardsIgnoreStart
+     * - FOURCC:               @link https://learn.microsoft.com/en-us/windows/win32/directshow/fourcc-codes
+     * - Compression Types:    @link https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-wmf/4e588f70-bd92-4a6f-b77f-35d0feaf7a57
      * - AM_MEDIA_TYPE struct: @link https://learn.microsoft.com/en-us/windows/win32/api/strmif/ns-strmif-am_media_type
+     * @codingStandardsIgnoreEnd
      */
     public function __construct(
         public readonly int $size,

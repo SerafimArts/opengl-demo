@@ -30,7 +30,7 @@ class Loader
      */
     public function load(Data $data): LoadingInterface
     {
-        return Loading::fromClosure(function() use ($data) {
+        return Loading::fromClosure(function () use ($data) {
             $progress = $this->progress($data);
 
             foreach ($progress as $name => $item) {

@@ -36,7 +36,7 @@ class RendererServiceProvider extends ServiceProvider
     {
         $flags = $this->config('renderer.flags', 0);
 
-        return new Renderer($window, $this->getDriver(), $flags,);
+        return new Renderer($window, $this->getDriver(), $flags);
     }
 
     /**

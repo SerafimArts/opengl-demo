@@ -41,7 +41,7 @@ function mat4(array $points = null): Mat4
  * @param float $far
  * @return Mat4
  */
-function perspective(float $fov = 45., float $aspect = 16/9, float $near = .1, float $far = 100.): Mat4
+function perspective(float $fov = 45., float $aspect = 16 / 9, float $near = .1, float $far = 100.): Mat4
 {
     return Mat4::perspective($fov, $aspect, $near, $far);
 }

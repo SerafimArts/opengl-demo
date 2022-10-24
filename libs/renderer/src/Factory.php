@@ -61,7 +61,7 @@ final class Factory implements FactoryInterface
         $handle = $window->getHandle();
 
         // TODO Can throw exceptions (like 0xC000041D)
-        return match(true) {
+        return match (true) {
             $handle instanceof Win32Handle => $this->ffi->SDL_CreateWindowFrom($handle->window),
             $handle instanceof XLibHandle => $this->ffi->SDL_CreateWindowFrom($handle->window),
             $handle instanceof WaylandHandle => $this->ffi->SDL_CreateWindowFrom($handle->surface),

@@ -168,4 +168,3 @@ class Vec3 extends Vector
         return \sprintf('vec3(%F, %F, %F)', $this->x, $this->y, $this->z);
     }
 }
-
