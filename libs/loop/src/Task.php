@@ -13,24 +13,19 @@ final class Task
      */
     public static function all(\Fiber|\Generator|callable ...$tasks): \Generator
     {
-        $fibers = self::toFibers($tasks);
-        $result = [];
+        $result = $coroutines = [];
 
-        while ($fibers !== []) {
-            /** @var \Fiber $task */
-            foreach ($fibers as $index => $task) {
-                switch (false) {
-                    case $task->isStarted():
-                        yield $task->start();
-                        break;
+        foreach ($tasks as $task) {
+            $coroutines[] = self::toCoroutine($task);
+        }
 
-                    case $task->isTerminated():
-                        yield $task->resume();
-                        break;
-
-                    default:
-                        $result[$index] = $task->getReturn();
-                        unset($fibers[$index]);
+        while ($coroutines !== []) {
+            /** @var \Generator $coroutine */
+            foreach ($coroutines as $index => $coroutine) {
+                if ($coroutine->valid()) {
+                    $coroutine->send(yield $coroutine->key() => $coroutine->current());
+                } else {
+                    $result[$index] = $coroutine->getReturn();
                 }
             }
         }
@@ -38,87 +33,90 @@ final class Task
         return $result;
     }
 
-    /**
-     * @param iterable<\Fiber|\Generator|callable> $tasks
-     * @return array<\Fiber>
-     */
-    private static function toFibers(iterable $tasks): array
+    private static function toCoroutine(\Fiber|\Generator|callable $task, mixed ...$args): \Generator
     {
-        $fibers = [];
-
-        foreach ($tasks as $task) {
-            $fibers[] = match (true) {
-                $task instanceof \Fiber => $task,
-                $task instanceof \Generator => self::toFiber($task),
-                default => new \Fiber($task),
-            };
-        }
-
-        return $fibers;
-    }
-
-    /**
-     * @param \Generator $coroutine
-     * @return \Fiber
-     */
-    public static function toFiber(\Generator $coroutine): \Fiber
-    {
-        return new \Fiber(static function () use ($coroutine): mixed {
-            while ($coroutine->valid()) {
-                \Fiber::suspend($coroutine->current());
-            }
-
-            return $coroutine->getReturn();
-        });
-    }
-
-    /**
-     * @template TReturn
-     *
-     * @psalm-param non-empty-list<\Fiber<null, null, TReturn, null>> $tasks
-     * @param iterable<\Fiber> $tasks
-     * @return TReturn
-     * @throws \Throwable
-     */
-    public static function any(iterable $tasks): mixed
-    {
-        $tasks = [...$tasks];
-
-        while (true) {
-            /** @var \Fiber $task */
-            foreach ($tasks as $task) {
-                switch (false) {
-                    case $task->isStarted():
-                        $task->start();
-                        break;
-
-                    case $task->isTerminated():
-                        $task->resume();
-                        break;
-
-                    default:
-                        return $task->getReturn();
-                }
-            }
-        }
+        return match (true) {
+            $task instanceof \Generator => $task,
+            $task instanceof \Fiber => self::fiberToCoroutine($task),
+            default => self::callableToCoroutine($task),
+        };
     }
 
     /**
      * @template TStart
      * @template TReturn
      *
-     * @param callable(...TStart):TReturn $task
+     * @param callable(TStart):TReturn $fn
      * @param TStart ...$args
-     * @return \Fiber<TStart, mixed, TReturn, mixed>
+     * @return \Generator<array-key, mixed, TReturn, mixed>
      * @throws \Throwable
      */
+    public static function callableToCoroutine(callable $fn, mixed ...$args): \Generator
+    {
+        return self::fiberToCoroutine(new \Fiber($fn), ...$args);
+    }
+
+    /**
+     * @template TStart
+     * @template TResume
+     * @template TReturn
+     * @template TSuspend
+     *
+     * @param \Fiber<TStart, TResume, TReturn, TSuspend> $fiber
+     * @param TStart ...$args
+     * @return \Generator<array-key, TResume, TReturn, TSuspend>
+     * @throws \Throwable
+     */
+    public static function fiberToCoroutine(\Fiber $fiber, mixed ...$args): \Generator
+    {
+        $index = -1; // Note: Pre-increment is faster than post-increment.
+        $value = null;
+
+        // Allow an already running fiber.
+        if (!$fiber->isStarted()) {
+            $value = $fiber->start(...$args);
+
+            if (!$fiber->isTerminated()) {
+                $value = yield ++$index => $value;
+            }
+        }
+
+        // A Fiber without suspends should return the result immediately.
+        if (!$fiber->isTerminated()) {
+            while (true) {
+                $value = $fiber->resume($value);
+
+                // The last call to "resume()" moves the execution of the
+                // Fiber to the "return" stmt.
+                //
+                // So the "yield" is not needed. Skip this step and return
+                // the result.
+                if ($fiber->isTerminated()) {
+                    break;
+                }
+
+                $value = yield ++$index => $value;
+            }
+        }
+
+        return $fiber->getReturn();
+    }
+
+    public static function coroutineToFiber(\Generator $task): \Fiber
+    {
+        return new \Fiber(function () use ($task) {
+            while ($task->valid()) {
+                $task->send(\Fiber::suspend($task->current()));
+            }
+
+            return $task->getReturn();
+        });
+    }
+
     public static function async(callable $task, mixed ...$args): \Fiber
     {
         $fiber = new \Fiber($task);
-
-        if (!$fiber->isStarted()) {
-            $fiber->start(...$args);
-        }
+        $fiber->start(...$args);
 
         return $fiber;
     }
@@ -127,23 +125,23 @@ final class Task
      * @template TStart
      * @template TReturn
      *
-     * @param \Fiber<TStart, mixed, TReturn, mixed>|callable(...TStart):TReturn $task
+     * @param \Fiber<TStart,mixed,TReturn,mixed>|\Generator<array-key,mixed,TReturn,mixed>|callable(TStart):TReturn $task
      * @param TStart ...$args
      * @return TReturn
      * @throws \Throwable
      */
-    public static function wait(\Fiber|callable $task, mixed ...$args): mixed
+    public static function await(\Fiber|\Generator|callable $task, mixed ...$args): mixed
     {
-        $task = $task instanceof \Fiber ? $task : new \Fiber($task);
+        $coroutine = self::toCoroutine($task, ...$args);
 
-        if (!$task->isStarted()) {
-            $task->start(...$args);
+        if (\Fiber::getCurrent()) {
+            while ($coroutine->valid()) {
+                $coroutine->send(\Fiber::suspend($coroutine->current()));
+            }
+        } else {
+            foreach ($coroutine as $_);
         }
 
-        while (!$task->isTerminated()) {
-            $task->resume();
-        }
-
-        return $task->getReturn();
+        return $coroutine->getReturn();
     }
 }
