@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bic\Loop\Tests;
+namespace Bic\Async\Tests;
 
-use Bic\Loop\Task;
+use Bic\Async\Task;
 
 class TaskTestCase extends TestCase
 {
@@ -19,7 +19,7 @@ class TaskTestCase extends TestCase
         // List of outer iterator values (coroutine sent values)
         $expectedSend = $this->randomArrayValues();
 
-        $actual = Task::fiberToCoroutine(new \Fiber(static function () use ($expectedGiven) {
+        $actual = Task::toCoroutine(new \Fiber(static function () use ($expectedGiven) {
             $result = [];
 
             foreach ($expectedGiven as $value) {
@@ -54,29 +54,10 @@ class TaskTestCase extends TestCase
      */
     public function testFiberToCoroutineWithoutSteps(): void
     {
-        $coroutine = Task::fiberToCoroutine(new \Fiber(static fn(): int => 0xDEAD_BEEF));
+        $coroutine = Task::toCoroutine(new \Fiber(static fn(): int => 0xDEAD_BEEF));
 
         $this->assertFalse($coroutine->valid());
         $this->assertSame(0xDEAD_BEEF, $coroutine->getReturn());
-    }
-
-    public function testCoroutineToFiber(): void
-    {
-        $actual = Task::coroutineToFiber((function () {
-            yield 1;
-            yield 2;
-            yield 3;
-
-            return 0xDEAD_BEEF;
-        })());
-
-        $this->assertSame(1, $actual->start());
-        $this->assertSame(2, $actual->resume());
-        $this->assertSame(3, $actual->resume());
-
-        $actual->resume(); // GOTO return stmt
-
-        $this->assertSame(0xDEAD_BEEF, $actual->getReturn());
     }
 
     /**
@@ -107,53 +88,47 @@ class TaskTestCase extends TestCase
         $this->assertSame($expected, $async->getReturn());
     }
 
-    public function testGeneratorAwaiting(): void
+    public function testAllTasks(): void
     {
-        $generator = (static function(): \Generator {
-            yield 1;
-            yield 2;
-            yield 3;
+        $a = function () { \Fiber::suspend(1); \Fiber::suspend(3); return 0xDEAD_BEEF; };
+        $b = function () { \Fiber::suspend(2); return 0xFEED_FACE; };
 
-            return 0xDEAD_BEEF;
-        })();
-
-        $this->assertSame(0xDEAD_BEEF, Task::await($generator));
+        $this->assertSame([0xDEAD_BEEF, 0xFEED_FACE], Task::all($a, $b));
     }
 
-    public function testSyncFunctionAwaiting(): void
+    public function testAllTasksInterception(): void
     {
-        $function = static function(): int {
+        $a = function () {
+            \Fiber::suspend(10);
+            \Fiber::suspend(11);
+            \Fiber::suspend(12);
+
             return 0xDEAD_BEEF;
         };
 
-        $this->assertSame(0xDEAD_BEEF, Task::await($function));
-    }
+        $b = function () {
+            \Fiber::suspend(20);
 
-    public function testFiberAwaiting(): void
-    {
-        $fiber = new \Fiber(static function () {
-            \Fiber::suspend(1);
-            \Fiber::suspend(2);
-            \Fiber::suspend(3);
+            return 0xFEED_FACE;
+        };
 
-            return 0xDEAD_BEEF;
-        });
+        $all = new \Fiber(Task::all(...));
 
-        $this->assertSame(0xDEAD_BEEF, Task::await($fiber));
-    }
+        // Execute fiber and suspend with int(10) (firest fiber)
+        $this->assertSame(10, $all->start($a, $b));
 
-    public function testAwaitingInterception(): void
-    {
-        $task = Task::async(static function () {
-            $a = Task::await(static fn() => \Fiber::suspend());
-            $b = Task::await(static fn() => \Fiber::suspend());
+        // Suspend fiber with int(20) (second fiber)
+        $this->assertSame(20, $all->resume());
 
-            return $a + $b;
-        });
+        // Suspend fiber with int(11) (first fiber)
+        $this->assertSame(11, $all->resume());
 
-        $task->resume(0xDEAD_BEEF);
-        $task->resume(0xFEED_FACE);
+        // Suspend fiber with int(12) (first fiber)
+        $this->assertSame(12, $all->resume());
 
-        $this->assertSame(0xDEAD_BEEF + 0xFEED_FACE, $task->getReturn());
+        // Resume fiber and go to return
+        $this->assertSame(null, $all->resume());
+
+        $this->assertSame([0xDEAD_BEEF, 0xFEED_FACE], $all->getReturn());
     }
 }

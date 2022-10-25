@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Loop\Tests;
+namespace Bic\Async\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

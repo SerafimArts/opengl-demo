@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f3f758907c23c8f7192b055a4db681f",
+    "content-hash": "bcfacc58a36a6037d2f85280c7e5b2d0",
     "packages": [
+        {
+            "name": "bic-engine/async",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "libs/async",
+                "reference": "0754eadf312a7f36a2a1f1c2efcbaad626c83392"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "symfony/var-dumper": "^5.4|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bic\\Async\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bic\\Async\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "bic-engine/image",
             "version": "dev-master",
@@ -85,48 +127,6 @@
             }
         },
         {
-            "name": "bic-engine/loop",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "libs/loop",
-                "reference": "19fc6a80292cf01feadb7f5acfc659af5605b356"
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "symfony/var-dumper": "^5.4|^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev",
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bic\\Loop\\": "src"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Bic\\Loop\\Tests\\": "tests"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "bic-engine/math",
             "version": "dev-master",
             "dist": {
@@ -195,6 +195,43 @@
             "autoload-dev": {
                 "psr-4": {
                     "Bic\\Renderer\\Tests\\": "tests"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "bic-engine/renderer-sdl",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "libs/renderer-sdl",
+                "reference": "e32f9b4961eeae822c682517af6199d9fd7b7485"
+            },
+            "require": {
+                "bic-engine/renderer": "^1.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "symfony/var-dumper": "^5.4|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bic\\Renderer\\SDL\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bic\\Renderer\\SDL\\Tests\\": "tests"
                 }
             },
             "transport-options": {
