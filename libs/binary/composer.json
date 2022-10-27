@@ -1,18 +1,22 @@
 {
-    "name": "bic-engine/image",
+    "name": "bic-engine/binary",
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "bic-engine/binary": "^1.0"
+        "php": "^8.1"
     },
     "autoload": {
         "psr-4": {
-            "Bic\\Image\\": "src"
+            "Bic\\Binary\\": "src"
         }
     },
     "require-dev": {
         "symfony/var-dumper": "^5.4|^6.0",
         "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bic\\Binary\\Tests\\": "tests"
+        }
     },
     "extra": {
         "branch-alias": {

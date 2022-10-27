@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Decoder\IcoDecoder;
+namespace Bic\Image\Ico\Internal;
+
+use Bic\Image\Ico\Internal\Compression;
 
 /**
  * The BITMAPINFOHEADER structure contains information about the dimensions and
@@ -16,7 +18,7 @@ namespace Bic\Image\Decoder\IcoDecoder;
  * @link https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader
  *
  * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal Bic\Image\Decoder
+ * @psalm-internal Bic\Image\Ico
  */
 final class BitMapInfoHeader
 {

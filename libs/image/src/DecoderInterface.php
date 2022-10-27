@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Decoder;
+namespace Bic\Image;
 
-use Bic\Image\Binary\StreamInterface;
-use Bic\Image\ImageInterface;
+use Bic\Binary\StreamInterface;
 
 interface DecoderInterface
 {

@@ -2,17 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Binary;
+namespace Bic\Binary;
 
-use Bic\Image\Exception\FileNotFoundException;
-use Bic\Image\Exception\NonLocalFileException;
-use Bic\Image\Exception\NonReadableException;
-use Bic\Image\Exception\StreamException;
+use Bic\Binary\Exception\FileNotFoundException;
+use Bic\Binary\Exception\NonLocalFileException;
+use Bic\Binary\Exception\NonReadableException;
+use Bic\Binary\Exception\StreamException;
 
-/**
- * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal Bic\Image
- */
 class FileStream extends ResourceStream
 {
     /**

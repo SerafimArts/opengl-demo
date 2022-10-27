@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Exception;
+namespace Bic\Binary\Exception;
 
 class NonReadableException extends StreamException
 {

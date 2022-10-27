@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Decoder;
+namespace Bic\Image\Ico;
 
-use Bic\Image\Decoder\IcoDecoder\BitMapInfoHeader;
-use Bic\Image\Decoder\IcoDecoder\Compression;
-use Bic\Image\Decoder\IcoDecoder\IcoDirectory;
+use Bic\Binary\Endianness;
+use Bic\Binary\StreamInterface;
+use Bic\Binary\TypedStream;
+use Bic\Image\Ico\Internal\BitMapInfoHeader;
+use Bic\Image\Ico\Internal\Compression;
+use Bic\Image\Ico\Internal\IcoDirectory;
+use Bic\Image\DecoderInterface;
 use Bic\Image\Format;
 use Bic\Image\Image;
-use Bic\Image\Binary\Endianness;
-use Bic\Image\Binary\StreamInterface;
-use Bic\Image\Binary\TypedStream;
+use Bic\Image\ImageInterface;
 
 final class IcoDecoder implements DecoderInterface
 {
@@ -21,14 +23,21 @@ final class IcoDecoder implements DecoderInterface
     public function decode(StreamInterface $stream): ?iterable
     {
         if ($stream->read(4) === "\x00\x00\x01\x00") {
-            return $this->read(new TypedStream($stream, Endianness::LITTLE));
+            return $this->read($stream);
         }
 
         return null;
     }
 
-    private function read(TypedStream $stream): iterable
+    /**
+     * @param StreamInterface $stream
+     *
+     * @return iterable<ImageInterface>
+     */
+    private function read(StreamInterface $stream): iterable
     {
+        $stream = new TypedStream($stream, Endianness::LITTLE);
+
         /** @var array<IcoDirectory> $directories */
         $directories = [];
 

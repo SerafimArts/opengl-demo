@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Bic\Image;
 
-use Bic\Image\Binary\FileStream;
+use Bic\Binary\FileStream;
 use Bic\Image\Exception\ImageException;
-use Bic\Image\Exception\InvalidArgumentException;
-use Bic\Image\Decoder\DecoderInterface;
-use Bic\Image\Decoder\IcoDecoder;
 
 class Factory implements FactoryInterface
 {
@@ -22,7 +19,7 @@ class Factory implements FactoryInterface
      */
     public function __construct(iterable $decoders = null)
     {
-        foreach ($decoders ?? $this->getDefaultDecoders() as $decoder) {
+        foreach ($decoders ?? [] as $decoder) {
             $this->extend($decoder);
         }
     }
@@ -36,18 +33,7 @@ class Factory implements FactoryInterface
     }
 
     /**
-     * @return non-empty-list<DecoderInterface>
-     */
-    private function getDefaultDecoders(): iterable
-    {
-        yield new IcoDecoder();
-    }
-
-    /**
      * {@inheritDoc}
-     *
-     * @throws ImageException
-     * @throws InvalidArgumentException
      */
     public function fromPathname(string $pathname): iterable
     {

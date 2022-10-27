@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Decoder\IcoDecoder;
+namespace Bic\Image\Ico\Internal;
 
 /**
  * @link https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-wmf/4e588f70-bd92-4a6f-b77f-35d0feaf7a57
  *
  * @internal This is an internal library enum, please do not use it in your code.
- * @psalm-internal Bic\Image\Decoder
+ * @psalm-internal Bic\Image\Ico
  */
 enum Compression: int
 {

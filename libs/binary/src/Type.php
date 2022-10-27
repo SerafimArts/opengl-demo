@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Binary;
+namespace Bic\Binary;
 
 enum Type
 {

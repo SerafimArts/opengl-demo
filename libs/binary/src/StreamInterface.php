@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Binary;
+namespace Bic\Binary;
 
-/**
- * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal Bic\Image
- */
 interface StreamInterface
 {
     /**

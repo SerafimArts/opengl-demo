@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Bic\Image\Decoder\IcoDecoder;
+namespace Bic\Image\Ico\Internal;
 
 /**
  * Icon Entry info (16 bytes)
  *
  * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal Bic\Image\Decoder
+ * @psalm-internal Bic\Image\Ico
  */
 final class IcoDirectory
 {

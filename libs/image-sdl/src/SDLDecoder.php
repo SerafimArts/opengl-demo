@@ -6,7 +6,7 @@ namespace Bic\Image\SDL;
 
 use Bic\Image\Binary\Endianness;
 use Bic\Image\Binary\StreamInterface;
-use Bic\Image\Decoder\DecoderInterface;
+use Bic\Image\DecoderInterface;
 use Bic\Image\Format;
 use Bic\Image\Image;
 use Bic\Image\SDL\Kernel\PixelFormat;
