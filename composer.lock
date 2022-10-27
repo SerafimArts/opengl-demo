@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e7f9ab37d54e18077e0e9b6c1f41b69",
+    "content-hash": "df6f3218eefa27c1a55805e4958efc80",
     "packages": [
         {
             "name": "bic-engine/async",
@@ -51,18 +51,26 @@
         {
             "name": "bic-engine/binary",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BicEngine/Binary.git",
+                "reference": "cd6f77333e93ca62e979e4b70d1bbc6115f46048"
+            },
             "dist": {
-                "type": "path",
-                "url": "libs/binary",
-                "reference": "fb77ba299fcc921699b0ceae3d03b6e6b7c819dc"
+                "type": "zip",
+                "url": "https://api.github.com/repos/BicEngine/Binary/zipball/cd6f77333e93ca62e979e4b70d1bbc6115f46048",
+                "reference": "cd6f77333e93ca62e979e4b70d1bbc6115f46048",
+                "shasum": ""
             },
             "require": {
                 "php": "^8.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5",
-                "symfony/var-dumper": "^5.4|^6.0"
+                "squizlabs/php_codesniffer": "^3.7",
+                "vimeo/psalm": "^4.28"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -75,25 +83,30 @@
                     "Bic\\Binary\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Bic\\Binary\\Tests\\": "tests"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "description": "A set of utilities for working with binary streams",
+            "support": {
+                "issues": "https://github.com/BicEngine/Binary/issues",
+                "source": "https://github.com/BicEngine/Binary/tree/master"
+            },
+            "time": "2022-10-27T15:38:01+00:00"
         },
         {
             "name": "bic-engine/image",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BicEngine/Image.git",
+                "reference": "cd90c053552d1903caa6c2c03bab5cf352a72082"
+            },
             "dist": {
-                "type": "path",
-                "url": "libs/image",
-                "reference": "d0b1ed7e7a4cad1f4a848b505ccbcb6495e6ad5d"
+                "type": "zip",
+                "url": "https://api.github.com/repos/BicEngine/Image/zipball/cd90c053552d1903caa6c2c03bab5cf352a72082",
+                "reference": "cd90c053552d1903caa6c2c03bab5cf352a72082",
+                "shasum": ""
             },
             "require": {
                 "bic-engine/binary": "^1.0",
@@ -101,8 +114,10 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5",
-                "symfony/var-dumper": "^5.4|^6.0"
+                "squizlabs/php_codesniffer": "^3.7",
+                "vimeo/psalm": "^4.28"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -115,20 +130,30 @@
                     "Bic\\Image\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "description": "The library for reading, converting and decoding images",
+            "support": {
+                "issues": "https://github.com/BicEngine/Image/issues",
+                "source": "https://github.com/BicEngine/Image/tree/master"
+            },
+            "time": "2022-10-27T15:37:47+00:00"
         },
         {
             "name": "bic-engine/image-ico",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BicEngine/ImageIco.git",
+                "reference": "8643e3f4311a47f50d8076a64c5f16ecabe548d6"
+            },
             "dist": {
-                "type": "path",
-                "url": "libs/image-ico",
-                "reference": "2597e66cdb8d05193a94e3a801eb49d5586a21fa"
+                "type": "zip",
+                "url": "https://api.github.com/repos/BicEngine/ImageIco/zipball/8643e3f4311a47f50d8076a64c5f16ecabe548d6",
+                "reference": "8643e3f4311a47f50d8076a64c5f16ecabe548d6",
+                "shasum": ""
             },
             "require": {
                 "bic-engine/binary": "^1.0",
@@ -137,8 +162,10 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5",
-                "symfony/var-dumper": "^5.4|^6.0"
+                "squizlabs/php_codesniffer": "^3.7",
+                "vimeo/psalm": "^4.28"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -151,17 +178,16 @@
                     "Bic\\Image\\Ico\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Bic\\Image\\Ico\\Tests\\": "tests"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "description": "ICO format decoder",
+            "support": {
+                "issues": "https://github.com/BicEngine/ImageIco/issues",
+                "source": "https://github.com/BicEngine/ImageIco/tree/master"
+            },
+            "time": "2022-10-27T15:53:28+00:00"
         },
         {
             "name": "bic-engine/image-sdl",
